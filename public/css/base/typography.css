@@ -1,0 +1,88 @@
+/* ── Sistema tipográfico — Cabinet Grotesk + General Sans + JetBrains Mono ── */
+
+body {
+  font-family: var(--font-base);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings — Cabinet Grotesk */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+  color: var(--ink);
+}
+
+h1 { font-size: 2.5rem;  font-weight: 800; letter-spacing: -0.04em; }
+h2 { font-size: 1.875rem; }
+h3 { font-size: 1.4rem; }
+h4 { font-size: 1.1rem; }
+
+p {
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* Clase display: para títulos hero grandes */
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: var(--ink);
+}
+
+/* Eyebrow: JetBrains Mono — solo labels técnicos, metadatos, tags */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink-soft);
+}
+
+/* Mono de utilidad */
+.mono-text {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+}
+
+/* Display XL — hero de sección grande */
+.display-xl {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  letter-spacing: -0.05em;
+  line-height: 0.88;
+  color: var(--ink);
+}
+
+/* Eyebrow con acento teal */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 2px;
+  background: var(--leaf);
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

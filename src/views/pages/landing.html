@@ -1,0 +1,327 @@
+{% extends 'layout.html' %}
+{% block title %}SymbioEnergia IA · Polígonos Industriales Autosostenibles{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/landing.css') }}">
+{% endblock %}
+{% block content %}
+
+<!-- ── HERO ─────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero__inner">
+
+    <div class="hero__copy">
+      <p class="hero__eyebrow">Red de Energía Industrial · España</p>
+      <h1 class="hero__headline">
+        Polígonos industriales
+        <span class="hero__rotator" aria-label="autosostenibles, conectados, rentables">
+          <span class="hero__word hero__word--1">autosostenibles</span>
+          <span class="hero__word hero__word--2">conectados</span>
+          <span class="hero__word hero__word--3">rentables</span>
+        </span>
+      </h1>
+      <p class="hero__sub">
+        Analiza el potencial renovable de tu empresa, conéctate con las naves vecinas
+        y forma una comunidad energética que reduzca el coste colectivo hasta un&nbsp;40%.
+        Sin visita técnica. Sin coste.
+      </p>
+      <div class="hero__actions">
+        <a href="/mapa" class="hero__btn hero__btn--primary">Analizar mi polígono</a>
+        <a href="#como-funciona" class="hero__btn hero__btn--ghost">Ver cómo funciona</a>
+      </div>
+      <div class="hero__trust">
+        <span class="hero__badge">Apache 2.0</span>
+        <span class="hero__sep" aria-hidden="true"></span>
+        <span class="hero__badge">PVGIS · ESIOS · IGN</span>
+        <span class="hero__sep" aria-hidden="true"></span>
+        <span class="hero__badge">AI Act compliant</span>
+      </div>
+    </div>
+
+    <div class="hero__visual" aria-hidden="true">
+      <!-- App preview card -->
+      <div class="app-card">
+        <div class="app-card__chrome">
+          <span class="app-card__dot app-card__dot--r"></span>
+          <span class="app-card__dot app-card__dot--y"></span>
+          <span class="app-card__dot app-card__dot--g"></span>
+          <span class="app-card__url">Polígono Industrial Teruel Norte</span>
+        </div>
+        <div class="app-card__body">
+          <div class="roof-viz">
+            <div class="roof-viz__label">Red energética · 12 empresas conectadas</div>
+            <div class="roof-viz__grid">
+              <div class="roof-viz__panel"></div>
+              <div class="roof-viz__panel"></div>
+              <div class="roof-viz__panel"></div>
+              <div class="roof-viz__panel"></div>
+              <div class="roof-viz__panel roof-viz__panel--wind"></div>
+              <div class="roof-viz__panel"></div>
+              <div class="roof-viz__panel"></div>
+              <div class="roof-viz__panel roof-viz__panel--wind"></div>
+              <div class="roof-viz__panel"></div>
+              <div class="roof-viz__panel"></div>
+              <div class="roof-viz__panel"></div>
+              <div class="roof-viz__panel"></div>
+            </div>
+            <div class="roof-viz__scan"></div>
+          </div>
+          <div class="app-card__metrics">
+            <div class="app-card__metric">
+              <span class="app-card__metric-lbl">Capacidad red</span>
+              <span class="app-card__metric-val" data-count="1840">0</span>
+              <span class="app-card__metric-unit">kWp</span>
+            </div>
+            <div class="app-card__metric">
+              <span class="app-card__metric-lbl">Ahorro colectivo</span>
+              <span class="app-card__metric-val" data-count="218000">0</span>
+              <span class="app-card__metric-unit">€/año</span>
+            </div>
+            <div class="app-card__metric">
+              <span class="app-card__metric-lbl">Autosuficiencia</span>
+              <span class="app-card__metric-val" data-count="78">0</span>
+              <span class="app-card__metric-unit">%</span>
+            </div>
+          </div>
+          <div class="app-card__agents">
+            <span class="app-card__agent app-card__agent--done">Solar</span>
+            <span class="app-card__agent app-card__agent--done">Eólico</span>
+            <span class="app-card__agent app-card__agent--done">Red</span>
+            <span class="app-card__agent app-card__agent--loading">Simbiosis</span>
+          </div>
+        </div>
+      </div>
+      <!-- Floating chips -->
+      <div class="hero__chip hero__chip--1">RD-ley 7/2026</div>
+      <div class="hero__chip hero__chip--2">STEP Aragón · hasta 500.000€</div>
+      <div class="hero__chip hero__chip--3">12 empresas · 1 red autosostenible</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── STATS BAR ─────────────────────────────────────────────────────────── -->
+<section class="stats-bar">
+  <div class="stats-bar__inner">
+    <div class="stats-bar__item">
+      <span class="stats-bar__num" data-count="3500">0</span>
+      <span class="stats-bar__unit">+</span>
+      <span class="stats-bar__lbl">Polígonos industriales en España</span>
+    </div>
+    <div class="stats-bar__divider" aria-hidden="true"></div>
+    <div class="stats-bar__item">
+      <span class="stats-bar__num" data-count="40">0</span>
+      <span class="stats-bar__unit">%</span>
+      <span class="stats-bar__lbl">Reducción de coste energético en red</span>
+    </div>
+    <div class="stats-bar__divider" aria-hidden="true"></div>
+    <div class="stats-bar__item">
+      <span class="stats-bar__num" data-count="500">0</span>
+      <span class="stats-bar__unit">k€</span>
+      <span class="stats-bar__lbl">Subvención máxima STEP por empresa</span>
+    </div>
+    <div class="stats-bar__divider" aria-hidden="true"></div>
+    <div class="stats-bar__item">
+      <span class="stats-bar__num" data-count="5">0</span>
+      <span class="stats-bar__unit">km</span>
+      <span class="stats-bar__lbl">Radio comunidad energética RD&nbsp;7/2026</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ──────────────────────────────────────────────────────── -->
+<section class="how" id="como-funciona">
+  <div class="how__inner">
+    <div class="how__header" data-aos="fade-up">
+      <p class="eyebrow">Proceso</p>
+      <h2 class="how__title">De nave individual<br>a polígono autosostenible</h2>
+    </div>
+    <div class="how__steps">
+      <div class="how__step" data-aos="fade-up" data-aos-delay="0">
+        <div class="how__step-num">01</div>
+        <div class="how__step-body">
+          <h3 class="how__step-title">Localiza tu empresa</h3>
+          <p class="how__step-desc">Introduce la dirección o haz clic en el mapa. El sistema identifica tu nave, calcula el área de cubierta disponible y analiza el entorno del polígono.</p>
+        </div>
+      </div>
+      <div class="how__connector" aria-hidden="true"></div>
+      <div class="how__step" data-aos="fade-up" data-aos-delay="100">
+        <div class="how__step-num">02</div>
+        <div class="how__step-body">
+          <h3 class="how__step-title">Analiza el mix renovable</h3>
+          <p class="how__step-desc">6 agentes IA evalúan en paralelo: solar fotovoltaica, eólico mini, biomasa, mini-hidráulica, normativa aplicable y retorno financiero con datos reales de PVGIS y ESIOS.</p>
+        </div>
+      </div>
+      <div class="how__connector" aria-hidden="true"></div>
+      <div class="how__step" data-aos="fade-up" data-aos-delay="200">
+        <div class="how__step-num">03</div>
+        <div class="how__step-body">
+          <h3 class="how__step-title">Diseña la red del polígono</h3>
+          <p class="how__step-desc">El agente Simbiosis detecta las empresas vecinas, propone qué energía compartir, calcula el nivel de autosuficiencia colectiva y genera el borrador de comunidad energética conforme al RD-ley 7/2026.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── VISION SECTION ────────────────────────────────────────────────────── -->
+<section class="vision" id="vision">
+  <div class="vision__inner">
+    <div class="vision__header" data-aos="fade-up">
+      <p class="eyebrow">Visión a largo plazo</p>
+      <h2 class="vision__title">Cada polígono,<br>una central energética propia</h2>
+      <p class="vision__sub">España tiene más de 3.500 polígonos industriales. Si cada uno forma una comunidad energética, el impacto es equivalente a construir varias centrales convencionales — sin infraestructura centralizada y con el beneficio directo en las empresas.</p>
+    </div>
+    <div class="vision__cards">
+
+      <div class="vision-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="vision-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h3 class="vision-card__title">Fase 1 · Empresa</h3>
+        <p class="vision-card__desc">Analiza el potencial renovable de tu nave. Instala, conecta y reduce tu factura hasta un 60%.</p>
+        <span class="vision-card__tag">Disponible ahora</span>
+      </div>
+
+      <div class="vision-card vision-card--active" data-aos="fade-up" data-aos-delay="80">
+        <div class="vision-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="12" r="3"/><circle cx="16" cy="8" r="3"/><circle cx="16" cy="16" r="3"/><path d="m10.7 13.5 2.6 1m0-5-2.6 1"/></svg>
+        </div>
+        <h3 class="vision-card__title">Fase 2 · Polígono</h3>
+        <p class="vision-card__desc">Las empresas del polígono forman una comunidad energética. Comparten excedentes, reducen costes colectivos y alcanzan 70–80% de autosuficiencia.</p>
+        <span class="vision-card__tag vision-card__tag--active">En desarrollo</span>
+      </div>
+
+      <div class="vision-card" data-aos="fade-up" data-aos-delay="160">
+        <div class="vision-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 class="vision-card__title">Fase 3 · España y mundo</h3>
+        <p class="vision-card__desc">Una plataforma abierta que conecta todos los polígonos industriales de España y, a futuro, del mundo. Energía accesible, limpia y gestionada por quienes la producen.</p>
+        <span class="vision-card__tag">Roadmap 2027</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── AGENTS GRID ───────────────────────────────────────────────────────── -->
+<section class="agents" id="agentes">
+  <div class="agents__inner">
+    <div class="agents__header" data-aos="fade-up">
+      <p class="eyebrow">6 Agentes especializados</p>
+      <h2 class="agents__title">Cada dato, de su fuente</h2>
+    </div>
+    <div class="agents__grid">
+
+      <div class="agent-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="agent-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="m13 13 6 6"/></svg>
+        </div>
+        <h3 class="agent-card__name">Geo-Scanner</h3>
+        <p class="agent-card__desc">Detecta el contorno real de la nave usando OpenStreetMap. Calcula área útil, orientación e inclinación del tejado para instalación fotovoltaica.</p>
+        <span class="agent-card__source">OSM · Overpass API · IGN</span>
+      </div>
+
+      <div class="agent-card" data-aos="fade-up" data-aos-delay="60">
+        <div class="agent-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        </div>
+        <h3 class="agent-card__name">Clima</h3>
+        <p class="agent-card__desc">Radiación solar horaria y velocidad de viento real por coordenadas. Perfil de producción mensual para cada tecnología renovable.</p>
+        <span class="agent-card__source">Open-Meteo ERA5 · PVGIS SARAH3</span>
+      </div>
+
+      <div class="agent-card" data-aos="fade-up" data-aos-delay="120">
+        <div class="agent-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="12" r="3"/><circle cx="16" cy="8" r="3"/><circle cx="16" cy="16" r="3"/><path d="m10.7 13.5 2.6 1m0-5-2.6 1"/></svg>
+        </div>
+        <h3 class="agent-card__name">Simbiosis</h3>
+        <p class="agent-card__desc">Detecta empresas vecinas en el polígono, propone qué energía compartir y diseña la arquitectura de la comunidad energética. Calcula el nivel de autosuficiencia colectiva.</p>
+        <span class="agent-card__source">OSM · RD 7/2026 · HRIA</span>
+      </div>
+
+      <div class="agent-card" data-aos="fade-up" data-aos-delay="180">
+        <div class="agent-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h3 class="agent-card__name">Normativa</h3>
+        <p class="agent-card__desc">Subvenciones STEP Aragón, MOVES III, ICO y programas europeos. Filtradas por sector, ubicación y tipo de tecnología renovable.</p>
+        <span class="agent-card__source">BOA · BOE · IDAE · Horizon Europe</span>
+      </div>
+
+      <div class="agent-card" data-aos="fade-up" data-aos-delay="240">
+        <div class="agent-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3 class="agent-card__name">Financiero</h3>
+        <p class="agent-card__desc">ROI, payback, VAN y TIR con precio eléctrico real. Escenarios individual y colectivo. Cuota mensual con financiación bancaria.</p>
+        <span class="agent-card__source">ESIOS · OMIE · REE</span>
+      </div>
+
+      <div class="agent-card agent-card--featured" data-aos="fade-up" data-aos-delay="300">
+        <div class="agent-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3 class="agent-card__name">Renovables</h3>
+        <p class="agent-card__desc">Evalúa solar, mini-eólico, biomasa y mini-hidráulica según la zona. Propone el mix óptimo y el porcentaje de autosuficiencia alcanzable para el polígono.</p>
+        <span class="agent-card__source">PVGIS · ESIOS CO₂ · IGN hidrología</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── RESPONSIBLE AI ────────────────────────────────────────────────────── -->
+<section class="responsible-ai" id="ia-responsable">
+  <div class="responsible-ai__inner">
+    <div class="responsible-ai__header" data-aos="fade-up">
+      <p class="eyebrow">IA Responsable y Abierta</p>
+      <h2 class="responsible-ai__title">Tecnología que cuida a las personas</h2>
+    </div>
+    <div class="responsible-ai__pillars">
+
+      <div class="rai-pillar" data-aos="fade-up" data-aos-delay="0">
+        <div class="rai-pillar__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 class="rai-pillar__title">Evaluación HRIA</h3>
+        <p class="rai-pillar__desc">El agente Simbiosis evalúa el impacto en derechos humanos <strong>antes</strong> de proponer redes energéticas: ruido, sombras, barreras digitales y acceso equitativo entre empresas del polígono.</p>
+        <div class="rai-pillar__badge rai-pillar__badge--score">HRIA Score · 92 / 100</div>
+      </div>
+
+      <div class="rai-pillar" data-aos="fade-up" data-aos-delay="80">
+        <div class="rai-pillar__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h3 class="rai-pillar__title">Anonimización PII</h3>
+        <p class="rai-pillar__desc">Ningún dato empresarial sensible llega al LLM en texto claro. Presidio detecta CIFs, IBANs y datos de consumo. Informe de entidades incluido en cada respuesta.</p>
+        <div class="rai-pillar__badge">AI Act compliant</div>
+      </div>
+
+      <div class="rai-pillar" data-aos="fade-up" data-aos-delay="160">
+        <div class="rai-pillar__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3 class="rai-pillar__title">Trazabilidad total</h3>
+        <p class="rai-pillar__desc">Cada dato incluye fuente verificable, margen de confianza y fecha de consulta. Si los datos son insuficientes, el sistema lo declara explícitamente — nunca lo oculta.</p>
+        <div class="rai-pillar__badge">Fuente · Confianza · Fecha</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ─────────────────────────────────────────────────────────── -->
+<section class="final-cta">
+  <div class="final-cta__inner" data-aos="fade-up">
+    <p class="final-cta__pre">Sin registro. Sin coste. Sin visita técnica.</p>
+    <h2 class="final-cta__title">Empieza hoy la transición<br>energética de tu polígono</h2>
+    <a href="/mapa" class="final-cta__btn">Analizar mi polígono</a>
+    <p class="final-cta__note">Código abierto · Apache 2.0 · Universidad de Zaragoza · Hackathon IA Responsable 2026</p>
+  </div>
+</section>
+
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/pages/landing.js') }}"></script>
+{% endblock %}

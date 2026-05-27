@@ -1,0 +1,342 @@
+{% extends 'layout.html' %}
+{% block title %}Mi Empresa · {{ user.company_name or user.email }} · SymbioEnergia IA{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/mi_empresa.css') }}">
+{% endblock %}
+{% block content %}
+<div class="empresa-page">
+
+  {# Resolve coords/kwp from active company (if any), falling back to user profile #}
+  {% if active_company_id and companies %}
+    {% set _candidates = companies | selectattr('id', 'equalto', active_company_id) | list %}
+    {% set _active = _candidates[0] if _candidates else None %}
+  {% else %}
+    {% set _active = None %}
+  {% endif %}
+  {% set _lat  = _active.lat  if _active else user.lat %}
+  {% set _lon  = _active.lon  if _active else user.lon %}
+  {% set _kwp  = _active.solar_capacity_kwp if _active else user.solar_capacity_kwp %}
+
+  {% if bienvenida %}
+  <div class="empresa-alert empresa-alert--success">
+    Email verificado. Bienvenido/a a SymbioEnergia IA.
+  </div>
+  {% endif %}
+
+  <!-- Header empresa -->
+  <div class="empresa-header glassmorphic">
+    <div class="empresa-header__info">
+      <div class="empresa-header__avatar">{{ (user.company_name or user.email)[0].upper() }}</div>
+      <div>
+        <h1 class="empresa-header__name">{{ user.company_name or 'Mi Empresa' }}</h1>
+        <p class="empresa-header__email">{{ user.email }}</p>
+        <p class="empresa-header__since">Miembro desde {{ user.created_at.strftime('%B %Y') }}</p>
+      </div>
+    </div>
+    <div class="empresa-header__actions">
+      {% if _lat and _lon %}
+      <a href="/estudio?lat={{ _lat }}&lon={{ _lon }}{% if _kwp %}&kwp={{ _kwp }}{% endif %}" class="empresa-btn empresa-btn--primary">
+        Ver análisis completo →
+      </a>
+      {% else %}
+      <a href="/" class="empresa-btn empresa-btn--primary">
+        Seleccionar edificio →
+      </a>
+      {% endif %}
+      <a href="/logout" class="empresa-btn empresa-btn--ghost">Cerrar sesión</a>
+    </div>
+  </div>
+
+  <!-- KPIs principales — actualizables desde el historial -->
+  <div class="empresa-kpis" id="empresa-kpis">
+    <div class="empresa-kpi glassmorphic">
+      <span class="empresa-kpi__icon">☀️</span>
+      <div>
+        <span class="empresa-kpi__label">Capacidad Solar</span>
+        <span class="empresa-kpi__value" id="kpi-solar">
+          {% if user.solar_capacity_kwp %}{{ "%.0f"|format(user.solar_capacity_kwp) }} kWp{% else %}--{% endif %}
+        </span>
+      </div>
+    </div>
+    <div class="empresa-kpi glassmorphic">
+      <span class="empresa-kpi__icon">💶</span>
+      <div>
+        <span class="empresa-kpi__label">Ahorro Anual Neto</span>
+        <span class="empresa-kpi__value" id="kpi-savings">
+          {% if user.annual_savings_eur %}{{ "{:,.0f}".format(user.annual_savings_eur).replace(",", ".") }} €/año{% else %}--{% endif %}
+        </span>
+      </div>
+    </div>
+    <div class="empresa-kpi glassmorphic">
+      <span class="empresa-kpi__icon">⏱</span>
+      <div>
+        <span class="empresa-kpi__label">Payback con Subvención</span>
+        <span class="empresa-kpi__value" id="kpi-payback">
+          {% if user.payback_years %}{{ "%.1f"|format(user.payback_years) }} años{% else %}--{% endif %}
+        </span>
+      </div>
+    </div>
+    <div class="empresa-kpi glassmorphic">
+      <span class="empresa-kpi__icon">🏛</span>
+      <div>
+        <span class="empresa-kpi__label">Subvención Estimada</span>
+        <span class="empresa-kpi__value" id="kpi-subsidy">
+          {% if user.subsidy_eur %}{{ "{:,.0f}".format(user.subsidy_eur).replace(",", ".") }} €{% else %}--{% endif %}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edificio activo seleccionado del historial -->
+  <div class="empresa-selected-building hidden glassmorphic" id="selected-building-banner">
+    <div class="selected-building__info">
+      <span class="selected-building__label">Edificio seleccionado:</span>
+      <strong class="selected-building__name" id="selected-building-name">--</strong>
+      <span class="selected-building__coords" id="selected-building-coords"></span>
+    </div>
+    <div class="selected-building__actions">
+      <a class="empresa-btn empresa-btn--primary selected-building__link" id="selected-building-link" href="#">Ver análisis completo →</a>
+      <button class="empresa-btn empresa-btn--ghost" id="selected-building-clear">Limpiar selección</button>
+    </div>
+  </div>
+
+  <!-- Proyección de ahorro acumulado -->
+  {% if user.annual_savings_eur %}
+  <div class="empresa-section glassmorphic">
+    <h2 class="empresa-section__title">Proyección de Ahorro Acumulado</h2>
+    <div class="empresa-projection">
+      {% set savings = user.annual_savings_eur %}
+      {% for years, label in [(1, '1 año'), (5, '5 años'), (10, '10 años'), (15, '15 años'), (25, '25 años')] %}
+      <div class="empresa-projection__item">
+        <span class="empresa-projection__label">{{ label }}</span>
+        <span class="empresa-projection__value">{{ "{:,.0f}".format(savings * years).replace(",", ".") }} €</span>
+        <div class="empresa-projection__bar">
+          <div class="empresa-projection__fill" style="width: {{ [100, (years / 25 * 100)|int]|min }}%"></div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Acciones rápidas -->
+  <div class="empresa-section glassmorphic">
+    <h2 class="empresa-section__title">Acciones disponibles</h2>
+    <div class="empresa-actions">
+      {% if _lat and _lon %}
+      <a href="/estudio?lat={{ _lat }}&lon={{ _lon }}{% if _kwp %}&kwp={{ _kwp }}{% endif %}" class="empresa-action-card">
+        <span class="empresa-action-card__icon">🏗</span>
+        <span class="empresa-action-card__label">Análisis Completo</span>
+        <span class="empresa-action-card__desc">Geo, clima, financiero y normativa</span>
+      </a>
+      <a href="/simbiosis?lat={{ _lat }}&lon={{ _lon }}{% if _kwp %}&kwp={{ _kwp }}{% endif %}" class="empresa-action-card">
+        <span class="empresa-action-card__icon">🔗</span>
+        <span class="empresa-action-card__label">Red de Simbiosis</span>
+        <span class="empresa-action-card__desc">Empresas vecinas compatibles</span>
+      </a>
+      {% endif %}
+      <a href="/normativa" class="empresa-action-card">
+        <span class="empresa-action-card__icon">📋</span>
+        <span class="empresa-action-card__label">Subvenciones Activas</span>
+        <span class="empresa-action-card__desc">STEP Aragón · NextGen · Horizon</span>
+      </a>
+      <a href="/financiero" class="empresa-action-card">
+        <span class="empresa-action-card__icon">📈</span>
+        <span class="empresa-action-card__label">Análisis Financiero</span>
+        <span class="empresa-action-card__desc">ROI, VAN, TIR y escenarios</span>
+      </a>
+      <a href="/mapa" class="empresa-action-card">
+        <span class="empresa-action-card__icon">🗺</span>
+        <span class="empresa-action-card__label">Explorar Mapa</span>
+        <span class="empresa-action-card__desc">Analizar otro edificio</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Mis edificios guardados -->
+  <div class="empresa-section glassmorphic">
+    <h2 class="empresa-section__title">Mis Edificios</h2>
+    {% if companies %}
+    <div class="empresa-buildings">
+      {% for c in companies %}
+      <div class="empresa-building-item{% if c.id == active_company_id %} empresa-building-item--active{% endif %}">
+        <div class="empresa-building-item__info">
+          <span class="empresa-building-item__name">{{ c.building_name or c.name }}</span>
+          <span class="empresa-building-item__coords">{{ c.lat }}, {{ c.lon }}</span>
+          {% if c.solar_capacity_kwp %}
+          <span class="empresa-building-item__meta">{{ "%.0f"|format(c.solar_capacity_kwp) }} kWp</span>
+          {% endif %}
+        </div>
+        <div class="empresa-building-item__actions">
+          {% if c.id == active_company_id %}
+          <span class="empresa-badge empresa-badge--active">Activo</span>
+          {% else %}
+          <button class="empresa-btn empresa-btn--small empresa-btn--outline select-building-btn" data-id="{{ c.id }}">Seleccionar</button>
+          {% endif %}
+          <a href="/estudio?lat={{ c.lat }}&lon={{ c.lon }}{% if c.solar_capacity_kwp %}&kwp={{ c.solar_capacity_kwp }}{% endif %}" class="empresa-btn empresa-btn--small empresa-btn--ghost">Ver</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p style="color:var(--text-muted);font-size:.9rem">Aún no has guardado ningún edificio. <a href="/mapa" style="color:var(--leaf)">Analiza uno nuevo →</a></p>
+    {% endif %}
+  </div>
+
+  <!-- Historial de análisis -->
+  <div class="empresa-section glassmorphic" id="historial-section">
+    <h2 class="empresa-section__title">Historial de Análisis</h2>
+    <div id="historial-loading" style="color:var(--text-secondary);font-size:.9rem;padding:.5rem 0">Cargando...</div>
+    <div id="historial-empty" class="hidden" style="color:var(--text-secondary);font-size:.9rem;padding:.5rem 0">
+      Aún no has realizado ningún análisis. <a href="/mapa" style="color:var(--leaf)">Selecciona un edificio →</a>
+    </div>
+    <div id="historial-table-wrap" class="hidden" style="overflow-x:auto">
+      <table class="historial-table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Edificio / Municipio</th>
+            <th>Solar (kWp)</th>
+            <th>Ahorro neto</th>
+            <th>Payback</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="historial-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Seguridad y trazabilidad -->
+  <div class="empresa-trust glassmorphic">
+    <div class="empresa-trust__item">
+      <span class="empresa-trust__icon">🔒</span>
+      <div>
+        <span class="empresa-trust__title">Privacidad garantizada</span>
+        <span class="empresa-trust__desc">Anonimización PII con Microsoft Presidio antes de cada consulta IA (AI Act compliant)</span>
+      </div>
+    </div>
+    <div class="empresa-trust__item">
+      <span class="empresa-trust__icon">🖥</span>
+      <div>
+        <span class="empresa-trust__title">IA Local disponible</span>
+        <span class="empresa-trust__desc">Ollama LLaMA 3.2 — los datos nunca salen de tu servidor</span>
+      </div>
+    </div>
+    <div class="empresa-trust__item">
+      <span class="empresa-trust__icon">📊</span>
+      <div>
+        <span class="empresa-trust__title">Fuentes oficiales</span>
+        <span class="empresa-trust__desc">Open-Meteo ERA5 · OpenStreetMap · BOA/IDAE · Catastro</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+window.addEventListener('message', (e) => {
+  if (e.data && e.data.type === 'symbioenergía_save') {
+    fetch('/api/user/company', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(e.data.payload) });
+  }
+});
+
+// Cargar historial de análisis con selección de edificio
+(async () => {
+  const loading = document.getElementById('historial-loading');
+  const empty = document.getElementById('historial-empty');
+  const tableWrap = document.getElementById('historial-table-wrap');
+  const tbody = document.getElementById('historial-tbody');
+  const banner = document.getElementById('selected-building-banner');
+  const kpiSolar = document.getElementById('kpi-solar');
+  const kpiSavings = document.getElementById('kpi-savings');
+  const kpiPayback = document.getElementById('kpi-payback');
+  const kpiSubsidy = document.getElementById('kpi-subsidy');
+
+  const fmtEur = n => n != null ? new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n) : '—';
+  const fmtNum = n => n != null ? new Intl.NumberFormat('es-ES', { maximumFractionDigits: 1 }).format(n) : '—';
+  const fmtDate = s => new Date(s).toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' });
+
+  let selectedRow = null;
+
+  function selectAnalysis(a, tr) {
+    // Deseleccionar fila anterior
+    if (selectedRow) selectedRow.classList.remove('historial-row--active');
+    selectedRow = tr;
+    tr.classList.add('historial-row--active');
+
+    // Actualizar KPIs del panel superior
+    kpiSolar.textContent = a.solar_capacity_kwp ? fmtNum(a.solar_capacity_kwp) + ' kWp' : '--';
+    kpiSavings.textContent = a.annual_savings_net_eur ? fmtEur(a.annual_savings_net_eur) + '/año' : '--';
+    kpiPayback.textContent = a.payback_with_subsidy ? fmtNum(a.payback_with_subsidy) + ' años' : '--';
+    kpiSubsidy.textContent = a.subsidy_amount_eur ? fmtEur(a.subsidy_amount_eur) : '--';
+
+    // Mostrar banner del edificio seleccionado
+    const lugar = [a.building_name, a.municipio, a.provincia].filter(Boolean).join(' · ') || `${a.lat?.toFixed(4)}, ${a.lon?.toFixed(4)}`;
+    document.getElementById('selected-building-name').textContent = lugar;
+    document.getElementById('selected-building-coords').textContent = `${a.lat?.toFixed(5)}, ${a.lon?.toFixed(5)}`;
+    const _kwpSuffix = a.solar_capacity_kwp ? `&kwp=${a.solar_capacity_kwp}` : '';
+    document.getElementById('selected-building-link').href = `/estudio?lat=${a.lat}&lon=${a.lon}${_kwpSuffix}`;
+    banner.classList.remove('hidden');
+  }
+
+  document.getElementById('selected-building-clear')?.addEventListener('click', () => {
+    if (selectedRow) selectedRow.classList.remove('historial-row--active');
+    selectedRow = null;
+    banner.classList.add('hidden');
+    // Restaurar KPIs del perfil principal (recarga página para simplificar)
+    location.reload();
+  });
+
+  try {
+    const res = await fetch('/api/user/analyses');
+    const data = await res.json();
+    loading.classList.add('hidden');
+    const analyses = data.analyses || [];
+    if (!analyses.length) { empty.classList.remove('hidden'); return; }
+
+    analyses.forEach(a => {
+      const tr = document.createElement('tr');
+      tr.className = 'historial-row';
+      const lugar = [a.building_name, a.municipio, a.provincia].filter(Boolean).join(' · ') || `${a.lat?.toFixed(4)}, ${a.lon?.toFixed(4)}`;
+      tr.innerHTML = `
+        <td>${fmtDate(a.analyzed_at)}</td>
+        <td title="${lugar}" class="historial-lugar">${lugar}</td>
+        <td>${fmtNum(a.solar_capacity_kwp)} kWp</td>
+        <td>${fmtEur(a.annual_savings_net_eur)}/año</td>
+        <td>${fmtNum(a.payback_with_subsidy)} años</td>
+        <td><a href="/estudio?lat=${a.lat}&lon=${a.lon}${a.solar_capacity_kwp ? '&kwp=' + a.solar_capacity_kwp : ''}" class="historial-link" onclick="event.stopPropagation()">Ver →</a></td>
+      `;
+      tr.addEventListener('click', () => selectAnalysis(a, tr));
+      tbody.appendChild(tr);
+    });
+    tableWrap.classList.remove('hidden');
+  } catch {
+    loading.textContent = 'No se pudo cargar el historial.';
+  }
+})();
+
+// Seleccionar edificio activo desde Mis Edificios
+document.querySelectorAll('.select-building-btn').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const id = btn.dataset.id;
+    btn.textContent = '...';
+    try {
+      const res = await fetch('/api/user/select-building', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ company_id: parseInt(id) }),
+      });
+      if (res.ok) {
+        location.reload();
+      } else {
+        btn.textContent = 'Error';
+      }
+    } catch {
+      btn.textContent = 'Error';
+    }
+  });
+});
+</script>
+{% endblock %}

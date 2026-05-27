@@ -1,0 +1,202 @@
+{% extends 'layout.html' %}
+{% block title %}Red Polígono · SymbioEnergia IA{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/components/agent-page.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/symbiosis.css') }}">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+{% endblock %}
+{% block content %}
+<div class="agent-page">
+
+  <header class="agent-header" data-aos="fade-up">
+    <span class="agent-header__badge" data-aos="fade-right" data-aos-delay="60">Red Polígono · Simbiosis</span>
+    <h1 class="agent-header__title" data-aos="fade-up" data-aos-delay="120">Red Energética del <em class="symbiosis-title-accent">Polígono</em></h1>
+    <p class="agent-header__subtitle" data-aos="fade-up" data-aos-delay="200">Detecta empresas vecinas en radio de 5 km, calcula el potencial de autosuficiencia colectiva y diseña la arquitectura de comunidad energética conforme al RD-ley 7/2026. Incluye evaluación HRIA obligatoria.</p>
+    <span class="agent-header__coords" id="coords-display"></span>
+  </header>
+
+  <div id="loading" class="agent-loading">
+    <div class="agent-loading__spinner"></div>
+    <p>Buscando vecinos energéticos en radio 5 km...</p>
+  </div>
+
+  <div id="error" class="agent-error hidden"></div>
+
+  <section id="results" class="agent-section hidden">
+
+    <!-- ── KPI GRID ─────────────────────────────────────────────────────── -->
+    <div class="agent-grid">
+      <div class="agent-card">
+        <h2 class="agent-card__title">Red del Polígono</h2>
+        <div class="kpi-row">
+          <div class="kpi-item kpi-item--purple">
+            <span class="kpi-item__label">Empresas en red</span>
+            <span class="kpi-item__value" id="neighbor-count">--</span>
+            <span class="kpi-item__unit">vecinos compatibles</span>
+          </div>
+          <div class="kpi-item kpi-item--success">
+            <span class="kpi-item__label">Potencial compartido</span>
+            <span class="kpi-item__value" id="shared-kwh">--</span>
+            <span class="kpi-item__unit">kWh/año</span>
+          </div>
+          <div class="kpi-item">
+            <span class="kpi-item__label">Radio legal máx.</span>
+            <span class="kpi-item__value" id="radius">5</span>
+            <span class="kpi-item__unit">km · RD 7/2026</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <h2 class="agent-card__title">Autosuficiencia Colectiva</h2>
+        <div class="autosuf-display">
+          <div class="autosuf-ring" id="autosuf-ring">
+            <svg viewBox="0 0 120 120" class="autosuf-ring__svg">
+              <defs>
+                <linearGradient id="autosuf-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#4cc9f0"/>
+                  <stop offset="100%" stop-color="#078080"/>
+                </linearGradient>
+              </defs>
+              <circle cx="60" cy="60" r="50" class="autosuf-ring__bg"/>
+              <circle cx="60" cy="60" r="50" class="autosuf-ring__fill" id="autosuf-ring-fill" style="stroke-dashoffset: 314.16;"/>
+            </svg>
+            <span class="autosuf-ring__label" id="autosuf-pct">0%</span>
+          </div>
+          <div class="autosuf-details">
+            <div class="autosuf-details__row">
+              <span class="autosuf-details__label">Consumo total red</span>
+              <span class="autosuf-details__value" id="total-consumption">--</span>
+            </div>
+            <div class="autosuf-details__row">
+              <span class="autosuf-details__label">Generación renovable</span>
+              <span class="autosuf-details__value" id="shared-kwh-detail">--</span>
+            </div>
+            <div class="autosuf-details__row">
+              <span class="autosuf-details__label">Nivel autosuficiencia</span>
+              <span class="autosuf-details__value autosuf-details__value--pct" id="autosuf-pct-detail">0%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── VISUALIZACIÓN DE RED ────────────────────────────────────────── -->
+    <div class="agent-grid agent-grid--full">
+      <div class="agent-card agent-card--network">
+        <h2 class="agent-card__title">Mapa de la Red Energética</h2>
+        <div class="network-viz" id="network-viz">
+          <div id="network-map" class="network-map"></div>
+          <div class="network-viz__legend">
+            <span class="network-viz__legend-item">
+              <span class="network-viz__legend-dot network-viz__legend-dot--origin"></span> Tu empresa
+            </span>
+            <span class="network-viz__legend-item">
+              <span class="network-viz__legend-dot"></span> Alta afinidad
+            </span>
+            <span class="network-viz__legend-item">
+              <span class="network-viz__legend-dot network-viz__legend-dot--low"></span> Afinidad media
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── DISEÑO DE COMUNIDAD ─────────────────────────────────────────── -->
+    <div class="agent-grid">
+      <div class="agent-card">
+        <h2 class="agent-card__title">Arquitectura de la Comunidad</h2>
+        <div id="network-design" class="network-design">
+          <div class="network-design__loading">Cargando...</div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <h2 class="agent-card__title">Evaluación HRIA</h2>
+        <div class="hria-score-display">
+          <span class="hria-score-display__value" id="hria-score">--</span>
+          <div>
+            <div class="hria-score-display__label">Puntuación impacto social / 100</div>
+            <div class="hria-score-display__note" id="hria-transparency"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LIQUIDACIÓN MENSUAL ───────────────────────────────────────────── -->
+    <div class="agent-grid agent-grid--full">
+      <div class="agent-card">
+        <div class="balance-header">
+          <div>
+            <h2 class="agent-card__title">Liquidación Mensual · "Bizum Energético"</h2>
+            <p class="balance-header__desc">Balance neto mes a mes entre tu instalación fotovoltaica y la red vecina · Precio: OMIE ref.</p>
+          </div>
+          <div class="balance-header__actions">
+            <button class="btn-contract btn-contract--secondary" id="btn-invoice" onclick="openInvoice()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              Emitir Liquidación
+            </button>
+            <button class="btn-contract" id="btn-contract" onclick="openContract()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              Contrato CE RD-ley 7/2026
+            </button>
+          </div>
+        </div>
+
+        <!-- Callout legal -->
+        <div class="ce-callout">
+          <div class="ce-callout__item">
+            <span class="ce-callout__icon">⚖️</span>
+            <div>
+              <strong>Estatutos auto-generados</strong>
+              <span>RD-ley 7/2026 · Coeficientes dinámicos · Listos para firma</span>
+            </div>
+          </div>
+          <div class="ce-callout__item">
+            <span class="ce-callout__icon">🧾</span>
+            <div>
+              <strong>Liquidación automática</strong>
+              <span>Balance neto mensual · Factura interna entre partes</span>
+            </div>
+          </div>
+          <div class="ce-callout__item">
+            <span class="ce-callout__icon">🔒</span>
+            <div>
+              <strong>Sin riesgo de impago</strong>
+              <span>El saldo se liquida en €/kWh antes del día 5 de cada mes</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="balance-summary" id="balance-summary"></div>
+        <div class="balance-table-wrap" id="balance-table-wrap">
+          <p class="balance-empty">Calculando balance mensual...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── EMPRESAS VECINAS ────────────────────────────────────────────── -->
+    <div class="agent-grid agent-grid--full">
+      <div class="agent-card">
+        <h2 class="agent-card__title">Empresas Vecinas Detectadas</h2>
+        <div class="neighbor-list" id="neighbor-list"></div>
+      </div>
+    </div>
+
+    <!-- ── HRIA RISKS ──────────────────────────────────────────────────── -->
+    <div class="agent-grid agent-grid--full">
+      <div class="agent-card">
+        <h2 class="agent-card__title">Análisis de Riesgos HRIA</h2>
+        <div class="hria-list" id="hria-list"></div>
+      </div>
+    </div>
+
+    <footer class="agent-footer" id="data-footer"></footer>
+
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script src="{{ url_for('static', filename='js/pages/symbiosis.js') }}"></script>
+{% endblock %}

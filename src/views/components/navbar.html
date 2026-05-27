@@ -1,0 +1,79 @@
+<nav class="navbar" id="navbar">
+  <a class="navbar__logo" href="/" aria-label="SymbioEnergia IA — inicio">
+    <img src="{{ url_for('static', filename='img/navbar-logo.png') }}" alt="SymbioEnergia IA" class="navbar__logo-img">
+  </a>
+
+  <!-- Hamburger button — visible only on mobile -->
+  <button class="navbar__hamburger" id="navbar-hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navbar-drawer" type="button">
+    <svg class="navbar__hamburger-icon navbar__hamburger-icon--open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="3" y1="6"  x2="21" y2="6"/>
+      <line x1="3" y1="12" x2="21" y2="12"/>
+      <line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+    <svg class="navbar__hamburger-icon navbar__hamburger-icon--close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M18 6 6 18M6 6l12 12"/>
+    </svg>
+  </button>
+
+  {%- if active_lat and active_lon -%}
+    {%- set _coords = '?lat=' ~ active_lat ~ '&lon=' ~ active_lon -%}
+    {%- set _coords_kwp = _coords ~ ('&kwp=' ~ active_kwp if active_kwp else '') -%}
+  {%- else -%}
+    {%- set _coords = '' -%}
+    {%- set _coords_kwp = '' -%}
+  {%- endif -%}
+  <ul class="navbar__links" id="navbar-drawer" role="list">
+    <li><a href="/mapa">Mapa</a></li>
+    <li><a href="/estudio{{ _coords_kwp }}">Estudio 3D</a></li>
+    <li><a href="/geo{{ _coords_kwp }}">Geo-Scanner</a></li>
+    <li><a href="/clima{{ _coords }}">Clima</a></li>
+    <li><a href="/simbiosis{{ _coords_kwp }}">Red Polígono</a></li>
+    <li><a href="/normativa{{ _coords }}">Normativa</a></li>
+    <li><a href="/financiero{{ _coords }}">Financiero</a></li>
+    <!-- Auth links duplicated inside drawer for mobile -->
+    <li class="navbar__drawer-auth">
+      {% if session.user_id %}
+        <a href="/mi-empresa" class="navbar__auth-btn navbar__auth-btn--user">
+          <span class="navbar__auth-icon">◉</span>
+          {{ session.user_company or session.user_email }}
+        </a>
+        <a href="/logout" class="navbar__auth-btn navbar__auth-btn--logout">Salir</a>
+      {% else %}
+        <a href="/login" class="navbar__auth-btn navbar__auth-btn--login">Iniciar sesión</a>
+        <a href="/registro" class="navbar__auth-btn navbar__auth-btn--register">Registrarse</a>
+      {% endif %}
+    </li>
+  </ul>
+
+  <div class="navbar__auth">
+    {% if session.user_id %}
+      <a href="/mi-empresa" class="navbar__auth-btn navbar__auth-btn--user">
+        <span class="navbar__auth-icon">◉</span>
+        {{ session.user_company or session.user_email }}
+      </a>
+      <a href="/logout" class="navbar__auth-btn navbar__auth-btn--logout">Salir</a>
+    {% else %}
+      <a href="/login" class="navbar__auth-btn navbar__auth-btn--login">Iniciar sesión</a>
+      <a href="/registro" class="navbar__auth-btn navbar__auth-btn--register">Registrarse</a>
+    {% endif %}
+  </div>
+</nav>
+
+<script>
+(function () {
+  var btn = document.getElementById('navbar-hamburger');
+  var nav = document.getElementById('navbar');
+  if (!btn || !nav) return;
+  btn.addEventListener('click', function () {
+    var open = nav.classList.toggle('nav--open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  // Close drawer when a link inside it is tapped
+  document.getElementById('navbar-drawer').addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') {
+      nav.classList.remove('nav--open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+})();
+</script>

@@ -1,0 +1,88 @@
+/* ── Animaciones orquestadas — SymbioEnergia ── */
+
+/* Entrada de panel: blur + scale + translate */
+@keyframes panel-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.97);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Aparición de valor KPI */
+@keyframes value-appear {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Expansión horizontal de línea decorativa */
+@keyframes line-expand {
+  from { transform: scaleX(0); transform-origin: left; }
+  to   { transform: scaleX(1); transform-origin: left; }
+}
+
+/* Fade simple */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Slide up genérico */
+@keyframes slide-up {
+  from { transform: translateY(16px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* Spinner de carga */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Pulso del indicador teal (live status) */
+@keyframes teal-pulse {
+  0%, 100% { box-shadow: 0 0 0 0   rgba(7, 128, 128, 0.45); }
+  50%       { box-shadow: 0 0 0 6px rgba(7, 128, 128, 0);    }
+}
+
+/* ── Clases de utilidad ── */
+
+.animate-panel-reveal {
+  animation: panel-reveal 0.65s var(--ease-expo, cubic-bezier(0.16, 1, 0.3, 1)) both;
+}
+
+.animate-fade-in   { animation: fade-in   0.4s ease-out forwards; }
+.animate-slide-up  { animation: slide-up  0.5s var(--ease-expo, cubic-bezier(0.16, 1, 0.3, 1)) both; }
+.animate-value     { animation: value-appear 0.5s var(--ease-expo, cubic-bezier(0.16, 1, 0.3, 1)) both; }
+.animate-line      { animation: line-expand  0.6s var(--ease-expo, cubic-bezier(0.16, 1, 0.3, 1)) both; }
+
+/* Escalonado — aplicar a hijos en secuencia */
+.delay-1 { animation-delay:  60ms; }
+.delay-2 { animation-delay: 130ms; }
+.delay-3 { animation-delay: 200ms; }
+.delay-4 { animation-delay: 270ms; }
+.delay-5 { animation-delay: 340ms; }
+
+/* Panel derecho: entra 180ms después del izquierdo */
+.panel-delay-right { animation-delay: 180ms; }
+
+/* Lift — hover de tarjetas con spring */
+.hover-lift {
+  transition:
+    transform  0.28s var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1)),
+    box-shadow 0.28s ease;
+}
+
+.hover-lift:hover {
+  transform:  translateY(-5px);
+  box-shadow: var(--shadow-float, 0 8px 32px rgba(35, 35, 35, 0.10));
+}
+
+/* Transición global de interactivos */
+a, button, select, input, .tab-btn, .mode-btn, .neighbor-card, .subsidy-card {
+  transition: all 0.2s ease;
+}

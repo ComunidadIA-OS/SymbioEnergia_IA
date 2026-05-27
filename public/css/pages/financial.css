@@ -1,0 +1,494 @@
+/* ── Title accent ── */
+.fin-title-accent {
+  font-style: normal;
+  color: var(--leaf, #078080);
+}
+
+/* ── Loading €-rings ── */
+.fin-loading-rings {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.fin-loading-rings__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: var(--leaf, #078080);
+  animation: fin-spin 1s linear infinite;
+}
+
+.fin-loading-rings__ring--2 {
+  inset: 10px;
+  border-top-color: rgba(7,128,128,0.3);
+  animation-direction: reverse;
+  animation-duration: 0.65s;
+}
+
+@keyframes fin-spin { to { transform: rotate(360deg); } }
+
+.fin-loading-rings__icon { color: var(--leaf, #078080); z-index: 1; }
+
+.fin-loading-text {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-soft);
+}
+
+.fin-loading-dots span { animation: fin-blink 1.2s ease-in-out infinite both; }
+.fin-loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.fin-loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes fin-blink { 0%,80%,100%{opacity:0} 40%{opacity:1} }
+
+/* ── Payback hero card ── */
+.fin-payback-card {
+  background: linear-gradient(135deg, var(--surface) 0%, rgba(7,128,128,0.05) 100%);
+  border-color: rgba(7,128,128,0.2);
+}
+
+.fin-payback-card__body {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (max-width: 700px) {
+  .fin-payback-card__body { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+
+.fin-payback-card__left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 200px;
+}
+
+.fin-payback-hero-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin: 0.2rem 0;
+}
+
+.fin-payback-value {
+  font-family: var(--font-display);
+  font-size: 3.8rem;
+  font-weight: 800;
+  color: var(--leaf, #078080);
+  letter-spacing: -0.07em;
+  line-height: 1;
+}
+
+.fin-payback-unit {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  letter-spacing: -0.02em;
+}
+
+.fin-payback-badge {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1.5px solid;
+  align-self: flex-end;
+  margin-bottom: 0.3rem;
+}
+
+.fin-payback-sub {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-muted);
+  letter-spacing: 0.06em;
+}
+
+/* ── Timeline ── */
+.fin-payback-card__right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.fin-timeline-label {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--ink-muted);
+}
+
+.fin-timeline-track {
+  position: relative;
+  height: 12px;
+  background: var(--line);
+  border-radius: 6px;
+  overflow: visible;
+}
+
+.fin-timeline-recovery {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: linear-gradient(to right, rgba(249,115,22,0.7), rgba(249,168,37,0.6));
+  border-radius: 6px 0 0 6px;
+  transition: width 1.2s cubic-bezier(0.22,1,0.36,1);
+  width: 0%;
+}
+
+.fin-timeline-profit {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  border-radius: 0 6px 6px 0;
+  background: rgba(7,128,128,0.25);
+  transition: width 1.2s cubic-bezier(0.22,1,0.36,1) 0.1s;
+  width: 0%;
+}
+
+.fin-timeline-net-mark {
+  position: absolute;
+  top: -4px;
+  width: 3px;
+  height: 20px;
+  background: var(--leaf, #078080);
+  border-radius: 2px;
+  transition: left 1.2s cubic-bezier(0.22,1,0.36,1);
+  box-shadow: 0 0 6px rgba(7,128,128,0.6);
+}
+
+.fin-timeline-gross-mark {
+  position: absolute;
+  top: -4px;
+  width: 2px;
+  height: 20px;
+  background: rgba(249,168,37,0.5);
+  border-radius: 1px;
+  border: none;
+  transition: left 1.2s cubic-bezier(0.22,1,0.36,1);
+}
+
+.fin-timeline-ticks {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  color: var(--ink-muted);
+  letter-spacing: 0.06em;
+}
+
+.fin-timeline-legend {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.fin-tl-leg {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--ink-muted);
+}
+
+.fin-tl-leg::before {
+  content: '';
+  width: 10px;
+  height: 4px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.fin-tl-leg--recovery::before { background: rgba(249,168,37,0.7); }
+.fin-tl-leg--profit::before   { background: rgba(7,128,128,0.4); }
+.fin-tl-leg--gross::before    { background: rgba(249,168,37,0.45); width: 2px; height: 10px; }
+
+/* ── Hero KPI row ── */
+.fin-hero-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 700px) { .fin-hero-row { grid-template-columns: 1fr; } }
+
+.fin-source-badge {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--leaf, #078080);
+  background: rgba(7,128,128,0.1);
+  border: 1px solid rgba(7,128,128,0.25);
+  border-radius: 20px;
+  padding: 2px 8px;
+  margin-left: auto;
+}
+
+.fin-kpi-hero {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  margin: 0.4rem 0 0.3rem;
+}
+
+.fin-kpi-value {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.fin-kpi-value--green { color: var(--leaf, #078080); }
+.fin-kpi-value--amber { color: var(--ink, #232323); }
+.fin-kpi-value--leaf  { color: var(--leaf); }
+
+.fin-kpi-unit {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
+.fin-kpi-sub {
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  line-height: 1.4;
+  margin-top: auto;
+}
+
+.fin-tir-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 3px 9px;
+  border-radius: 20px;
+  border: 1.5px solid;
+  margin-top: 0.3rem;
+}
+
+/* ── Detail row ── */
+.fin-detail-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 700px) { .fin-detail-row { grid-template-columns: 1fr; } }
+
+/* ── Installation card ── */
+.fin-install-card { gap: 1rem; }
+
+.fin-install-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.fin-install-kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.8rem;
+  background: var(--bg-warm);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+
+.fin-install-kpi__label {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-muted);
+}
+
+.fin-install-kpi__val-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.fin-install-kpi__value {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+
+.fin-install-kpi__value--amber { color: var(--ink, #232323); }
+
+.fin-install-kpi__unit {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
+/* ── Investment breakdown ── */
+.fin-investment-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fin-inv-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.fin-inv-value {
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 0.9rem;
+}
+
+.fin-inv-bar-wrap { display: flex; flex-direction: column; gap: 4px; }
+
+.fin-inv-bar {
+  height: 10px;
+  background: rgba(90,82,72,0.25);
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+}
+
+.fin-inv-bar__subsidy {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: linear-gradient(to right, var(--leaf, #078080), #078080);
+  border-radius: 5px;
+  transition: width 1.2s cubic-bezier(0.22,1,0.36,1);
+  width: 0%;
+}
+
+.fin-inv-bar-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+}
+
+.fin-inv-bar-label--green { color: var(--leaf, #078080); }
+.fin-inv-bar-label--blue  { color: var(--ink-soft, #5a5248); }
+
+/* ── Bank card ── */
+.fin-bank-card { gap: 1rem; }
+
+.fin-bank-split {
+  display: grid;
+  grid-template-columns: 7fr 3fr;
+  gap: 0;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+
+.fin-bank-split__block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  padding: 1.1rem 0.75rem;
+}
+
+.fin-bank-split__block--loan {
+  background: rgba(90,82,72,0.1);
+  border-right: 1px solid var(--line);
+}
+
+.fin-bank-split__block--own {
+  background: rgba(7,128,128,0.08);
+}
+
+.fin-bank-split__pct {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.fin-bank-split__block--loan .fin-bank-split__pct { color: var(--ink-soft, #5a5248); }
+.fin-bank-split__block--own  .fin-bank-split__pct { color: var(--leaf, #078080); }
+
+.fin-bank-split__label {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-muted);
+}
+
+.fin-bank-split__value {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.fin-bank-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.fin-bank-metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.fin-bank-metric:last-child { border-bottom: none; }
+
+.fin-bank-metric__label {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-muted);
+}
+
+.fin-bank-metric__value {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}

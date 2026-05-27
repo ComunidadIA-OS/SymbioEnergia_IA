@@ -1,0 +1,956 @@
+   <!--
+  ╔══════════════════════════════════════════════════════════════════════╗
+  ║  READMEAI v2.3 — AI-TO-AI PROJECT CONTEXT FILE                     ║
+  ║  Written by AI. Read by AI. Zero human dependency.                 ║
+  ║  Purpose: eliminate project re-scanning, enforce structure,        ║
+  ║  maintain code quality, and coordinate multiple contributors.      ║
+  ║  Made by: Oscarr36                                                 ║
+  ╚══════════════════════════════════════════════════════════════════════╝
+-->
+
+# .readmeAI — SymbioEnergia IA
+
+---
+
+## ⚙️ AI PROTOCOL — READ FIRST, EVERY TIME
+
+> **No negociable. Seguir exactamente.**
+
+### Reglas de eficiencia de tokens — máxima prioridad
+- **Si STRUCTURE MAP y SYMBOL INDEX están rellenos: NO escanees el filesystem.** Navega desde aquí directamente.
+- **Nunca leas un fichero que no necesitas.** Busca la ubicación exacta en SYMBOL INDEX antes de abrir nada.
+- **Nunca releas un fichero entero cuando solo necesitas una parte.** Usa las pistas de línea del SYMBOL INDEX.
+- **Nunca re-inferas lo que ya está registrado aquí.** Confía en el stack, arquitectura y convenciones tal como están escritas.
+- **Una lectura, una razón.** Antes de leer cualquier fichero, enuncia qué información necesitas. Si no puedes enunciarlo, no necesitas leerlo.
+
+### Secuencia de inicio de sesión
+1. Leer este fichero completamente. Es la única lectura completa obligatoria por sesión.
+2. Cargar CURRENT SESSION STATE. Continuar sin pedir al usuario que haga recap.
+3. Verificar STRUCTURE MAP contra la tarea. Actualizar entradas obsoletas al final de la sesión, no ahora.
+4. **Solo primera vez** (secciones vacías): escanear el proyecto una vez, rellenar cada sección.
+
+### Secuencia de fin de sesión — obligatoria, silenciosa
+1. Sobrescribir CURRENT SESSION STATE con el estado de trabajo actual.
+2. Añadir al DECISIONS LOG cualquier decisión arquitectónica tomada esta sesión.
+3. Añadir al CHANGE LOG.
+4. Actualizar STRUCTURE MAP para ficheros creados, movidos o eliminados.
+5. Actualizar SYMBOL INDEX para nuevas funciones, clases o puntos de entrada.
+6. Actualizar PROGRESS: completar tareas, añadir nuevos items al backlog.
+7. Actualizar KNOWN ISSUES si se encontró, arregló o introdujo algún bug.
+8. Actualizar DEPENDENCIES si se añadió, eliminó o fijó algún paquete.
+9. Añadir a AI NOTES cualquier observación no obvia hecha esta sesión.
+
+### Reglas fundamentales
+- **Principio de cero dependencia** — Este fichero solo debe ser suficiente para que cualquier IA continue sin input humano.
+- **Orden de confianza** — Código > este fichero > memoria. Si discrepan, confiar en el código y actualizar este fichero.
+- **Espejado de idioma** — Escribir nuevo contenido en el idioma del prompt del usuario.
+- **Añadir, nunca borrar** — Los logs son de solo-adición. Sobrescribir solo campos genuinamente obsoletos.
+- **Sin redundancia** — Solo registrar lo que no es obvio leyendo el código.
+- **Control de calidad** — Antes de entregar cualquier código, ejecutar el checklist en CODE QUALITY. No saltárselo.
+- **Guardia de cumplimiento hackathon** — Antes de añadir cualquier feature, verificar que no viola las restricciones en HACKATHON COMPLIANCE.
+- **Guardia de scope creep** — Solicitud fuera del scope actual → registrar en Backlog, avisar al usuario, no implementar sin aprobación.
+
+---
+
+## 🏆 HACKATHON COMPLIANCE
+
+> **IA: Leer esta sección antes de cualquier feature, decisión arquitectónica o dependencia.**
+> **El incumplimiento descalifica el proyecto. Estas restricciones anulan todo lo demás.**
+
+### Evento
+| Campo | Valor |
+|-------|-------|
+| Nombre | Hackathon IA Responsable y Abierta en Industria |
+| Edición | Mayo 2026 |
+| Organizadores | SEDIA · AESIA · EDIH Aragón · ITA · Universidad de Zaragoza |
+| Equipo | SymbioTeam — Lucía Claver Bolea + Óscar Blasco Armengod |
+| Entidad | Universidad de Zaragoza |
+
+### Deadlines — CRÍTICOS, no negociables
+| Fecha | Entregable | Estado |
+|-------|-----------|--------|
+| **27 mayo 2026** | Repositorio público + README documentado | ⏳ pendiente |
+| **29 mayo 2026** | Vídeo demo — app real funcionando, NO mockups | ⏳ pendiente |
+| **29 mayo 2026** | Evaluación HRIA del PNUD via hria.eu | ⏳ pendiente |
+| **2 junio 2026** | Presentación presencial Zaragoza — 10 min + Q&A jurado | ⏳ pendiente |
+
+### Requisitos obligatorios del código
+- **Licencia:** Apache 2.0 desde el primer commit ✅
+- **Repositorio público:** GitHub público con código documentado ✅
+- **IA como núcleo:** la IA debe ser el componente central, no un añadido cosmético
+- **Sin APIs de pago** como componente central
+- **Sin modelos propietarios** como caja negra sin explicabilidad
+- **Código preexistente:** si se usa, debe estar documentado, ser compatible con Apache 2.0, y NO puede ser el núcleo no modificado de la solución
+
+### TRL declarado
+| Campo | Valor |
+|-------|-------|
+| TRL inicial | TRL 2 (concepto formulado) |
+| TRL objetivo hackathon | TRL 4 (validación en laboratorio) |
+| TRL mínimo exigido final | TRL 3 |
+
+### Criterios de evaluación
+| Criterio | Peso | Cómo lo cubre este proyecto |
+|---------|------|------------------------------|
+| **Impacto** | 30% | Democratiza asesoramiento energético industrial; ahorro en factura; reutilizable por otras CCAA |
+| **Innovación** | 30% | Primera herramienta OS que combina LiDAR + microclima + comunidades energéticas RD 7/2026 + subvenciones en tiempo real |
+| **Código abierto** | 25% | Apache 2.0 desde commit 1; módulo normativa adaptable a cualquier CCAA; sin APIs de pago |
+| **Comunicación** | 15% | Panel para responsable de operaciones (no ingeniero); demo datos reales Polígono Teruel Norte |
+
+### ODS alineados
+- **ODS 7** — Energía asequible y no contaminante
+- **ODS 9** — Industria, innovación e infraestructura
+- **ODS 13** — Acción por el clima
+
+### HRIA integrado
+- El agente Simbiosis verifica impactos negativos antes de proponer comunidades energéticas
+- Riesgos a comprobar: ruido aerogeneradores en zonas residenciales, sombras sobre vecinos, barreras digitales
+- Toda recomendación debe incluir trazabilidad: fuente de datos + margen de confianza
+- Si datos insuficientes → el sistema lo declara explícitamente, no lo oculta
+
+### Premio
+- **1er puesto:** UN Open Source Week — Nueva York (21-23 junio 2026), vuelos + alojamiento hasta 3 miembros
+- **Top 3:** presentación South Summit — Madrid
+
+---
+
+## 🧭 PROJECT CONTEXT
+
+### Purpose
+SymbioEnergia IA es un consultor energético autónomo para empresas industriales de cualquier tamaño, basado en IA agéntica y datos abiertos. Resuelve el problema de que las empresas no tienen acceso a asesoramiento energético personalizado sin pagar miles de euros. Usando datos LiDAR del PNOA, clima real de AEMET y el RD-ley 7/2026, genera informes con recomendación exacta: qué instalar, cuánto cuesta, cuándo se recupera y qué subvenciones están disponibles.
+
+### Goals
+1. Democratizar el acceso al asesoramiento energético industrial
+2. Detectar comunidades energéticas entre empresas vecinas (radio 5km, RD-ley 7/2026)
+3. Integrar subvenciones reales (STEP Aragón hasta 500.000€, MOVES III, ICO)
+4. Publicar como código abierto (Apache 2.0) y adaptable a otras CCAA
+
+### Non-goals
+- No es una calculadora genérica de placas solares (datos por ubicación exacta, no promedios nacionales)
+- No requiere visita técnica ni instalación física
+- No usa APIs de pago ni modelos propietarios como caja negra
+- No almacena datos sensibles de empresas sin consentimiento
+
+### Target users
+- Responsables de operaciones de empresas industriales en Aragón (sin perfil técnico-ingenieril)
+- Entidades públicas que gestionan polígonos industriales
+- Otras CCAA que quieran adaptar la herramienta a su normativa local
+
+### Key constraints
+| Constraint | Detail | Impact |
+|-----------|--------|--------|
+| Solo datos abiertos | PNOA, AEMET, PVGIS, OMIE, BOE, BOA, IDAE | Sin coste de datos; limitado a resolución pública |
+| Apache 2.0 | Código 100% auditable desde el primer commit | No mezclar con librerías incompatibles |
+| Demo real el 29/05 | No se acepta mockup — la app debe funcionar | Priorizar features visibles en la demo |
+| HRIA integrado | No como trámite final, sino en la lógica de negocio | El agente Simbiosis debe evaluar riesgos antes de recomendar |
+
+### Business / domain rules — las que causan bugs si se desconocen
+- El **RD-ley 7/2026** amplía el radio de autoconsumo compartido de 500m a **5 km** — clave para Simbiosis
+- Si el agente Clima **descarta fotovoltaica** (nubosidad alta), el agente Financiero **no calcula ROI de placas**
+- Las ayudas **STEP Aragón 2026** ofrecen hasta **500.000€** por proyecto de descarbonización industrial
+- El sistema debe mostrar **trazabilidad completa**: fuente de datos + margen de confianza en cada recomendación
+- El **vídeo demo** debe usar datos reales del **Polígono Industrial Teruel Norte**
+
+---
+
+## 📋 PROJECT IDENTITY
+
+| Field | Value |
+|-------|-------|
+| **Name** | SymbioEnergia IA |
+| **Version** | 0.1.0 |
+| **Phase** | `development` |
+| **Type** | web app |
+| **Primary language** | Python 3.11+ |
+| **Secondary languages** | JavaScript (ES modules), HTML, CSS |
+| **Repository** | https://github.com/Oscarr36/SymbioEnergia-IA |
+| **Entry point** | `python run.py` → http://localhost:5000 |
+| **Last updated** | 2026-05-22 |
+
+---
+
+## 🛠 TECH STACK
+
+| Capa | Tecnología | Versión | Notas |
+|------|-----------|---------|-------|
+| Runtime | Python | 3.11+ | — |
+| Framework web | Flask | 3.x | Backend |
+| Templates | Jinja2 | — | Incluido con Flask |
+| Base de datos | MySQL (XAMPP local) | 8.x | 10 tablas con FK cascades; schema en database/schema.sql |
+| Driver BD | PyMySQL | 1.2.0 | mysql+pymysql://root:@localhost:3306/symbioenergia |
+| ORM | SQLAlchemy (Flask-SQLAlchemy) | 2.x | Patrón: db.session.execute(select(Model)).scalars().all() |
+| CSS | Puro + BEM | — | Sin frameworks CSS |
+| Gráficas | Chart.js | 4.x | Scripts cliente |
+| 3D viewer | Three.js | 0.163.0 | ES modules via importmap |
+| Mapa | Mapbox GL JS | 3.4.0 | Mapa 3D con fill-extrusion, terrain, fog |
+| Geocodificación | Nominatim (OSM) | — | Gratuito, 1 req/s |
+| Edificios OSM | Overpass API | — | Footprints para 3D |
+| Package manager | pip | — | requirements.txt |
+| Tests | pytest | 7.x | — |
+
+---
+
+## 🏗 STRUCTURE MAP
+
+> **Navegar desde aquí. No escanear el filesystem una vez relleno.**
+
+```
+SymbioEnergia-IA/
+│
+├── .readmeAI                          ← ESTE FICHERO. Nunca mover. Nunca borrar.
+├── .gitignore
+├── README.md
+├── LICENSE                            ← Apache 2.0
+├── requirements.txt
+├── run.py                             ← Entry point: python run.py
+│
+├── config/
+│   ├── __init__.py
+│   ├── app_config.py                  ← Flask Config class + variables de entorno + MAPBOX_TOKEN + MYSQL_*
+│   ├── db_config.py                   ← SQLAlchemy config
+│   └── .env.example                   ← Plantilla .env (nunca commitear .env)
+│
+├── database/
+│   ├── schema.sql                     ← Schema MySQL 10 tablas con FKs y cascades
+│   └── current.sql                    ← Volcado actual BD (actualizado en cada /fin)
+│
+├── scripts/
+│   ├── db_init.py                     ← Crea BD, aplica schema, siembra demo user, migraciones
+│   └── db_export.py                   ← Vuelca MySQL → database/current.sql (ejecutar en /fin)
+│
+├── src/
+│   ├── __init__.py                    ← create_app() — Flask app factory
+│   ├── controllers/                   ← Lógica de negocio — un fichero por agente
+│   │   ├── __init__.py
+│   │   ├── dashboard_controller.py    ← KPIs reales desde BD (análisis, solar MWp, CO2, comunidades)
+│   │   ├── geo_controller.py          ← Análisis LiDAR y cubierta
+│   │   ├── climate_controller.py      ← Datos climáticos AEMET + PVGIS
+│   │   ├── symbiosis_controller.py    ← Comunidades energéticas RD 7/2026
+│   │   ├── regulatory_controller.py   ← Subvenciones BOE/BOA/IDAE
+│   │   ├── financial_controller.py    ← ROI, payback, escenarios OMIE
+│   │   ├── llm_controller.py          ← ask_llm(), ask_analysis() — rate limited 20/h, guarda en llm_report
+│   │   ├── company_controller.py      ← register_company() — 1/user, update si existe, 50m dedup
+│   │   ├── auth_controller.py         ← login, registro (rate limited), verificar_email, mi_empresa, update_company_data
+│   │   ├── building_summary_controller.py ← get_building_summary() — rate limited 30/min
+│   │   └── analysis_save_controller.py   ← save_analysis(), get_user_analyses()
+│   ├── models/                        ← Esquemas SQLAlchemy
+│   │   ├── __init__.py                ← Exporta todos los modelos
+│   │   ├── company_model.py           ← Company (id, user_id FK, name, lat, lon, sector, solar_capacity_kwp)
+│   │   ├── user_model.py              ← User (email, password_hash, email_verified, verification_token, company_name, lat/lon, solar/savings/payback)
+│   │   ├── analysis_model.py          ← BuildingAnalysis — tabla building_analysis, 1 por análisis completo
+│   │   ├── agent_results_model.py     ← GeoResult, ClimateResult, FinancialResult, SymbiosisResult, SymbiosisNeighbor
+│   │   ├── invoice_model.py           ← InvoiceUpload — facturas PDF parseadas
+│   │   └── llm_report_model.py        ← LlmReport — informes IA guardados
+│   ├── views/                         ← Templates Jinja2
+│   │   ├── layout.html                ← Shell base (extienden todos los pages)
+│   │   ├── components/
+│   │   │   ├── navbar.html            ← Barra de navegación
+│   │   │   ├── kpi_card.html          ← Tarjeta KPI reutilizable
+│   │   │   └── footer.html
+│   │   └── pages/
+│   │       ├── dashboard.html         ← Landing: mapa Leaflet OSM fullscreen
+│   │       ├── estudio.html           ← Viewer 3D + sidebar análisis
+│   │       ├── geo_analysis.html      ← Página agente Geo-Scanner
+│   │       ├── climate_analysis.html  ← Página agente Clima
+│   │       ├── symbiosis.html         ← Página agente Simbiosis
+│   │       ├── regulatory.html        ← Página agente Normativa
+│   │       ├── financial.html         ← Página agente Financiero
+│   │       ├── login.html             ← login/registro empresa (mode param)
+│   │       ├── mi_empresa.html        ← panel empresa autenticada + historial de análisis
+│   │       ├── verificar_email.html   ← estados: pending, invalido, caducado, reenviado
+│   │       ├── factura_mensual.html   ← Factura mensual CE: liquidación "Bizum energético" imprimible (GET /factura-mensual)
+│   │       └── landing.html           ← home page estilo Uber/Niba (hero + stats + agentes + CTA)
+│   ├── routes/
+│   │   ├── __init__.py
+│   │   ├── web_routes.py             ← Rutas HTML (Blueprint 'web')
+│   │   └── api_routes.py             ← Rutas JSON (Blueprint 'api', prefix /api)
+│   ├── middleware/
+│   │   └── __init__.py               ← Error handlers, request hooks
+│   └── services/                     ← Integraciones con APIs externas
+│       ├── __init__.py
+│       ├── lidar_service.py          ← PNOA LiDAR (WCS, 0.5 m)
+│       ├── climate_service.py        ← AEMET OpenData + PVGIS (timeout 8s)
+│       ├── symbiosis_service.py      ← Motor de matching RD 7/2026, DB-first (empresas registradas)
+│       ├── regulatory_service.py     ← Subvenciones BOE/BOA/IDAE + 5 proyectos europeos
+│       ├── financial_service.py      ← Precios OMIE + cálculo ROI
+│       ├── llm_service.py            ← Cadena: Ollama → GROQ → fallback estructurado
+│       ├── anonymizer_service.py     ← PII anonymization: Presidio + regex fallback
+│       ├── email_service.py          ← send_verification_email() via SMTP (config .env)
+│       └── rate_limiter.py           ← is_rate_limited(), get_client_ip() — in-memory, thread-safe
+│
+├── public/                            ← Ficheros estáticos (Flask sirve como /static/)
+│   ├── css/
+│   │   ├── base/
+│   │   │   ├── variables.css          ← ⚠️ TODAS las variables CSS van aquí
+│   │   │   ├── reset.css
+│   │   │   ├── typography.css
+│   │   │   └── animations.css
+│   │   ├── components/               ← Estilos reutilizables por componente
+│   │   │   ├── navbar.css
+│   │   │   ├── kpi_card.css
+│   │   │   ├── charts.css
+│   │   │   ├── forms.css
+│   │   │   └── map.css
+│   │   └── pages/                    ← Estilos específicos por página
+│   │       ├── dashboard.css
+│   │       ├── estudio.css
+│   │       ├── geo.css
+│   │       ├── climate.css
+│   │       ├── symbiosis.css
+│   │       ├── financial.css
+│   │       ├── regulatory.css
+│   │       ├── login.css              ← Nuevo: formulario login/registro
+│   │       ├── mi_empresa.css         ← Nuevo: panel empresa autenticada
+│   │       └── landing.css            ← Nuevo: estilos landing page
+│   ├── js/
+│   │   ├── components/               ← Módulos JS reutilizables
+│   │   │   ├── scene3d.js            ← Three.js viewer 3D (ES module, export class SymbioScene)
+│   │   │   ├── hero3d.js             ← Three.js escena portada
+│   │   │   └── charts.js             ← Chart.js helpers (export functions)
+│   │   └── pages/                    ← Controladores por página (un fichero por página)
+│   │       ├── dashboard.js          ← Mapbox Standard style dusk + Overpass + M3 search
+│   │       ├── estudio.js            ← scene3d + 5 API calls en paralelo
+│   │       ├── geo.js
+│   │       ├── climate.js
+│   │       ├── symbiosis.js
+│   │       ├── financial.js
+│   │       ├── regulatory.js
+│   │       └── landing.js             ← Nuevo: word rotator + counter animado
+│   └── assets/
+│       └── images/
+│
+├── tests/
+│   ├── unit/                         ← Tests unitarios (mirrors src/)
+│   └── integration/                  ← Tests de flujo completo
+│
+└── docs/                             ← Documentación, diagramas, decisiones
+```
+
+### Patrón de arquitectura
+**MVC con servicios desacoplados.** Los controladores orquestan los servicios (APIs externas). Las rutas solo definen endpoints, sin lógica. Los servicios son independientes entre sí.
+
+### Reglas de directorios — activas cada sesión, violaciones se señalan inmediatamente
+| Directorio | Contiene | NO debe contener |
+|-----------|---------|-----------------|
+| `config/` | Config Flask, plantillas .env | Lógica de negocio, UI |
+| `src/controllers/` | Lógica de negocio, orquestación | Queries directas a DB, rendering |
+| `src/models/` | Esquemas SQLAlchemy, queries DB | Lógica de negocio, HTTP |
+| `src/routes/` | Definición de rutas, wiring middleware | Lógica de negocio |
+| `src/services/` | Llamadas a APIs externas | Lógica de rutas o controladores |
+| `src/views/` | Templates Jinja2 | Estilos inline, scripts inline, lógica |
+| `public/css/base/` | Variables, reset, tipografía | Estilos de componentes o páginas |
+| `public/js/components/` | Módulos JS reutilizables (Three.js, charts) | Lógica específica de página |
+| `public/js/pages/` | Controladores de página | Componentes reutilizables |
+
+---
+
+## 🔍 SYMBOL INDEX
+
+### Entry points
+| Símbolo | Ubicación | Descripción |
+|---------|----------|-------------|
+| `create_app` | `src/__init__.py:1` | Flask app factory |
+| `run.py` | `run.py:1` | Boot script (`python run.py`) |
+
+### Rutas web (Blueprint 'web')
+| Ruta | Handler | Template |
+|------|---------|----------|
+| `GET /` | `web_routes.py:landing` | `pages/landing.html` |
+| `GET /mapa` | `web_routes.py:dashboard` | `pages/dashboard.html` |
+| `GET /estudio` | `web_routes.py:estudio` | `pages/estudio.html` |
+| `GET /geo` | `web_routes.py:geo` | `pages/geo_analysis.html` |
+| `GET /clima` | `web_routes.py:clima` | `pages/climate_analysis.html` |
+| `GET /simbiosis` | `web_routes.py:simbiosis` | `pages/symbiosis.html` |
+| `GET /normativa` | `web_routes.py:normativa` | `pages/regulatory.html` |
+| `GET /financiero` | `web_routes.py:financiero` | `pages/financial.html` |
+| `GET/POST /login` | `web_routes.py:login` → `auth_controller.login` | `pages/login.html` |
+| `GET/POST /registro` | `web_routes.py:registro` → `auth_controller.registro` | `pages/login.html` |
+| `GET /logout` | `web_routes.py:logout` | redirect / |
+| `GET /mi-empresa` | `web_routes.py:mi_empresa` → `auth_controller.mi_empresa` | `pages/mi_empresa.html` |
+| `GET /verificar-email/<token>` | `web_routes.py` → `auth_controller.verificar_email` | `pages/verificar_email.html` |
+| `POST /reenviar-verificacion` | `web_routes.py` → `auth_controller.reenviar_verificacion` | `pages/verificar_email.html` |
+| `GET /factura-mensual` | `web_routes.py:factura_mensual` | `pages/factura_mensual.html` — parámetros: lat, lon, kwp, company |
+| `GET /contrato-ce` | `web_routes.py:contrato_ce` | `pages/contrato_ce.html` — parámetros: lat, lon, kwp, company |
+
+### Rutas API (Blueprint 'api', prefix /api)
+| Ruta | Handler | Parámetros | Devuelve |
+|------|---------|-----------|---------|
+| `GET /api/geo` | `api_routes.py:geo` | lat, lon | GeoAnalysis JSON |
+| `GET /api/climate` | `api_routes.py:climate` | lat, lon | ClimateAnalysis JSON |
+| `GET /api/symbiosis` | `api_routes.py:symbiosis` | lat, lon | SimbiosisResult JSON |
+| `GET /api/regulatory` | `api_routes.py:regulatory` | lat, lon | RegulatoryResult JSON |
+| `GET /api/financial` | `api_routes.py:financial` | lat, lon, kwh | FinancialResult JSON |
+| `GET /api/building-summary` | `building_summary_controller.get_building_summary` | lat, lon | {building_name, solar_kwh_year, panel_count, co2, subsidy, registered_by} — rate 30/min |
+| `POST /api/llm` | `llm_controller.ask_llm` | {prompt} | {response, provider, anonymization} — rate 20/h |
+| `POST /api/llm/analysis` | `llm_controller.ask_analysis` | {analysis_type, location_data, analysis_id} | {structured, report, provider} — rate 20/h |
+| `GET /api/llm/health` | `api_routes.py:llm_health` | — | {ollama, groq, active} |
+| `POST /api/companies` | `company_controller.register_company` | {name, lat, lon, ...} | {id} — requiere sesión, 1/user |
+| `GET /api/companies` | `company_controller.get_companies` | lat, lon, radius_km | {companies:[]} |
+| `POST /api/user/company` | `auth_controller.update_company_data` | session + {lat,lon,...} | {ok:true} — NO sobreescribe company_name |
+| `POST /api/analysis/save` | `analysis_save_controller.save_analysis` | {geo,climate,financial,symbiosis,llm,lat,lon} | {analysis_id} |
+| `GET /api/user/analyses` | `analysis_save_controller.get_user_analyses` | session | {analyses:[]} — últimos 20 |
+
+### Funciones / métodos clave
+| Símbolo | Ubicación | Descripción |
+|---------|----------|-------------|
+| `get_geo_analysis(lat, lon)` | `src/controllers/geo_controller.py:1` | Llama a lidar_service |
+| `get_climate_analysis(lat, lon)` | `src/controllers/climate_controller.py:1` | Llama a climate_service |
+| `find_symbiosis(lat, lon)` | `src/controllers/symbiosis_controller.py:1` | Llama a symbiosis_service |
+| `get_regulatory_info(lat, lon)` | `src/controllers/regulatory_controller.py:1` | Llama a regulatory_service |
+| `calculate_financial(lat, lon, kwh)` | `src/controllers/financial_controller.py:1` | Llama a financial_service |
+| `SymbioScene` | `public/js/components/scene3d.js:1` | Clase Three.js viewer 3D |
+| `SymbioScene.buildFromFootprint` | `public/js/components/scene3d.js` | Extruye footprint OSM a 3D |
+| `SymbioScene.setMode` | `public/js/components/scene3d.js` | Modos: general, irradiacion, sombras, paneles, lidar |
+| `landing()` | `src/routes/web_routes.py` | Ruta GET / → renderiza landing.html |
+| `initWordRotator()` | `public/js/pages/landing.js` | Cicla .hero__word cada 2800ms con animación exit/enter |
+| `animateCount(el)` | `public/js/pages/landing.js` | IntersectionObserver + rAF counter con easing cúbico |
+| `_addIndustrialLayers()` | `public/js/pages/dashboard.js` | GeoJSON source con generateId, teal + feature-state hover |
+| `_handleMapClick()` | `public/js/pages/dashboard.js` | Click genérico — prioriza industrial-3d, luego buildings-hit, luego vacío |
+| `loadBuildingsInView()` | `public/js/pages/dashboard.js` | Overpass API a zoom ≥14, convierte a GeoJSON polygons |
+| `openBuildingPopup()` | `public/js/pages/dashboard.js` | mapboxgl.Popup con estado loading → fetch /api/building-summary |
+| `_syncClearBtn()` | `public/js/pages/dashboard.js` | Muestra/oculta botón X del buscador M3 según longitud del input |
+| `loadAnalysis()` | `public/js/pages/estudio.js:42` | 5 fetches en paralelo con Promise.all + AbortController 18s |
+| `_setAgentStatus(agent, state)` | `public/js/pages/estudio.js:35` | Actualiza dot indicador de agente: loading/done/error |
+| `buildAiReport(report)` | `public/js/pages/estudio.js:367` | Renderiza informe estructurado JSON del LLM |
+| `ask(prompt, model, temperature, max_tokens)` | `src/services/llm_service.py:114` | Cadena: Ollama → GROQ → fallback |
+| `_try_ollama(prompt, model, temperature, max_tokens)` | `src/services/llm_service.py:44` | POST http://localhost:11434/api/chat, timeout=25s |
+| `_try_groq(prompt, model, temperature, max_tokens)` | `src/services/llm_service.py:81` | GROQ cloud via SDK |
+| `get_active_provider()` | `src/services/llm_service.py:11` | Devuelve 'ollama'|'groq'|'fallback' |
+| `anonymize(text)` | `src/services/anonymizer_service.py:1` | Presidio + regex fallback; devuelve {anonymized_text, entities_found, method} |
+| `login()` | `src/controllers/auth_controller.py` | GET/POST — verifica email+password, crea sesión |
+| `registro()` | `src/controllers/auth_controller.py` | GET/POST — rate limited 5/h por IP, crea User + envía email verificación |
+| `verificar_email(token)` | `src/controllers/auth_controller.py` | GET — marca email_verified=True, crea sesión |
+| `reenviar_verificacion()` | `src/controllers/auth_controller.py` | POST — rate limited 3/h por IP |
+| `mi_empresa()` | `src/controllers/auth_controller.py` | GET — panel empresa autenticada |
+| `update_company_data()` | `src/controllers/auth_controller.py` | POST /api/user/company — sync lat/lon/kwp/savings/payback; NO toca company_name |
+| `save_analysis()` | `src/controllers/analysis_save_controller.py` | POST — guarda BuildingAnalysis + 5 sub-tablas en una transacción con db.session.flush() |
+| `get_user_analyses()` | `src/controllers/analysis_save_controller.py` | GET — devuelve últimos 20 análisis del usuario con geo+financial joinados |
+| `is_rate_limited(key, max_per_window, window_seconds)` | `src/services/rate_limiter.py` | Thread-safe; buckets en memoria; devuelve True si se supera el límite |
+| `get_client_ip()` | `src/services/rate_limiter.py` | Lee X-Forwarded-For o request.remote_addr |
+| `_claimBuilding(lat, lng)` | `public/js/pages/dashboard.js` | AJAX POST /api/companies desde popup; muestra badge o error inline |
+| `drawTerrain(slopeDeg, orientDeg)` | `public/js/pages/geo.js` | Canvas: brújula SVG (N/S/E/O, arco óptimo sur, flecha coloreada por eficiencia) + cross-section pendiente con línea óptima 32° |
+| `azimutToText(deg)` | `public/js/pages/geo.js` | Convierte azimut 0-360° a texto de punto cardinal (16 sectores) |
+| `solarEfficiency(orientDeg, slopeDeg)` | `public/js/pages/geo.js` | Calcula % eficiencia solar vs. óptimo (Sur 180°, 33°); devuelve {pct, label, color} |
+| `solarClassify(kwh)` | `public/js/pages/climate.js` | Clasifica producción anual en Excelente/Muy buena/Buena/Media/Baja dentro del rango España 800-1800 kWh/kWp |
+| `skyIcon(cloudPct)` | `public/js/pages/climate.js` | Devuelve SVG inline de sol/parcialmente nublado/nublado según % nubosidad |
+| `renderHoursVisual(annualHours)` | `public/js/pages/climate.js` | Rellena 12 mini-barras proporcionales a horas de sol mensuales estimadas |
+| `renderInstantPower(radiationW, kwp)` | `public/js/pages/climate.js` | Calcula y renderiza generación instantánea en kW y proyección diaria kWh; usa PR=0.82 y peakSunHours=5.5; lee kwp de URL param `?kwp=` (default 50) |
+| `_drawSimbiosisNetwork(neighbors)` | `public/js/pages/estudio.js` | Canvas animado de red energética: hex grid, bezier curved connections, paquetes diamante con trails, eased motion; se cancela al salir del pane simbiosis |
+| `paybackClassify(years)` | `public/js/pages/financial.js` | Clasifica payback en Excelente/Muy bueno/Bueno/Aceptable/Revisar con color y badge |
+| `tirClassify(pct)` | `public/js/pages/financial.js` | Clasifica TIR (>15% Excelente, >10% Muy buena, >7% Buena) |
+| `renderTimeline(paybackNet, paybackGross)` | `public/js/pages/financial.js` | Anima timeline CSS 0-20 años: recovery ámbar hasta payback neto, profit verde desde payback hasta 20a, marcas net/gross |
+| `_security_headers(response)` | `src/__init__.py` (after_request) | X-Frame-Options, X-Content-Type-Options, X-XSS-Protection, Referrer-Policy, Permissions-Policy |
+| `inject_active_building()` | `src/__init__.py` (context_processor) | Inyecta active_lat, active_lon, active_kwp, active_building_name en TODOS los templates via active_company_id de session |
+| `_redirect_to_active_building(endpoint)` | `src/routes/web_routes.py` | Si no hay lat/lon en URL y hay edificio activo en session, redirige al endpoint con coords del edificio; devuelve None si no aplica |
+| `openWizard()` | `public/js/pages/estudio.js` | Abre wizard "Actualizar consumo"; usa animation=none + requestAnimationFrame para forzar re-trigger del CSS fade-in al re-adjuntar al DOM |
+| `_mapboxBuildingShape` | `public/js/pages/estudio.js` (scope DOMContentLoaded) | IIFE que lee y borra `localStorage('symbio_building_shape')` al arrancar; footprint real del edificio clicado en el mapa |
+| `symbio_building_shape` | localStorage | `{footprint:[{lat,lon}...], height:N, min_height:N}` — escrito por dashboard.js al clic, leído y borrado por estudio.js al arrancar |
+
+### Modelos SQLAlchemy
+| Clase | Fichero | Campos clave |
+|-------|---------|-------------|
+| `Company` | `src/models/company_model.py` | id, user_id (FK→user), name, lat, lon, annual_kwh, sector, solar_capacity_kwp, contact_email, registered_at |
+| `User` | `src/models/user_model.py` | id, email, password_hash, email_verified, verification_token, company_name, lat, lon, solar_capacity_kwp, annual_savings_eur, payback_years, subsidy_eur, surface_m2, created_at |
+| `BuildingAnalysis` | `src/models/analysis_model.py` | id, user_id, company_id, lat, lon, kwh_annual_input, sector_input, analyzed_at — tabla building_analysis |
+| `GeoResult` | `src/models/agent_results_model.py` | analysis_id, building_name, total_area_m2, usable_area_m2, solar_capacity_kwp, municipio |
+| `ClimateResult` | `src/models/agent_results_model.py` | analysis_id, solar_annual_kwh_per_kwp, avg_temp, sun_hours, precipitation |
+| `FinancialResult` | `src/models/agent_results_model.py` | analysis_id, investment_eur, subsidy_eur, payback_years, npv_eur, irr_pct |
+| `SymbiosisResult` | `src/models/agent_results_model.py` | analysis_id, hria_score, shared_potential_kwh |
+| `SymbiosisNeighbor` | `src/models/agent_results_model.py` | symbiosis_result_id, company_name, distance_km, compatibility_score |
+| `InvoiceUpload` | `src/models/invoice_model.py` | user_id, analysis_id, kwh_annual, cost_annual_eur, tariff, confidence, source |
+| `LlmReport` | `src/models/llm_report_model.py` | analysis_id, user_id, analysis_type, question, response_json (LONGTEXT), provider, entities_anonymized |
+
+---
+
+## 📐 CONVENTIONS
+
+### Nomenclatura de ficheros
+| Tipo | Convención | Ejemplo |
+|------|-----------|---------|
+| Controladores | `snake_case_controller.py` | `dashboard_controller.py` |
+| Modelos | `snake_case_model.py` | `company_model.py` |
+| Servicios | `snake_case_service.py` | `lidar_service.py` |
+| Views/templates | `snake_case.html` | `geo_analysis.html` |
+| CSS | `kebab-case.css` | `kpi-card.css` |
+| JS componentes | `camelCase.js` | `scene3d.js` |
+| JS páginas | `camelCase.js` | `dashboard.js` |
+| Tests | `snake_case_test.py` | `geo_controller_test.py` |
+
+### Reglas CSS
+- **Todas las variables CSS en `public/css/base/variables.css`.** Cero valores mágicos de color en otro sitio.
+- **BEM obligatorio:** `.bloque__elemento--modificador`. Sin excepciones.
+- **Sin estilos inline** en HTML. Sin atributos `style=""`.
+- **Mobile-first:** estilos base para móvil, `@media (min-width: …)` para más grande.
+- **Sin estilos en ficheros JavaScript.**
+
+### Reglas Python
+- `snake_case` para funciones y variables. `PascalCase` para clases. `SCREAMING_SNAKE` para constantes.
+- Type hints en todas las firmas de funciones públicas.
+- `async/await` para operaciones IO-bound (llamadas a APIs).
+- Sin wildcard imports (`from x import *`).
+- Sin `print()` en código de producción — usar `logging`.
+
+### Reglas JavaScript
+- `const` por defecto. `let` solo cuando se necesita reasignación. Nunca `var`.
+- Named exports en módulos ES (`export function`, `export class`). No default exports.
+- `async/await` en lugar de cadenas `.then()`.
+- Sin números mágicos ni strings mágicos — extraer a constantes nombradas.
+
+### Git
+- **Formato de ramas:** `feature/descripcion-corta` · `fix/descripcion-corta` · `chore/descripcion-corta`
+- **Formato de commit:** `tipo(scope): descripcion` — ej. `feat(geo): integrar LiDAR PNOA real`
+- **Sin commits directos a `main`.** Usar ramas de feature + PR.
+- **PR requerido** para cualquier cambio que toque más de un módulo.
+
+### Política de comentarios
+- Sin comentarios que expliquen QUÉ hace el código — los nombres lo hacen.
+- Comentarios solo para el POR QUÉ: restricciones ocultas, invariantes no obvias, workarounds.
+- Sin TODO en código commitado — abrir item en el Backlog aquí en su lugar.
+- Sin código comentado — borrarlo; git tiene el historial.
+
+---
+
+## ✅ CODE QUALITY
+
+### Checklist pre-entrega — obligatorio, no saltarse
+- [ ] Cada función hace exactamente una cosa. Si se puede describir con "y", dividirla.
+- [ ] Sin función más larga de ~30 líneas.
+- [ ] Sin anidación más profunda de 3 niveles. Usar early returns para aplanar.
+- [ ] Sin lógica duplicada.
+- [ ] Sin valores hardcodeados (strings, números, URLs, credenciales). Usar constantes o config.
+- [ ] Todas las variables y funciones nombradas semánticamente.
+- [ ] Sin variables, imports o parámetros sin usar.
+- [ ] Paths de error manejados. Sin fallos silenciosos.
+- [ ] Type hints en todas las funciones Python públicas.
+- [ ] Nuevos ficheros colocados en el directorio correcto según STRUCTURE MAP.
+
+### Patrones prohibidos — nunca producir este código
+- `eval()` o constructor `Function()`
+- `console.log` en código commitado (usar logger apropiado)
+- Strings SQL construidos por concatenación (queries parametrizadas siempre)
+- Capturar excepciones y no hacer nada (`except: pass` o `catch(e) {}`)
+- Credenciales o secretos en código fuente
+- `innerHTML` con datos no sanitizados
+- I/O síncrona de ficheros en un handler de request Flask
+- `SELECT *` en queries de producción
+
+---
+
+## 🔌 API & DATA CONTRACTS
+
+### Variables de entorno
+| Variable | Requerida | Propósito | Default |
+|----------|----------|---------|---------|
+| `FLASK_SECRET_KEY` | sí | Firma de sesiones Flask | — |
+| `FLASK_ENV` | no | development/production | `development` |
+| `AEMET_API_KEY` | sí (para datos reales) | AEMET OpenData API | — |
+| `DATABASE_URL` | no | Connection string BD | SQLite local |
+
+### APIs externas consumidas
+| Servicio | Auth | Rate limit | Wrapper | Notas |
+|---------|------|-----------|---------|-------|
+| PNOA LiDAR (IGN) | Sin auth | — | `lidar_service.py` | WCS, resolución 0.5 m |
+| AEMET OpenData | API key (env) | 1 req/min | `climate_service.py` | Registro gratuito |
+| PVGIS (EU-JRC) | Sin auth | — | `climate_service.py` | Solar/wind potential |
+| Nominatim (OSM) | Sin auth | 1 req/s | `public/js/pages/dashboard.js` | Header User-Agent obligatorio |
+| Overpass API | Sin auth | — | `public/js/pages/dashboard.js` | Footprints de edificios |
+| BOE / BOA | Sin auth | — | `regulatory_service.py` | Subvenciones |
+| OMIE | Sin auth | — | `financial_service.py` | Precio horario eléctrico |
+
+---
+
+## 🔐 SECURITY
+
+### Reglas de validación de input
+- Validar lat/lon en limits (lat: -90..90, lon: -180..180) antes de pasar a servicios
+- Validar parámetro `kwh` > 0 y < 100_000_000 antes de cálculos financieros
+- Ficheros subidos (facturas PDF): validar MIME type y tamaño antes de procesar
+
+### Patrones de seguridad prohibidos
+- SQL por concatenación de strings — usar SQLAlchemy ORM siempre
+- `innerHTML` con datos sin sanitizar — usar `textContent` o DOMPurify
+- Secretos en `.env.example` — solo valores placeholder
+- IDs secuenciales para recursos sensibles — usar UUIDs
+
+---
+
+## 🎯 CURRENT SESSION STATE
+
+### Objetivo activo
+Pulido visual de páginas de agentes standalone completado. Pendiente vídeo demo y HRIA (deadline 29 mayo 2026).
+
+### Contexto
+Sesión 2026-05-27 (Lucía/AI): pulido visual de /simbiosis, /normativa, /financiero y /clima. Se añadió título bicolor a /simbiosis y /normativa, ring de autosuficiencia con gradiente SVG, canvas de red profesional en el pane simbiosis de /estudio, stats grid en /normativa, sección proyectos EU. Se rediseñó /clima con 2 cards (condiciones actuales + generación estimada), estimación instantánea de kW/kWh según radiación real, y se unificó la paleta para mayor seriedad (sin colores eléctricos, sin azul/verde vivo, ámbar oscuro #d97706 como único acento en clima).
+
+### Último paso tomado
+Paleta clima: reemplazo teal→ámbar (#d97706) en todos los elementos de acento (valor kW generación, barra progreso, barras horas sol, barras gráfico). Negro queda negro.
+
+### Próximo paso inmediato
+1. Vídeo demo con datos reales Polígono Industrial Teruel Norte (deadline 29 mayo 2026)
+2. Evaluación HRIA en hria.eu (deadline 29 mayo 2026)
+3. Release GitHub v0.3.0: `gh auth login` → `gh release create`
+
+### Bloqueantes
+- Release GitHub v0.3.0: tag v0.3.0 ya en GitHub, falta `gh auth login` para crear el release
+- MySQL: necesita XAMPP activo para la demo (BD en modo degradado sin XAMPP)
+
+---
+
+## 📚 DECISIONS LOG
+
+| Fecha | Decisión | Alternativas | Razonamiento |
+|-------|---------|-------------|-------------|
+| 2026-05-22 | Flask MVC con servicios desacoplados | FastAPI, Django | Flask más liviano para prototipo hackathon; MVC familiar |
+| 2026-05-22 | Three.js para viewer 3D, Leaflet para mapa principal | Solo Three.js, MapLibre | Leaflet más fiable para mapa interactivo; Three.js solo para viewer edificio |
+| 2026-05-22 | SQLite para desarrollo, URL configurable para producción | PostgreSQL directo | SQLite sin dependencias externas para hackathon; fácil upgrade |
+| 2026-05-22 | ES modules para JS con importmap | Bundler (webpack/vite) | Sin build step; más simple para hackathon; Three.js 0.163 lo soporta bien |
+| 2026-05-22 | Estructura skeleton (stubs) en repo base | Subir código ya escrito | Coordinación: los dos colaboradores parten del mismo punto y trabajan en paralelo sin conflictos |
+| 2026-05-23 | Open-Meteo Archive API (ERA5) para clima | PVGIS, AEMET directo | Gratuita, sin clave, cubre cualquier coordenada, 3 años de datos reales |
+| 2026-05-23 | Google Geocoding API server-side con rate limit 50/día | Nominatim directo en JS | La clave nunca se expone al cliente; Nominatim como fallback transparente |
+| 2026-05-23 | Diseño claro (--bg: #f5f3ee) con Cabinet Grotesk | Dark glassmorphic anterior | Sistema profesional para hackathon; tipografía de impacto sin emojis |
+| 2026-05-23 | Paleta warm-light: --bg/#fffffe + #f8f5f2 fondo, --ink/#232323, --leaf/#078080 teal, --warning/#f45d48 coral | Blanco puro anterior | El usuario pidió tonos cálidos con personalidad; paleta proporcionada por el usuario |
+| 2026-05-23 | LLM con cadena Ollama→GROQ→fallback estructurado | Solo GROQ | Jurado AESIA premia privacidad; Ollama garantiza que datos no salen del servidor (AI Act) |
+| 2026-05-23 | Presidio para anonimización PII (regex fallback si no disponible) | Sin anonimización | Requisito AI Act evaluado por AESIA; datos sensibles nunca llegan al LLM cloud |
+| 2026-05-23 | Login con Flask session nativa + werkzeug hash | Flask-Login, JWT | Sin dependencias externas; suficiente para hackathon; werkzeug ya incluido con Flask |
+| 2026-05-23 | user_model.py con campos energéticos (lat, lon, capacidad, ahorro, payback) | Tabla separada AnalysisHistory | Perfil autocontenido; una sola query para renderizar /mi-empresa |
+| 2026-05-23 | Landing page en `/`, mapa movido a `/mapa` | Mapa como home directamente | El jurado y los usuarios necesitan ver propuesta de valor antes del mapa; patrón estándar en SaaS (Uber, Niba) |
+| 2026-05-23 | Mapbox GL JS en lugar de Leaflet para el mapa | Leaflet, MapLibre | Lucía pidió mapa 3D estético; Mapbox GL JS es el estándar para extrusión de edificios 3D, terrain DEM y estilos premium |
+| 2026-05-23 | Estilo Mapbox `light-v11` (gris/blanco) | Dark, satellite, tectonic | Usuario prefirió mapa claro y profesional; encaja con paleta warm-light del diseño |
+| 2026-05-23 | Token Mapbox en .env + inyección server-side via Flask | Hardcoded en JS, variable de entorno pública | Repo público → token nunca puede estar en código; Flask lo inyecta en `window.__SYMBIOSIS.mapboxToken` |
+| 2026-05-24 | Mapbox Standard style + lightPreset 'dusk' en lugar de dark-v11 | dark-v11 con colores manuales, night-v11 | Standard style v3 tiene motor de iluminación física real: sombras de edificios, atmósfera crepuscular y materiales — no se puede replicar con colores hardcoded |
+| 2026-05-24 | Capa invisible `buildings-hit` sobre streets-v8 para clics | Clickear directamente sobre Standard buildings | Standard style renderiza edificios internamente, no son queryables con queryRenderedFeatures; streets-v8 proporciona los polígonos de edificios para detección |
+| 2026-05-24 | M3 Search Bar (Material Design 3) para el buscador | Buscador propio con input+botón | Google M3 spec garantiza accesibilidad ARIA, estados de interacción (hover/focus/active), semántica correcta y altura mínima táctil 56px |
+| 2026-05-24 | MySQL (pymysql) en lugar de SQLite | PostgreSQL, SQLite | Hackathon con demo real; MySQL ya disponible via XAMPP; 10 tablas con FKs y cascades para demo robusta |
+| 2026-05-24 | Rate limiter en memoria (threading.Lock + defaultdict) | Redis + Flask-Limiter | Single-process en hackathon; sin dependencia de Redis; suficiente para proteger endpoints LLM/email |
+| 2026-05-24 | 1 empresa por usuario (update si existe, 409 si duplicado geográfico) | Múltiples empresas por usuario | Requisito de negocio: cada empresa es un edificio físico; evita spam; edificio != empresa |
+| 2026-05-24 | company_name del usuario NO se sobreescribe al guardar análisis | Permitir override | El análisis retorna el nombre del edificio OSM; no del negocio real del usuario |
+| 2026-05-24 | Security headers via @app.after_request en create_app() | Flask-Talisman, middleware | Cero dependencias extra; suficiente para X-Frame, X-Content-Type, Referrer-Policy para producción |
+| 2026-05-24 | Glass panel con rgba(0,0,0,0.48)+blur(40px) sin saturate/brightness | Tinte blanco, tinte morado, gris claro | El gris neutro semitransparente de la atribución Mapbox es la referencia visual más coherente con el mapa |
+| 2026-05-24 | loadBuildingsInView y loadDashboardKPIs diferidos al evento idle | Lanzar en load | El mapa renderiza primero sin competir con Overpass por ancho de banda; mejora percepción de velocidad |
+| 2026-05-24 | Campus UNIZAR (41.6488, -0.8913, zoom 16.2) como vista inicial | Polígono Teruel Norte (demo) | Demo del hackathon graba en Teruel Norte; mapa arranca en Zaragoza para ser más representativo y familiar |
+| 2026-05-24 | Pivot narrativo: de "consultor solar individual" a "plataforma polígonos autosostenibles" | Mantener foco solar individual | Usuario quiere que la app sirva para redes energéticas en todos los polígonos de España; narrativa anterior demasiado estrecha para el pitch |
+| 2026-05-24 | Logo imagen PNG en navbar y favicon PNG en lugar de texto tipográfico | Texto tipográfico, SVG inline | El usuario tiene identidad de marca ya diseñada; logo PNG sin fondo integrado directamente |
+| 2026-05-24 | Sección Vision 3 fases en landing (empresa → polígono → España/mundo) | Solo hero + agentes | Explicita el roadmap y eleva el pitch: de herramienta táctica a plataforma de impacto sistémico |
+| 2026-05-24 | Visualización SVG inline para red energética en /simbiosis | Canvas, Three.js, Leaflet | SVG es declarativo, responsive, no requiere librerías extra; suficiente para nodos < 20 sin animación continua |
+| 2026-05-24 | Ring SVG para autosuficiencia colectiva en lugar de barra o numeral | Barra horizontal, numeral grande | El anillo circular es más visual para porcentajes; stroke-dashoffset animado vía CSS da feedback inmediato |
+| 2026-05-24 | Eliminar rombo ::before del navbar al usar logo imagen | Mantener rombo + logo | El rombo decorativo choca visualmente con el logo imagen real; sin texto tipográfico ya no tiene sentido |
+| 2026-05-24 | Rate limiting 3 capas para recuperación de contraseña (IP + email + global) | Solo IP, solo email | Protege el SMTP de spam: límite por IP evita abuso, por email evita acoso a una cuenta, global evita sobrecarga del servidor de correo |
+| 2026-05-24 | Reutilizar columnas verification_token para reset | Columnas dedicadas reset_token/reset_token_expires | Separar responsabilidades: el token de verificación no debe compartirse con reset por claridad y seguridad |
+| 2026-05-24 | Footer enlace "Código abierto" al repositorio GitHub | Sin enlace, enlace a opencode.ai | El proyecto es open source (Apache 2.0); el enlace al repo permite a cualquier usuario acceder al código y contribuir |
+| 2026-05-25 | PVGIS (JRC EU) como fuente primaria de radiación solar en climate_service | Open-Meteo como fuente única | Argumento K.O. para el jurado: "precisión institucional del Centro Común de Investigación de la Comisión Europea"; Open-Meteo se mantiene para temperatura/viento/precipitación |
+| 2026-05-25 | Balance mensual ("Bizum energético") en symbiosis_service | Sin liquidación mensual | Lucía (asesora hackathon) identificó el mecanismo de liquidación mensual como diferenciador clave para el contrato CE; cálculo PVGIS×kWp - consumo_vecinos×factor_estacional |
+| 2026-05-25 | Contrato CE en plantilla standalone `/contrato-ce` (Jinja2 no extend layout) | Modal JS, API JSON, PDF server-side | Contrato imprimible como GET HTML es la solución más simple y portable; el jurado puede hacer Ctrl+P directamente en la demo; ruta `GET /contrato-ce?lat&lon&kwp&company` |
+| 2026-05-25 | `inject_active_building` como context processor global en `src/__init__.py` | Inyección per-ruta en cada blueprint, variable de entorno Flask | Un context processor inyecta automáticamente en TODOS los templates sin tocar cada ruta; el navbar puede generar los links correctos sin redireccionamiento HTTP extra |
+| 2026-05-25 | No-building screen explícita en /estudio (no usar demo coords para usuarios logeados sin edificio) | Demo silencioso con 40.364/-1.102 | Un usuario logeado sin edificio activo no debe ver datos ficticios sin saberlo; la pantalla informativa les guía a /mi-empresa |
+| 2026-05-25 | Leaflet mini-mapa en geo tab de /estudio reemplazando canvas procedimental de altimetría | Mantener canvas fake, Google Maps embed, iframe OSM | El canvas era una representación fake sin datos reales; Leaflet muestra la ubicación exacta con footprint OSM real de Overpass |
+| 2026-05-25 | kwp propagado via URL param en toda la cadena: Company.solar_capacity_kwp → context_processor → navbar → URL → estudio.js → /api/symbiosis | Solo en BD, sin propagar al cliente | El agente Simbiosis necesita el kWp del edificio para calcular el balance mensual "Bizum energético"; si no viene en la URL, el agente calcula con un valor estimado inferior |
+| 2026-05-26 | Footprint real de Mapbox (streets-v8) para el viewer 3D via localStorage | Usar solo footprint del agente Geo (Overpass backend) | queryRenderedFeatures sobre buildings-hit devuelve el polígono exacto del vector tile con height real; más preciso y disponible antes que la respuesta de la API |
+| 2026-05-26 | Eliminación completa de paneles solares del viewer 3D | Mantenerlos o hacer toggle | Los paneles genéricos procedurales no aportan valor visual real; el viewer es más limpio como maqueta arquitectónica pura |
+| 2026-05-27 | Centrado de rejilla de paneles calculando nCols/nRows y desplazando startX/startZ | Rellenar desde esquina (anterior) | La rejilla pegada a una esquina es visualmente incorrecta; el centrado reparte el margen sobrante a ambos lados |
+| 2026-05-27 | _pointInShape recibe -cz en lugar de cz | Usar cz directamente | rotateX(-π/2) convierte shape.y → -3D.z; sin negar, el PIP test fallaba en cubiertas asimétricas y colocaba paneles fuera del tejado |
+| 2026-05-27 | rotation.x = tiltRad (positivo) para inclinación sur | rotation.x = -tiltRad (anterior) | Con signo negativo los paneles miraban al Norte (-Z); el signo positivo eleva el lado norte y orienta la cara al Sur (+Z), óptimo para España |
+| 2026-05-27 | Renovables como primera pestaña activa en /estudio | Geo como primera pestaña (anterior) | Renovables es el dato más impactante para el pitch (clasificación solar + PVGIS); abrir en Geo era técnico/secundario |
+| 2026-05-27 | Terrain analysis canvas next to LiDAR en /geo | LiDAR full-width único | Añadir valor analítico visible: brújula de orientación + perfil de pendiente + eficiencia solar calculada sin petición extra al servidor |
+| 2026-05-27 | Weather hero card en /clima con condiciones actuales en tiempo real | KPIs planos dentro de grid general | La temperatura y nubosidad actuales dan contexto inmediato al usuario; el widget solo aparece si /api/weather responde correctamente |
+| 2026-05-27 | Payback hero full-width como primera sección en /financiero | Payback en grid general junto a otros KPIs | El payback es el único número que importa a un responsable de operaciones; hacerlo protagonista antes de cualquier otro dato mejora el impacto del pitch |
+| 2026-05-27 | Timeline visual CSS (recovery ámbar + profit verde) en /financiero | Gráfico Chart.js de flujo de caja | Sin añadir dependencia externa; la timeline CSS animada transmite el mismo mensaje (cuándo se recupera la inversión) con menor complejidad |
+| 2026-05-27 | Canvas red profesional en pane simbiosis de /estudio: hex grid + bezier + paquetes diamante | SVG estático anterior | El canvas canvas SVG era demasiado simple; la animación con paquetes de energía transmite flujo activo entre empresas — clave para el pitch |
+| 2026-05-27 | 2 cards separadas en /clima (condiciones actuales + generación estimada) | Una sola card fusionada | Separar responsabilidades mejora la legibilidad; la estimación de generación merece su propio espacio al ser un KPI financiero independiente |
+| 2026-05-27 | Mapbox default cambiado de UNIZAR (41.6488, -0.8913) a Teruel capital (40.3456, -1.1065) | Mantener Zaragoza/UNIZAR | El vídeo demo usa el Polígono Industrial Teruel Norte; arrancar en Teruel es más directo para la demo y para los datos reales |
+| 2026-05-27 | Paleta /clima: ámbar oscuro #d97706 como único acento, sin teal | Mantener teal/leaf como en otros agentes | /clima tiene temática solar → ámbar coherente; en /geo y /simbiosis el teal representa red/energía; paleta diferenciada por agente da personalidad sin romper el sistema |
+
+---
+
+## 🐛 KNOWN ISSUES
+
+| ID | Estado | Descripción | Workaround | Causa raíz |
+|----|--------|-------------|-----------|------------|
+| #1 | closed | Servicios devolvían NotImplementedError | — | Todos implementados en sesión 2026-05-23 |
+| #2 | closed | scene3d.js es un stub vacío | — | Implementado: SymbioScene con footprint OSM, modos, LiDAR |
+| #3 | open | Open-Meteo bloqueado en redes restrictivas | Fallback AEMET Aragón activo | Firewall/VPN bloquea archive-api.open-meteo.com |
+| #4 | closed | GROQ key configurada pero responde con fallback | — | Resuelto: cadena Ollama→GROQ→fallback estructurado implementada. _try_groq() con GROQ SDK |
+| #5 | closed | estudio.js no cargaba datos — todo quedaba en "--" | — | Causa raíz: 2 llaves sobrantes en bloques clima y simbiosis cerraban el try prematuramente. Eliminadas. |
+| #6 | open | presidio-analyzer requiere spacy model en inglés | pip install presidio-analyzer && python -m spacy download en_core_web_lg | Si Presidio no está instalado usa regex fallback automáticamente |
+| #7 | closed | Registro permitía múltiples empresas por usuario | — | company_controller.py: comprueba Company.user_id == user_id antes de crear, actualiza en su lugar |
+| #8 | closed | Clic en mapa vacío abría popup de edificio | — | _handleMapClick ahora consulta buildings-hit layer; sin hit → return sin popup |
+| #9 | closed | Botón "Registrar mi empresa" en popup no hacía nada (link a /mi-empresa) | — | Convertido a button con onclick="_claimBuilding(lat,lng)" → POST /api/companies AJAX |
+| #10 | closed | Registro de empresa sobreescribía nombre de cuenta con nombre del edificio OSM | — | Eliminado `user.company_name = data['company_name']` de update_company_data() |
+| #11 | open | Release v0.3.0 pendiente | Ejecutar `gh auth login` y luego crear el tag+release | gh CLI instalada (scoop) pero no autenticada |
+| #12 | closed | window.__SYMBIOSIS roto por Jinja2 escapando `""` a `&#34;&#34;` | — | Cambiado a `session.get('user_company') \| tojson` que produce `null` sin escape HTML |
+| #13 | closed | Mapa tardaba en cargar — Overpass competía con tiles Mapbox | — | loadBuildingsInView y loadDashboardKPIs movidos al evento `idle`; fadeDuration reducido a 150ms |
+| #14 | closed | loadDashboardKPIs() llamaba a IDs DOM (kpi-companies etc.) eliminados de dashboard.html | — | Función eliminada completamente; claimedLocations se carga en idle handler |
+| #15 | closed | loadRegisteredCompanies() accedía a Mapbox source 'registered-companies' nunca añadido | — | Refactorizada: solo popula claimedLocations[], no toca Mapbox |
+| #16 | closed | currentAnalysisId declarado dentro de loadAnalysis() — botón LLM siempre lo leía como undefined | — | Movido a scope DOMContentLoaded exterior |
+| #17 | closed | entities_count = anon['entities_found'] asignaba lista a columna Integer en LlmReport | — | Cambiado a len(anon['entities_found']) |
+| #18 | closed | App crasheaba al arrancar si MySQL no estaba disponible | — | try/except alrededor de db.create_all() + _seed_demo_user() en src/__init__.py |
+| #19 | closed | Parsing euros con replace('.', '') solo eliminaba el primer separador de miles | — | Cambiado a replace(/\./g, '') con flag global en estudio.js |
+| #20 | closed | Agentes /estudio mostraban "Error de conexión" al intentar cargar datos | — | 3 procesos Flask stale (sin threaded=True) bloqueaban el puerto 5000; los fetch paralelos de Promise.all se bloqueaban entre sí. Solución: `Stop-Process -Id <pids> -Force` + reiniciar Flask. run.py ya tenía threaded=True. |
+| #21 | closed | Wizard "Actualizar consumo" no se abría — el panel nunca aparecía | — | Al re-adjuntar el wizard al DOM con `appendChild`, el browser no re-dispara la animación CSS `fade-in`. Fix en `openWizard()`: `wizard.style.animation='none'` → `appendChild` → `requestAnimationFrame(() => { wizard.style.animation=''; })` |
+| #22 | closed | Todos los agentes (/geo, /clima, /simbiosis, /normativa, /financiero) siempre analizaban coords fijas 40.364/-1.102 independientemente del edificio activo | — | Implementado `inject_active_building` context processor + `_redirect_to_active_building` helper + navbar dinámico con coords del edificio activo |
+| #23 | closed | Paneles solares se salían de los bordes del tejado y orientación incorrecta | — | Bug 1: `_pointInShape(shape, cx, cz)` → `_pointInShape(shape, cx, -cz)` (shape.y = -3D.z tras rotateX). Bug 2: `rotation.x = -tiltRad` → `+tiltRad` (panels miraban Norte; +tiltRad orienta al Sur +Z). Bug 3: rejilla no centrada → cálculo nCols/nRows + startX/startZ centrado. |
+
+---
+
+## ✅ PROGRESS
+
+### Completado
+- [x] 2026-05-22 — Repositorio GitHub creado (Oscarr36/SymbioEnergia-IA)
+- [x] 2026-05-22 — Estructura base: todos los directorios y ficheros stub creados
+- [x] 2026-05-22 — .readmeAI configurado con T&C hackathon, convenciones y SYMBOL INDEX
+- [x] 2026-05-22 — Flask app factory (`create_app`), rutas web y API definidas, modelos SQLAlchemy
+- [x] 2026-05-23 — 5 agentes implementados: geo, clima, simbiosis, normativa, financiero (HTML + JS + CSS)
+- [x] 2026-05-23 — lidar_service.py — OSM Overpass + nube puntos LiDAR procedimental
+- [x] 2026-05-23 — climate_service.py — Open-Meteo Archive API (ERA5) + fallback AEMET Aragón
+- [x] 2026-05-23 — symbiosis_service.py — matching vecinos OSM + evaluación HRIA
+- [x] 2026-05-23 — regulatory_service.py — STEP Aragón + MOVES III + ICO con geocerca
+- [x] 2026-05-23 — financial_service.py — ROI/payback/VAN/TIR + escenario bancario
+- [x] 2026-05-23 — geocoding_service.py — Google API server-side + rate limit 50/día + fallback Nominatim
+- [x] 2026-05-23 — /api/geocode + /api/reverse-geocode endpoints
+- [x] 2026-05-23 — Diseño profesional: Cabinet Grotesk + General Sans + paleta claro (#f5f3ee)
+- [x] 2026-05-23 — API key Google guardada en config/.env (excluido del repo)
+- [x] 2026-05-23 — Paleta warm-light: fondo #f8f5f2, teal #078080, coral #f45d48, texto #232323
+- [x] 2026-05-23 — Rediseño completo estilos: todos CSS reescritos, hardcoded colors eliminados, navbar claro, Leaflet Positron
+
+### En progreso / completado esta sesión
+- [x] 2026-05-23 — Ollama local AI + cadena de proveedores LLM
+- [x] 2026-05-23 — Presidio PII anonymization (AI Act compliance)
+- [x] 2026-05-23 — Registro empresas en BD + red simbiosis DB-first
+- [x] 2026-05-23 — Proyectos europeos en normativa (5 programas: Horizon, LIFE, FEDER/PREAR, InvestEU, REPowerEU)
+- [x] 2026-05-23 — Fix crítico estudio.js: 2 llaves sobrantes que bloqueaban toda carga de datos
+- [x] 2026-05-23 — Sistema login/registro de empresas (Flask session + werkzeug)
+- [x] 2026-05-23 — Panel /mi-empresa con KPIs energéticos y proyección de ahorro a 25 años
+- [x] 2026-05-23 — Navbar con sesión activa (nombre empresa si autenticado)
+- [x] 2026-05-23 — Sync análisis→perfil usuario al guardar empresa
+
+### Completado esta sesión (Lucía, 2026-05-23)
+- [x] 2026-05-23 — Entorno de desarrollo Lucía configurado (Git, Python 3.14, deps, GitHub token)
+- [x] 2026-05-23 — Landing page premium: hero rotante, app-card preview, stats bar, how-it-works, agents grid, CTA final
+- [x] 2026-05-23 — Ruta `/` → landing, `/mapa` → mapa anterior. Navbar actualizado.
+- [x] 2026-05-23 — Mapa Leaflet reemplazado por Mapbox GL JS 3D: estilo light-v11, edificios extruidos, terrain, fog, toggle 3D/2D
+- [x] 2026-05-23 — Token Mapbox guardado en config/.env (gitignored), inyectado server-side via Flask template
+- [x] 2026-05-23 — MAPBOX_TOKEN añadido a app_config.py y .env.example (placeholder)
+- [x] 2026-05-24 — Mapa migrado a Standard style + lightPreset 'dusk' (maqueta arquitectónica real con sombras nativas)
+- [x] 2026-05-24 — Panel KPI derecho eliminado del dashboard
+- [x] 2026-05-24 — Sección "Ubicación demo" eliminada del panel izquierdo
+- [x] 2026-05-24 — Buscador rediseñado con M3 Search Bar (56px, pill, tinte teal, clear button, ARIA completo)
+- [x] 2026-05-24 — Puntos coral de empresas registradas eliminados del mapa
+- [x] 2026-05-24 — Leyenda inferior (teal/coral) eliminada del mapa
+
+### Completado esta sesión (Óscar, 2026-05-24)
+- [x] 2026-05-24 — BD MySQL real: schema de 10 tablas, scripts/db_init.py, migraciones idempotentes
+- [x] 2026-05-24 — Todos los modelos SQLAlchemy migrados a MySQL (pymysql, SQLAlchemy 2.x patterns)
+- [x] 2026-05-24 — Email verificación: token firmado 24h, reenvío con rate limit, página verificar_email.html
+- [x] 2026-05-24 — Modelos nuevos: BuildingAnalysis, GeoResult, ClimateResult, FinancialResult, SymbiosisResult, SymbiosisNeighbor, InvoiceUpload, LlmReport
+- [x] 2026-05-24 — POST /api/analysis/save + GET /api/user/analyses operativos
+- [x] 2026-05-24 — Historial de análisis en /mi-empresa (tabla dinámica via fetch)
+- [x] 2026-05-24 — estudio.js guarda análisis completo en BD tras Promise.all + pasa analysis_id al LLM
+- [x] 2026-05-24 — KPIs del dashboard leídos de BD real (no hardcoded)
+- [x] 2026-05-24 — Rate limiting global: LLM 20/h, building-summary 30/min, registro 5/h, reenvío email 3/h, empresa 5/h
+- [x] 2026-05-24 — Security headers: X-Frame-Options, X-Content-Type-Options, X-XSS-Protection, Referrer-Policy, Permissions-Policy
+- [x] 2026-05-24 — Fix: click mapa solo abre popup en edificios reales (capa buildings-hit), no en espacio vacío
+- [x] 2026-05-24 — Fix: "Registrar mi empresa" → botón AJAX POST /api/companies, no link a /mi-empresa
+- [x] 2026-05-24 — Fix: company_name del usuario NO se sobreescribe al guardar datos de análisis
+- [x] 2026-05-24 — Fix: 1 empresa por usuario (update si existe, 50m dedup geográfico para terceros)
+- [x] 2026-05-24 — Rebase sobre 4 commits de Lucía (dark mode, buscador M3, limpieza panel) sin conflictos residuales
+- [x] 2026-05-24 — pdfplumber instalado para lectura real de facturas PDF
+- [x] 2026-05-24 — BD exportada a database/current.sql (17 KB)
+
+### Completado esta sesión (Lucía, 2026-05-24 tarde)
+- [x] 2026-05-24 — Entorno Lucía configurado: config/.env copiado, PyMySQL instalado, db_init.py ejecutado, BD MySQL operativa
+- [x] 2026-05-24 — Panel mapa rediseñado con cristal Apple gris neutro (rgba(0,0,0,0.48) + blur 40px) — panel, buscador, popup, controles Mapbox
+- [x] 2026-05-24 — Fix bug crítico: Jinja2 escapaba `""` a `&#34;&#34;` dentro de `<script>` rompiendo window.__SYMBIOSIS
+- [x] 2026-05-24 — Campus UNIZAR (41.6488, -0.8913) como vista inicial del mapa, zoom 16.2
+- [x] 2026-05-24 — Carga diferida: loadBuildingsInView y loadDashboardKPIs movidos al evento idle
+- [x] 2026-05-24 — fadeDuration 150ms para tiles más rápidos
+
+### Completado esta sesión (Óscar, 2026-05-24 noche)
+- [x] 2026-05-24 — Fix: loadDashboardKPIs() eliminada (llamaba a IDs DOM inexistentes en dashboard.html)
+- [x] 2026-05-24 — Fix: loadRegisteredCompanies() refactorizada (no tocaba Mapbox source inexistente)
+- [x] 2026-05-24 — Fix: currentAnalysisId movido al scope externo en estudio.js (botón LLM roto)
+- [x] 2026-05-24 — Fix: entities_count corregido a len() en llm_controller.py (LlmReport.entities_anonymized es Integer)
+- [x] 2026-05-24 — Fix: modo degradado MySQL en src/__init__.py (app arranca aunque MySQL esté apagado)
+- [x] 2026-05-24 — Fix: parsing euros con replace(/\./g) para múltiples separadores de miles en estudio.js
+- [x] 2026-05-24 — README reescrito para hackathon: MySQL, Mapbox GL JS 3D, rate limiting, v0.3.0, HRIA, ODS
+- [x] 2026-05-24 — 56 tests unitarios creados y pasando: regulatory_service, financial_service, symbiosis (Haversine), anonymizer_service (AI Act PII), rate_limiter
+- [x] 2026-05-24 — pytest.ini configurado, requirements.txt ya incluía pytest>=7.4.0
+
+### Completado esta sesión (Óscar, 2026-05-24 cierre)
+- [x] 2026-05-24 — Rediseño /simbiosis → "Red del Polígono": layout completo con visualización SVG de red, ring autosuficiencia, arquitectura comunidad
+- [x] 2026-05-24 — symbiosis_service.py: añadido autosuficiencia_pct, total_consumption_kwh, network_design
+- [x] 2026-05-24 — symbiosis.js: renderNetwork SVG, renderAutosufRing, renderNetworkDesign, neighbor cards mejorados
+- [x] 2026-05-24 — symbiosis.css: autosuf-ring, network-viz, network-design, neighbor-card--registered
+- [x] 2026-05-24 — Eliminado rombo ::before del navbar (logo imagen ya no necesita decoración)
+- [x] 2026-05-24 — Recuperación de contraseña: modelo + email SMTP + controlador + template + link en login
+- [x] 2026-05-24 — Rate limiting recuperación: 2/IP/hora, 1/email/15min, 10 global/hora, 5/reset/hora
+- [x] 2026-05-24 — ALTER TABLE MySQL: columnas reset_token, reset_token_expires
+- [x] 2026-05-24 — Footer: enlace "Código abierto" al repositorio GitHub
+- [x] 2026-05-24 — 56 tests unitarios pasando. BD exportada. Push a origin/main.
+
+### Completado esta sesión (Óscar/Lucía, 2026-05-25 mañana)
+- [x] 2026-05-25 — PVGIS JRC EU como fuente primaria de radiación solar (climate_service.py) — argumento K.O. jurado: "precisión institucional 100%"
+- [x] 2026-05-25 — Balance mensual "Bizum energético" en symbiosis_service: producción PVGIS×kWp vs consumo vecinos con factores estacionales; 12 filas mensuales con kWh neto y valor €
+- [x] 2026-05-25 — Contrato Comunidad Energética tipo RD-ley 7/2026: plantilla standalone imprimible en /contrato-ce; 9 capítulos (denominación, objeto, instalaciones, partes+coeficientes, liquidación mensual, gobernanza, subvenciones, duración, firmas)
+- [x] 2026-05-25 — Botón "Generar Contrato CE" en /simbiosis → abre /contrato-ce en nueva pestaña
+- [x] 2026-05-25 — Parámetro kwp en GET /api/symbiosis para cálculo preciso del balance mensual
+- [x] 2026-05-25 — Nuevos campos en respuesta /api/climate: pvgis_irradiation_kwh_m2, pvgis_source, optimal_angle_deg, elevation_m, solar_classification
+
+### Completado esta sesión (Óscar, 2026-05-25 tarde)
+- [x] 2026-05-25 — `inject_active_building` context processor en `src/__init__.py`: inyecta `active_lat/lon/kwp/building_name` en TODOS los templates automáticamente
+- [x] 2026-05-25 — `_redirect_to_active_building(endpoint)` helper en `web_routes.py`: redirige /geo, /clima, /simbiosis, /normativa, /financiero al edificio activo si no hay coords en URL
+- [x] 2026-05-25 — Navbar dinámico: links incluyen ?lat=&lon=&kwp= del edificio activo via variables del context processor
+- [x] 2026-05-25 — Ruta /estudio mejorada: smart redirect a coords del edificio activo; pantalla "no_building" para usuarios logeados sin edificio activo; demo en 40.364/-1.102 si no logeado
+- [x] 2026-05-25 — mi_empresa.html: kwp incluido en todos los enlaces de análisis del edificio activo
+- [x] 2026-05-25 — /estudio pantalla no-building: card informativa con enlaces a /mi-empresa, mapa y modo demo
+- [x] 2026-05-25 — /estudio geo tab: Leaflet mini-mapa real (footprint OSM o dot marker) + territory strip (municipio/provincia/ccaa/cp)
+- [x] 2026-05-25 — estudio.js: kwp propagado a /api/symbiosis; kWp chip en badge coordenadas; building switcher muestra kWp
+- [x] 2026-05-25 — Fix bug: wizard "Actualizar consumo" no se abría — animation restart trick en openWizard() con requestAnimationFrame
+- [x] 2026-05-25 — Fix bug: "Error de conexión" agentes /estudio — 3 procesos Flask stale en puerto 5000 eliminados
+
+### Completado esta sesión (Lucía, 2026-05-26)
+- [x] 2026-05-26 — dashboard.js: al clic en cualquier edificio (buildings-hit + industrial-3d), captura polígono real + height + min_height → `localStorage('symbio_building_shape')`
+- [x] 2026-05-26 — estudio.js: lee `symbio_building_shape` al arrancar → `buildFromFootprint` inmediato con footprint Mapbox real (antes de API); fallback a showFallback() si no hay datos
+- [x] 2026-05-26 — estudio.js: proyección Mercator correcta con `cos(lat) × 111320` para conversión grados→metros (mejora precisión vs multiplicador fijo 85000)
+- [x] 2026-05-26 — estudio.js: prioridad footprint en loadAnalysis: Mapbox localStorage > sessionStorage (compat) > geo API
+- [x] 2026-05-26 — scene3d.js: eliminados `_placeSolarPanels()`, `_generateSolarPanels()`, `panelsGroup`, `panelsMesh`, modo `paneles` en setMode(), parámetros `panel_count`/`roof_slope` en buildFromFootprint
+- [x] 2026-05-26 — scene3d.js: `_buildDefaultBuilding()` sin paneles solares
+
+### Completado esta sesión (Lucía, 2026-05-27)
+- [x] 2026-05-27 — scene3d.js: eliminadas llamadas a `_addRoofTopDetails` y `_addFacadeWindows` de `buildFromFootprint` — el viewer 3D muestra solo el volumen puro del edificio sin cajas HVAC, skylights ni ventanas
+- [x] 2026-05-27 — scene3d.js y estudio.js reemplazados por versiones descargadas: scene3d.js restaura paneles solares funcionales (`_placeSolarPanels`, `updateSolarPanels`, HUD solar animado), viewer sigue limpio (decorativos no invocados desde buildFromFootprint)
+- [x] 2026-05-27 — Fix paneles solares: rejilla centrada en cubierta (nCols/nRows/startX/startZ), _pointInShape corregido a -cz (shape.y = -3D.z tras rotateX(-π/2)), rotation.x = +tiltRad para orientación sur correcta
+
+### Completado esta sesión (Óscar, 2026-05-27 tarde)
+- [x] 2026-05-27 — Fix z-index search dropdown en dashboard: `.floating-panel .search-m3 { z-index: 20 }` — resultados ya no se ocultan bajo stats-row/steps-section
+- [x] 2026-05-27 — Pestaña Renovables como primera y activa por defecto en /estudio (HTML: tab-btn active + pane active movidos)
+- [x] 2026-05-27 — Redesign pane-geo en /estudio: geo-scan-hero animado + geo-hero-grid (3 KPIs grandes con iconos) + geo-secondary-grid (3 KPIs) + geo-meta-strip (altura/orientación/densidad/fuente)
+- [x] 2026-05-27 — Redesign /geo completo: loading dual-rings teal, hero-row 3 cards (edificio/área útil/capacidad), geo-canvas-row 2 col (LiDAR + terrain analysis), terrain canvas con brújula SVG animada + perfil de pendiente + eficiencia solar calculada
+- [x] 2026-05-27 — geo.js: drawTerrain() con compass rose (norte/sur/este/oeste, arco teal óptimo sur), arrow orientación coloreada según eficiencia, slope cross-section con línea óptima 32° discontinua; azimutToText(); solarEfficiency()
+- [x] 2026-05-27 — Redesign /clima completo: loading sun dual-rings ámbar, weather hero card (temp grande + icono sky dinámico + 4 pills), 3 hero cards (solar annual + solar meter 800-1800, hours + mini-bars mensuales, condiciones), chart mejorado (fondo dark, colores cool-to-warm, línea media discontinua, labels estaciones)
+- [x] 2026-05-27 — climate.js: solarClassify(), skyIcon(), renderHoursVisual(), solar meter animado, chart con gradiente cool-to-warm y dataset media
+- [x] 2026-05-27 — Redesign /financiero completo: loading €-rings verdes, payback hero full-width con timeline 0-20a (recovery ámbar → profit verde, marcas net/gross), 3 KPI cards (VAN/TIR+badge/ahorro), detail row 2 col (instalación con barra desglose subvención + financiación con split visual 70/30)
+- [x] 2026-05-27 — financial.js: paybackClassify(), tirClassify(), renderTimeline() con profit div animado
+
+### Completado esta sesión (Lucía, 2026-05-27 sesión 2)
+- [x] 2026-05-27 — Títulos bicolor en /simbiosis (`Red Energética del <em>Polígono</em>`) y /normativa (`Marco <em>Regulatorio</em>`); misma clase patrón que /geo y /clima
+- [x] 2026-05-27 — Ring autosuficiencia en /simbiosis: gradiente SVG `<linearGradient>` #4cc9f0→#078080 + `filter:drop-shadow` en stroke
+- [x] 2026-05-27 — Canvas red profesional en pane simbiosis de /estudio: hex grid, bezier curved connections, paquetes diamante con trails y eased motion, paleta dark #0f1520; cancelado al salir del pane
+- [x] 2026-05-27 — Pane normativa en /estudio: pane-scan-hero--normativa + norm-kpi-row (2 cards: estado normativo + tope máximo subvención) + badge conteo convocatorias
+- [x] 2026-05-27 — /normativa: stats grid 4 columnas + sección proyectos EU; subsidy cards con barra porcentaje y estado abierto/cerrado
+- [x] 2026-05-27 — /simbiosis: título bicolor + gradiente ring (ya arriba)
+- [x] 2026-05-27 — Paleta /normativa y /financiero unificada: azul eliminado, ámbar stat cards → ink neutro, morado (#818cf8) → ink-soft, verde eléctrico (#4ade80) → var(--leaf)
+- [x] 2026-05-27 — /clima: animación canvas weather implementada y luego eliminada (fondo negro intrusivo); gráfico fondo claro con rejilla oscura
+- [x] 2026-05-27 — /clima: 2 cards separadas (condiciones actuales + generación estimada); `renderInstantPower()` con kW instantáneos, barra progreso y kWh proyectados; kwp configurable via URL param
+- [x] 2026-05-27 — Mapbox default cambiado a Teruel capital (40.3456, -1.1065)
+- [x] 2026-05-27 — Paleta /clima: ámbar oscuro #d97706 como único acento; barras gráfico gris→ámbar; badge fuente PVGIS neutro; overline gris muted
+
+### Backlog
+- [ ] Release v0.3.0 en GitHub (tag ya en GitHub, falta `gh auth login` → `gh release create`)
+- [ ] Vídeo demo con datos reales Polígono Industrial Teruel Norte (deadline 29 mayo 2026)
+- [ ] Evaluación HRIA en hria.eu (deadline 29 mayo 2026)
+- [ ] Panel energía → transición energética (derecha del mapa) — solicitado por usuario, no implementado
+- [ ] Tests de integración (flujo completo: mapa → análisis → guardar BD → informe LLM)
+
+---
+
+## 📦 DEPENDENCIES
+
+> Paquetes en `requirements.txt`. Actualizar esta tabla cuando se añada o elimine alguno.
+
+| Paquete | Versión | Propósito | Añadido |
+|---------|---------|-----------|---------|
+| Flask | 3.x | Framework web | inicial |
+| Flask-SQLAlchemy | 3.x | ORM + integración Flask | inicial |
+| SQLAlchemy | 2.x | ORM | inicial |
+| Werkzeug | — | Hash contraseñas, WSGI utils | inicial |
+| Jinja2 | — | Templates | inicial (incluido Flask) |
+| requests | — | HTTP calls a APIs externas | inicial |
+| python-dotenv | — | Lectura .env | inicial |
+| PyMySQL | 1.2.0 | Driver MySQL para SQLAlchemy | 2026-05-24 |
+| pdfplumber | — | Lectura real de facturas PDF | 2026-05-24 |
+| groq | — | SDK GROQ cloud LLM | 2026-05-23 |
+| presidio-analyzer | — | Detección PII (requiere spacy en_core_web_lg) | 2026-05-23 |
+| presidio-anonymizer | — | Anonimización PII | 2026-05-23 |
+
+---
+
+## 🗒 AI NOTES
+
+2026-05-22 — El repo tiene estructura skeleton: todos los ficheros existen pero las funciones devuelven `NotImplementedError` o `# TODO`. El propósito es que ambos colaboradores (Óscar y Lucía) partan de la misma estructura definida. Cuando cualquiera de los dos abra una sesión de IA y proporcione este .readmeAI, el asistente conoce exactamente dónde va cada cosa sin necesidad de re-escanear el proyecto.
+
+2026-05-22 — Three.js usa ES modules con importmap. El importmap está en `estudio.html`. Los ficheros `scene3d.js` y `hero3d.js` deben exportar clases/funciones con `export`. El import en `estudio.js` usa `import { SymbioScene } from '../components/scene3d.js'`.
+
+2026-05-22 — Flask sirve los ficheros de `public/` como estáticos. En los templates Jinja2, usar `url_for('static', filename='css/...')`. La carpeta static de Flask está configurada como `../public` en `src/__init__.py`.
+
+2026-05-23 — Rediseño completo de estilos: se eliminaron todos los colores hardcodeados del antiguo tema oscuro. Se reescribieron todos los archivos CSS con las nuevas variables. Navbar ahora usa fondo claro con blur. Leaflet cambiado a CartoDB Positron (light tiles). 3D viewer background cambiado a #1a1a2e. Se añadieron variables helper: --bg-warm, --surface, --coral, --ink-muted, --leaf-light/mid, --coral-light/mid, --shadow-sm/lg. GROQ LLM: API key configurada en .env pero sigue respondiendo con "Resumen preliminar disponible". Revisar `llm_service.py` línea de `current_app.config['GROQ_API_KEY']` — podría no leer bien la config.
+
+2026-05-23 (sesión tarde) — Bug crítico estudio.js: los bloques de clima y simbiosis tenían una llave sobrante cada uno (heredado de refactor anterior) que cerraba el bloque try de loadAnalysis() prematuramente. Resultado: el script parseaba sin error de sintaxis visible pero todas las variables geo/climate/etc. eran undefined fuera del try. Fix: eliminar la llave sobrante y mover _setAgentStatus() dentro del if correcto.
+
+2026-05-23 — Seguridad IA: el módulo anonymizer_service.py tiene dos capas: Presidio (requiere spacy en_core_web_lg) y regex fallback. En producción hackathon puede que solo esté el fallback activo — es suficiente para CIF/NIF/emails/teléfonos. La cadena llm_service intenta Ollama primero (localhost:11434) — si no corre, pasa a GROQ silenciosamente. get_active_provider() indica cuál respondió.
+
+2026-05-23 — Login: Flask session con SECRET_KEY de app_config. werkzeug.security.generate_password_hash usa PBKDF2 SHA-256 por defecto. La tabla user se crea automáticamente en db.create_all() porque src/__init__.py importa user_model antes de llamar a db.create_all(). Sin este import explícito SQLAlchemy no registra la tabla.
+
+2026-05-23 — Token Mapbox: los tokens pk.* de Mapbox son públicos por naturaleza (se exponen al navegador), pero no deben commitearse al repo. Patrón usado: `.env` (gitignored) → `app_config.py` → Flask route pasa `mapbox_token` al template → template inyecta `window.__SYMBIOSIS.mapboxToken = '{{ mapbox_token }}'` → dashboard.js lee `window.__SYMBIOSIS.mapboxToken`. Nunca hardcodear el token en ningún .js.
+
+2026-05-23 — Migración Leaflet → Mapbox GL JS: diferencias clave a recordar: (1) GeoJSON usa [lon, lat] (opuesto a Leaflet); (2) edificios como fill-extrusion layer, no polígonos; (3) hover via feature-state (requiere `generateId:true` en source); (4) popups via `new mapboxgl.Popup()` no `L.popup()`; (5) `from flask import current_app` debe estar en el import del módulo, no dentro de la función.
+
+2026-05-24 — Standard style vs dark-v11: el Standard style de Mapbox v3 tiene su propio motor de renderizado con iluminación física real. `setConfigProperty('basemap', 'lightPreset', 'dusk')` activa el preset crepuscular con sombras de edificios genuinas y atmósfera volumétrica. Los edificios del Standard style no son queryables con `queryRenderedFeatures` — por eso se añade la capa invisible `buildings-hit` sobre `streets-v8` (que sí proporciona polígonos queryables). Esta capa tiene `fill-extrusion-opacity: 0.001` y sirve solo para detección de clics y cursor crosshair.
+
+2026-05-24 — M3 Search Bar: los elementos clave del spec son (1) height 56px, (2) border-radius 28px (pill), (3) leading icon, (4) trailing clear + submit como icon-buttons con ripple via ::after, (5) separador vertical entre trailing buttons, (6) resultados como `<ul>` con `role="listbox"` y `<li>` con `role="option"`. El input debe ser `type="search"` con `::-webkit-search-cancel-button { display: none }` para eliminar el botón nativo del navegador.
+
+2026-05-24 — MySQL con SQLAlchemy 2.x: patrón obligatorio es `db.session.execute(select(Model).filter_by(...)).scalar_one_or_none()`. El antiguo `Model.query.filter_by()` está deprecado en SA 2.x y da warnings. `db.session.flush()` es necesario para obtener IDs autoincrement antes de insertar filas hijas en la misma transacción.
+
+2026-05-24 — Lucía hizo 4 commits mientras Óscar trabajaba (dark maqueta → standard dusk → M3 search → quita puntos coral). Los conflictos en dashboard.js eran en _handleMapClick: Lucía usó una capa buildings-hit invisible dedicada (mejor que buildings-base-3d para hit-testing). En el rebase se adoptó su capa y se conservó nuestro fix de no-popup-vacío + función _claimBuilding. Para futura coordinación: trabajar en ramas distintas (feature/oscar-X, feature/lucia-X) y hacer PR en lugar de commits directos a main.
+
+2026-05-24 — Registro empresa AJAX desde popup: _claimBuilding(lat, lng) está en el scope global de dashboard.js (no en módulo ES) para que el onclick inline del HTML generado pueda encontrarla. No mover a módulo sin adaptar el handler del botón.
+
+2026-05-24 — gh CLI instalada con scoop pero necesita `gh auth login` para crear releases. Una vez autenticada: `git tag v0.3.0 && git push origin v0.3.0 && gh release create v0.3.0 --title "v0.3.0 — BD real, rate limiting, seguridad" --notes "..."` en PowerShell.
+
+2026-05-27 — Patrón de rediseño de páginas de agentes: loading dual-rings (CSS border-top-color + animation, NO spinner genérico) → hero-row 3 cards → visualización canvas custom (sin Chart.js donde no es necesario). Las clasificaciones (payback/solar/TIR) devuelven {label, color, bg} para colorear badges inline. El canvas de terrain en /geo usa shadowBlur para el efecto glow de la flecha; las barras CSS de timeline en /financiero se animan vía requestAnimationFrame al cambiar style.width (CSS transition hace el resto).
+
+2026-05-27 — z-index en .floating-panel: `.floating-panel > * { z-index: 1 }` aplica a TODOS los hijos directos. Para que el dropdown de búsqueda aparezca por encima, se necesita un selector más específico: `.floating-panel .search-m3 { z-index: 20 }`. El overflow-y: auto del panel NO crea un stacking context nuevo (no tiene position:fixed/sticky), así que z-index funciona correctamente entre hermanos.
+
+2026-05-24 — Jinja2 auto-escapa HTML dentro de bloques `<script>` igual que en HTML normal. El patrón seguro para inyectar valores Python en JS es usar siempre `| tojson` (que produce JSON válido y marca el resultado como Markup seguro). Nunca usar strings literales con comillas como `'""'` — Jinja2 los convierte a `&#34;&#34;`. Regla: todo valor en `window.__SYMBIOSIS` debe pasar por `| tojson`.
+
+2026-05-25 — El patrón para re-triggerar animaciones CSS al re-adjuntar un elemento al DOM es: `el.style.animation = 'none'` → `parent.appendChild(el)` → `requestAnimationFrame(() => { el.style.animation = ''; })`. Sin el frame intermedio el browser cachea el estado de la animación y nunca la dispara.
+
+2026-05-25 — `geo.footprint_coords` siempre llega como lista de `{lat, lon}` objects (tanto de Overpass como del fallback procedimental). En Leaflet el formato es `[[lat, lon], ...]` — convertir con `footprint_coords.map(p => [p.lat, p.lon])`. El fallback si no hay footprint es un círculo con `L.circle([lat, lon], {radius: 30})`.
+
+2026-05-25 — El context processor `inject_active_building` en `src/__init__.py` corre en CADA request. Por eso hace una query MySQL por request si hay `active_company_id` en session. Para hackathon no es problema, pero en producción convendría cachearlo en session (invalidar al cambiar edificio activo).
+
+2026-05-26 — El footprint de Mapbox (streets-v8, via queryRenderedFeatures) llega en coordenadas WGS84 reales (no en coordenadas de tile). El polígono puede o no estar cerrado (último punto == primer punto); se normaliza quitando el punto duplicado antes de guardar. La proyección a metros locales usa `(lon-lon0)*cos(lat0*π/180)*111320` para x y `(lat-lat0)*111320` para z — corrección Mercator importante para edificios grandes o fuera del ecuador. Los paneles solares se eliminaron del viewer; el modo 'paneles' en el sidebar puede quitarse del HTML también si se desea.
+
+2026-05-24 — El evento `idle` de Mapbox GL JS se dispara cuando el mapa ha terminado de renderizar todos los tiles visibles y no hay animaciones pendientes. Es el momento correcto para lanzar llamadas API secundarias (Overpass, KPIs) que no son necesarias para la primera pintura. El evento `load` solo indica que el estilo se ha cargado, no que los tiles han llegado.
+
+---
+
+## 📜 CHANGE LOG
+
+| Fecha | Actor | Resumen |
+|-------|-------|---------|
+| 2026-05-22 | AI | Estructura base del repositorio creada. Scaffolding completo con stubs. .readmeAI configurado. Flask app factory + rutas + modelos operativos. |
+| 2026-05-23 | AI | 5 agentes implementados (HTML+JS+CSS). climate_service → Open-Meteo ERA5. geocoding_service → Google API server-side + rate limit. Diseño profesional (Cabinet Grotesk, paleta claro). Google API key en config/.env, protegida. |
+| 2026-05-23 | AI | Paleta warm-light aplicada a variables.css: fondo #f8f5f2, teal #078080, coral #f45d48. Tema oscuro eliminado. |
+| 2026-05-23 | AI | Rediseño completo de estilos: todos los CSS reescritos, hardcoded greens eliminados, navbar/footer claros, Leaflet Positron, 3D viewer #1a1a2e. Nuevas variables CSS consistentes. |
+| 2026-05-23 | AI | Ollama local AI + Presidio PII anonymization + registro empresas BD + red simbiosis DB-first + proyectos europeos normativa + empresas registradas en mapa dashboard. |
+| 2026-05-23 | AI | Fix crítico estudio.js (2 llaves sobrantes que bloqueaban toda carga) + login/registro empresas + panel /mi-empresa con KPIs y proyección ahorro + sync análisis→perfil + navbar con sesión activa. |
+| 2026-05-23 | Lucía/AI | Entorno Lucía configurado (Git, deps, GitHub token). Landing page premium: hero rotante, app-card preview, stats bar, how-it-works, agents grid, CTA final. `/` → landing, `/mapa` → mapa. |
+| 2026-05-23 | Lucía/AI | Mapa reemplazado Leaflet → Mapbox GL JS 3D: estilo light-v11, edificios extruidos fill-extrusion, terrain DEM, fog claro, toggle 3D/2D. Token Mapbox en .env (gitignored), inyectado server-side via Flask. Empresas registradas coral, industriales teal. |
+| 2026-05-24 | Lucía/AI | Mapa migrado a Standard style + dusk preset (maqueta arquitectónica real). Panel KPI derecho y sección demo eliminados. Buscador rediseñado M3 (56px pill, tinte teal, clear button, ARIA). Puntos coral empresas y leyenda eliminados. |
+| 2026-05-24 | Óscar/AI | BD MySQL real: 10 tablas con FKs y cascades, scripts/db_init.py, migraciones idempotentes, todos los modelos SQLAlchemy migrados. Email verificación. Historial análisis en /mi-empresa. KPIs dashboard desde BD. |
+| 2026-05-24 | Óscar/AI | Rate limiting global (LLM/building-summary/registro/empresa), security headers, fix 4 bugs críticos (click mapa, registro AJAX, company_name override, 1-empresa/usuario), rebase sobre 4 commits Lucía. BD exportada 17KB. |
+| 2026-05-24 | Lucía/AI | Entorno Lucía configurado (config/.env, PyMySQL instalado, db_init.py ejecutado). Panel mapa rediseñado con cristal Apple gris neutro rgba(0,0,0,0.48)+blur(40px). Fix bug Jinja2 &#34; en window.__SYMBIOSIS. Campus UNIZAR como vista por defecto. Carga diferida Overpass/KPIs al idle. Push a origin/main. |
+| 2026-05-24 | Óscar/AI | Fix 6 bugs transversales (loadDashboardKPIs, loadRegisteredCompanies, currentAnalysisId scope, entities_count Integer, modo degradado MySQL, parsing euros). README reescrito para hackathon (v0.3.0). 56 tests unitarios creados y 100% passing: regulatory, financial, symbiosis Haversine, anonymizer PII, rate_limiter. pytest.ini configurado. |
+| 2026-05-24 | Óscar/AI | Pivot narrativo landing → polígonos autosostenibles: hero, stats, sección Vision 3 fases, 6 agentes (añadido Renovables). Logos marca (favicon-logo.png, navbar-logo.png). Navbar Simbiosis → Red Polígono. pvgis_service, esios_service, renewables_service, renewables_controller, GET /api/renewables. BD exportada 38 KB. |
+| 2026-05-24 | Óscar/AI | Rediseño profundo /simbiosis → "Red del Polígono": visualización SVG de red energética entre empresas, ring de autosuficiencia colectiva, sección arquitectura comunidad energética RD 7/2026, KPIs mejorados. Eliminado rombo decorativo del navbar. Push a origin/main. |
+| 2026-05-24 | Óscar/AI | Recuperación de contraseña: modelo (reset_token, reset_token_expires), email SMTP con template HTML, controlador con rate limiting 3 capas (2/IP/h, 1/email/15min, 10 global/h), template multi-estado, link en login. ALTER TABLE MySQL. Push. |
+| 2026-05-24 | Óscar/AI | Footer: añadido enlace "Código abierto" al repositorio GitHub. |
+| 2026-05-24 | Lucía/AI | Sesión corta: prueba de rediseño visual completo (dark navy + lime green) intentada y revertida a petición de la usuaria. Sin cambios permanentes. BD exportada 43 KB. |
+| 2026-05-25 | Óscar/AI | PVGIS JRC EU como fuente primaria radiación solar en climate_service (Open-Meteo para meteo). Balance mensual "Bizum energético" en symbiosis_service (PVGIS×kWp - consumo vecinos). Contrato CE tipo RD-ley 7/2026 imprimible en /contrato-ce. Botón "Generar Contrato CE" en /simbiosis. Parámetro ?kwp en /api/symbiosis. |
+| 2026-05-25 | Óscar/AI | Building selection funcional: inject_active_building context processor + redirect helper + navbar dinámico con coords edificio activo. /estudio pantalla no-building + geo tab Leaflet mini-mapa real + territory strip. Fix: wizard animación restart. Fix: 3 procesos Flask stale eliminados. kwp propagado end-to-end. |
+| 2026-05-26 | Lucía/AI | Viewer 3D: footprint real del edificio Mapbox (streets-v8) capturado al clic → localStorage → renderizado inmediato en Three.js antes de respuesta API. Paneles solares eliminados completamente del viewer (métodos, grupos, modo paneles, parámetros). |
+| 2026-05-27 | Lucía/AI | scene3d.js: eliminados elementos decorativos restantes del viewer 3D — `_addRoofTopDetails` y `_addFacadeWindows` suprimidos de `buildFromFootprint`. Edificio 3D ahora es volumen puro sin cajas HVAC, skylights azules ni ventanas. |
+| 2026-05-27 | Lucía/AI | Reemplazo completo de scene3d.js y estudio.js con versiones descargadas. scene3d.js restaura paneles solares (`_placeSolarPanels`, `updateSolarPanels`, `panelsGroup`) eliminados en sesión anterior; métodos decorativos existen pero no se invocan desde `buildFromFootprint`. |
+| 2026-05-27 | Lucía/AI | Fix paneles solares viewer 3D: (1) rejilla centrada en cubierta (nCols/nRows + startX/startZ), (2) _pointInShape corregido con -cz (shape.y = -3D.z tras rotateX), (3) rotation.x = +tiltRad para orientación sur correcta en España. |
+| 2026-05-27 | Lucía/AI | Resuelto conflicto de rebase en scene3d.js (comentario duplicado en _placeSolarPanels); push exitoso a origin/main. |
+| 2026-05-27 (sesión 2) | Lucía/AI | Pulido visual páginas agentes: /simbiosis y /normativa con título bicolor; ring autosuficiencia con gradiente SVG + drop-shadow; canvas red profesional (hex grid, bezier, paquetes diamante) en pane simbiosis de /estudio; stats grid + sección EU en /normativa; animación weather canvas en /clima (desactivada después); 2 cards en /clima (condiciones + generación estimada kW/kWh). Paleta /normativa y /financiero unificada a teal de marca eliminando azul/ámbar/morado vivo. Mapbox default cambiado a Teruel capital (40.3456, -1.1065). |
+| 2026-05-27 | Lucía/AI | Pulido final /clima: ámbar oscuro #d97706 como único acento, sin verde/teal en ningún elemento; barras gráfico gris→ámbar; badge solar neutro; gráfico con fondo claro y rejilla oscura; animación canvas eliminada. BD exportada 175 KB. |

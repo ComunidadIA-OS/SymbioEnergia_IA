@@ -1,0 +1,141 @@
+{% extends 'layout.html' %}
+{% block title %}Agente Geo-Scanner · SymbioEnergia IA{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/components/agent-page.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/geo.css') }}">
+{% endblock %}
+{% block content %}
+<div class="agent-page">
+
+  <header class="agent-header" data-aos="fade-up">
+    <span class="agent-header__badge" data-aos="fade-right" data-aos-delay="60">Agente Geo-Scanner · IA</span>
+    <h1 class="agent-header__title" data-aos="fade-up" data-aos-delay="120">Análisis LiDAR<br><em class="geo-title-accent">de Cubierta Industrial</em></h1>
+    <p class="agent-header__subtitle" data-aos="fade-up" data-aos-delay="200">Geometría real mediante OpenStreetMap + simulación LiDAR procedimental. Calcula área útil y capacidad solar máxima instalable.</p>
+    <span class="agent-header__coords" id="coords-display"></span>
+  </header>
+
+  <!-- Loading animado estilo LiDAR -->
+  <div id="loading" class="agent-loading">
+    <div class="geo-loading-lidar">
+      <div class="geo-loading-lidar__ring"></div>
+      <div class="geo-loading-lidar__ring geo-loading-lidar__ring--2"></div>
+      <svg class="geo-loading-lidar__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="M13 13l6 6"/></svg>
+    </div>
+    <p class="geo-loading-text">Escaneando cubierta<span class="geo-loading-dots"><span>.</span><span>.</span><span>.</span></span></p>
+  </div>
+
+  <div id="error" class="agent-error hidden"></div>
+
+  <section id="results" class="agent-section hidden">
+
+    <!-- Hero row: 3 tarjetas -->
+    <div class="geo-hero-row">
+
+      <!-- Edificio identificado -->
+      <div class="agent-card geo-building-card">
+        <div class="agent-card__title">Edificio identificado</div>
+        <div class="geo-building-identity">
+          <div class="geo-building-identity__icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <p class="geo-building-name" id="building-name">--</p>
+        </div>
+        <p class="geo-building-note">OpenStreetMap · Geometría vectorial</p>
+      </div>
+
+      <!-- Superficie útil (hero) -->
+      <div class="agent-card geo-area-card">
+        <div class="agent-card__title">Superficie útil solar</div>
+        <div class="geo-kpi-hero">
+          <span class="geo-kpi-hero__value geo-kpi-hero__value--green" id="usable-area">--</span>
+          <span class="geo-kpi-hero__unit">m²</span>
+        </div>
+        <div class="geo-util-bar">
+          <div class="geo-util-bar__fill" id="util-bar" style="width:0%"></div>
+        </div>
+        <div class="geo-util-labels">
+          <span id="total-area">--</span> m² totales
+          <span class="geo-util-pct" id="util-pct">· 82% disponible</span>
+        </div>
+      </div>
+
+      <!-- Capacidad + métricas secundarias -->
+      <div class="agent-card geo-capacity-card">
+        <div class="agent-card__title">Capacidad solar máx.</div>
+        <div class="geo-kpi-hero">
+          <span class="geo-kpi-hero__value geo-kpi-hero__value--coral" id="solar-capacity">--</span>
+          <span class="geo-kpi-hero__unit">kWp</span>
+        </div>
+        <div class="geo-secondary-metrics">
+          <div class="geo-sm">
+            <span class="geo-sm__label">Altura</span>
+            <span class="geo-sm__value"><span id="height">--</span> m</span>
+          </div>
+          <div class="geo-sm">
+            <span class="geo-sm__label">Pendiente</span>
+            <span class="geo-sm__value"><span id="slope">--</span>°</span>
+          </div>
+          <div class="geo-sm">
+            <span class="geo-sm__label">Azimut</span>
+            <span class="geo-sm__value"><span id="orientation">--</span>°</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Canvas row: LiDAR izquierda + Terreno derecha -->
+    <div class="geo-canvas-row">
+
+      <!-- LiDAR point cloud -->
+      <div class="agent-card geo-lidar-card">
+        <div class="agent-card__title">
+          Nube de Puntos LiDAR · Vista Cenital
+          <span class="geo-lidar-badge">8 pt/m²</span>
+        </div>
+        <div class="geo-lidar-wrap">
+          <canvas id="lidar-canvas" class="geo-lidar-canvas"></canvas>
+          <div class="geo-lidar-scanline" id="lidar-scanline"></div>
+        </div>
+        <div class="lidar-legend">
+          <span class="lidar-legend__item lidar-legend__item--ground">Terreno</span>
+          <span class="lidar-legend__item lidar-legend__item--wall">Paredes</span>
+          <span class="lidar-legend__item lidar-legend__item--roof">Cubierta</span>
+        </div>
+      </div>
+
+      <!-- Terrain analysis -->
+      <div class="agent-card geo-terrain-card">
+        <div class="agent-card__title">
+          Análisis del Terreno
+          <span class="geo-lidar-badge">OSM · Procedimental</span>
+        </div>
+        <div class="geo-terrain-wrap">
+          <canvas id="terrain-canvas" class="geo-terrain-canvas"></canvas>
+        </div>
+        <div class="geo-terrain-metrics">
+          <div class="geo-terrain-metric">
+            <span class="geo-terrain-metric__label">Orientación</span>
+            <span class="geo-terrain-metric__value" id="terrain-orient-text">--</span>
+          </div>
+          <div class="geo-terrain-metric">
+            <span class="geo-terrain-metric__label">Pendiente</span>
+            <span class="geo-terrain-metric__value" id="terrain-slope-text">--</span>
+          </div>
+          <div class="geo-terrain-metric">
+            <span class="geo-terrain-metric__label">Eficiencia solar</span>
+            <span class="geo-terrain-metric__value" id="terrain-efficiency">--</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="agent-footer" id="data-footer"></footer>
+
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/pages/geo.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+{% block title %}Agente Normativa · SymbioEnergia IA{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/components/agent-page.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/regulatory.css') }}">
+{% endblock %}
+{% block content %}
+<div class="agent-page">
+
+  <header class="agent-header" data-aos="fade-up">
+    <span class="agent-header__badge" data-aos="fade-right" data-aos-delay="60">Agente Normativa · IA</span>
+    <h1 class="agent-header__title" data-aos="fade-up" data-aos-delay="120">Marco <em class="norm-title-accent">Regulatorio</em></h1>
+    <p class="agent-header__subtitle" data-aos="fade-up" data-aos-delay="200">Ayudas aplicables según ubicación: STEP Aragón (hasta 500.000 €), MOVES III, ICO y fondos NextGen. Actualizado con BOE, BOA e IDAE.</p>
+    <span class="agent-header__coords" id="coords-display"></span>
+  </header>
+
+  <div id="loading" class="agent-loading">
+    <div class="agent-loading__spinner"></div>
+    <p>Consultando BOE, BOA e IDAE...</p>
+  </div>
+
+  <div id="error" class="agent-error hidden"></div>
+
+  <section id="results" class="agent-section hidden">
+
+    <div class="max-subsidy-banner">
+      <div>
+        <div class="max-subsidy-banner__label">Ayuda máxima acumulable</div>
+        <div class="max-subsidy-banner__value" id="max-subsidy">--</div>
+      </div>
+      <div class="regional-status-badge" id="regional-status">--</div>
+    </div>
+
+    <!-- Stats row -->
+    <div class="norm-stats-row" id="norm-stats-row">
+      <div class="norm-stat-card">
+        <span class="norm-stat-card__icon">📋</span>
+        <span class="norm-stat-card__value" id="norm-stat-count">--</span>
+        <span class="norm-stat-card__label">Convocatorias activas</span>
+      </div>
+      <div class="norm-stat-card norm-stat-card--amber">
+        <span class="norm-stat-card__icon">💶</span>
+        <span class="norm-stat-card__value" id="norm-stat-max">--</span>
+        <span class="norm-stat-card__label">Tope máximo acumulable</span>
+      </div>
+      <div class="norm-stat-card norm-stat-card--blue">
+        <span class="norm-stat-card__icon">🇪🇺</span>
+        <span class="norm-stat-card__value" id="norm-stat-eu">--</span>
+        <span class="norm-stat-card__label">Fondos europeos</span>
+      </div>
+      <div class="norm-stat-card norm-stat-card--region">
+        <span class="norm-stat-card__icon">📍</span>
+        <span class="norm-stat-card__value" id="norm-stat-region" style="font-size:1rem">--</span>
+        <span class="norm-stat-card__label">Comunidad Autónoma</span>
+      </div>
+    </div>
+
+    <div class="agent-grid agent-grid--full">
+      <div class="agent-card">
+        <div class="agent-card__title-row">
+          <h2 class="agent-card__title">Subvenciones Aplicables</h2>
+          <span class="norm-count-badge" id="subsidy-count-badge"></span>
+        </div>
+        <div class="subsidy-list" id="subsidy-list"></div>
+      </div>
+    </div>
+
+    <!-- European projects (se muestra si los hay) -->
+    <div class="agent-grid agent-grid--full" id="eu-section" style="display:none">
+      <div class="agent-card">
+        <div class="agent-card__title-row">
+          <h2 class="agent-card__title">Financiación Europea</h2>
+          <span class="norm-eu-badge">★ NextGen EU · Horizon</span>
+        </div>
+        <div class="eu-projects-list" id="eu-projects-list"></div>
+      </div>
+    </div>
+
+    <footer class="agent-footer" id="data-footer"></footer>
+
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/pages/regulatory.js') }}"></script>
+{% endblock %}

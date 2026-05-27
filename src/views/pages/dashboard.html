@@ -1,0 +1,130 @@
+{% extends 'layout.html' %}
+{% block title %}Mapa de la Red Energética · SymbioEnergia IA{% endblock %}
+{% block styles %}
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/dashboard.css') }}">
+{% endblock %}
+{% block content %}
+<div class="dashboard">
+
+  <div id="map" class="dashboard__map"></div>
+
+  <div class="floating-panel floating-panel--left">
+
+    <div class="floating-panel__brand">
+      <span class="floating-panel__logo-dot"></span>
+      <p class="floating-panel__eyebrow">SymbioEnergia IA</p>
+    </div>
+
+    <h2 class="floating-panel__title">Mapa de la<br><span class="floating-panel__title-accent">Red Energética</span></h2>
+
+    <div class="search-m3" role="search">
+      <div class="search-m3__bar">
+        <span class="search-m3__lead-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </span>
+        <input type="search" id="search-input" class="search-m3__input" placeholder="Dirección o polígono industrial..." autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Buscar dirección" aria-autocomplete="list" aria-controls="search-results">
+        <button id="search-clear" class="search-m3__icon-btn search-m3__icon-btn--clear hidden" aria-label="Borrar búsqueda" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <span class="search-m3__divider" aria-hidden="true"></span>
+        <button id="search-btn" class="search-m3__icon-btn search-m3__icon-btn--submit" aria-label="Buscar" type="button">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+      </div>
+      <ul id="search-results" class="search-m3__results hidden" role="listbox" aria-label="Resultados"></ul>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <span class="stat-card__value">3.500<span class="stat-card__plus">+</span></span>
+        <span class="stat-card__label">Polígonos industriales<br>en España</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__value">40<span class="stat-card__prct">%</span></span>
+        <span class="stat-card__label">Reducción de coste<br>energético en red</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__value">500<span class="stat-card__sufix">k€</span></span>
+        <span class="stat-card__label">Subvención máxima<br>STEP por empresa</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__value">5<span class="stat-card__sufix">km</span></span>
+        <span class="stat-card__label">Radio comunidad<br>RD 7/2026</span>
+      </div>
+    </div>
+
+    <div class="steps-section">
+      <div class="steps-section__header">
+        <span class="steps-section__overline">Cómo funciona</span>
+        <h3 class="steps-section__title">Tres pasos para tu auditoría</h3>
+      </div>
+
+      <div class="step-card">
+        <div class="step-card__icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/><path d="M2 12h20"/><circle cx="12" cy="12" r="4"/></svg>
+        </div>
+        <div class="step-card__body">
+          <div class="step-card__num">01</div>
+          <h4 class="step-card__title">Localiza tu empresa</h4>
+          <p class="step-card__desc">Introduce la dirección o haz clic en el mapa. El sistema identifica tu nave, calcula el área de cubierta disponible y analiza el entorno del polígono.</p>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-card__icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </div>
+        <div class="step-card__body">
+          <div class="step-card__num">02</div>
+          <h4 class="step-card__title">Analiza el mix renovable</h4>
+          <p class="step-card__desc">6 agentes IA evalúan en paralelo: solar fotovoltaica, eólico mini, biomasa, mini-hidráulica, normativa aplicable y retorno financiero con datos reales de PVGIS y ESIOS.</p>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-card__icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M17 16v2l2 3"/><path d="M7 16v2l-2 3"/><path d="M12 11v5"/><path d="M9 18h6"/></svg>
+        </div>
+        <div class="step-card__body">
+          <div class="step-card__num">03</div>
+          <h4 class="step-card__title">Diseña la red del polígono</h4>
+          <p class="step-card__desc">El agente Simbiosis detecta las empresas vecinas, propone qué energía compartir, calcula el nivel de autosuficiencia colectiva y genera el borrador de comunidad energética conforme al RD-ley 7/2026.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="my-buildings-section">
+      <div class="my-buildings-section__header">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Mis naves</span>
+        <svg class="my-buildings-section__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="my-buildings-section__body">
+        <div id="my-buildings-list"></div>
+      </div>
+    </div>
+
+    <div class="map-controls">
+      <span class="map-controls__label">Vista</span>
+      <div class="map-controls__btns">
+        <button class="map-controls__btn map-controls__btn--active" id="btn-3d" title="Vista 3D">3D</button>
+        <button class="map-controls__btn" id="btn-2d" title="Vista planta">2D</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.js"></script>
+<script>
+  window.__SYMBIOSIS = {
+    loggedIn: {{ 'true' if session.user_id else 'false' }},
+    userId: {{ session.get('user_id') | tojson }},
+    userCompany: {{ session.get('user_company') | tojson }},
+    mapboxToken: '{{ mapbox_token }}'
+  };
+</script>
+<script src="{{ url_for('static', filename='js/pages/dashboard.js') }}"></script>
+{% endblock %}

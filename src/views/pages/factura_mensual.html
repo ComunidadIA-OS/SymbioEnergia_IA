@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liquidación Energética · {{ today_iso[:7] }} · SymbioEnergia IA</title>
+  <style>
+    :root {
+      --ink: #232323;
+      --ink-soft: #555;
+      --leaf: #078080;
+      --coral: #f45d48;
+      --line: #d8d4cc;
+      --bg: #ffffff;
+      --bg-soft: #f8f5f2;
+      --surplus: #e6f4f1;
+      --deficit: #fef2f0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Arial', 'Helvetica Neue', sans-serif;
+      font-size: 10pt;
+      line-height: 1.5;
+      color: var(--ink);
+      background: var(--bg);
+      padding: 1.5cm 2cm;
+      max-width: 21cm;
+      margin: 0 auto;
+    }
+
+    /* ── Screen-only controls ─── */
+    .screen-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: var(--ink);
+      color: #fff;
+      padding: .6rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: .85rem;
+      z-index: 100;
+    }
+    .screen-bar__title { flex: 1; font-weight: 600; }
+    .screen-bar__btn {
+      padding: .35rem .9rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: .82rem;
+      font-weight: 600;
+    }
+    .screen-bar__btn--print { background: var(--leaf); color: #fff; }
+    .screen-bar__btn--close { background: rgba(255,255,255,.15); color: #fff; }
+    .screen-bar__btn--close:hover { background: rgba(255,255,255,.25); }
+    @media print {
+      .screen-bar { display: none; }
+      body { padding: .8cm 1.2cm; }
+    }
+    .doc-body { padding-top: 2.8rem; }
+    @media print { .doc-body { padding-top: 0; } }
+
+    /* ── Header ─── */
+    .factura-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--leaf);
+      margin-bottom: 1.2rem;
+    }
+    .factura-header__brand { display: flex; flex-direction: column; gap: .2rem; }
+    .factura-header__logo { font-size: 1.1rem; font-weight: 700; color: var(--leaf); letter-spacing: -.5px; }
+    .factura-header__tagline { font-size: .75rem; color: var(--ink-soft); }
+    .factura-header__meta { text-align: right; font-size: .82rem; }
+    .factura-header__meta strong { display: block; font-size: 1rem; color: var(--ink); }
+    .factura-header__meta .factura-num { font-size: .75rem; color: var(--ink-soft); margin-top: .2rem; }
+
+    /* ── Partes ─── */
+    .partes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      background: var(--bg-soft);
+      border-radius: 6px;
+      padding: .9rem 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .partes__block { font-size: .85rem; }
+    .partes__label { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); margin-bottom: .2rem; }
+    .partes__name { font-weight: 700; font-size: .95rem; }
+    .partes__detail { color: var(--ink-soft); font-size: .8rem; }
+
+    /* ── Concepto ─── */
+    .concepto {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: .7rem 1rem;
+      margin-bottom: 1.2rem;
+      font-size: .85rem;
+    }
+    .concepto__title { font-weight: 700; margin-bottom: .3rem; }
+    .concepto__desc { color: var(--ink-soft); }
+
+    /* ── Balance Table ─── */
+    .balance-section { margin-bottom: 1.2rem; }
+    .balance-section__title {
+      font-size: .8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--ink-soft);
+      margin-bottom: .5rem;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+    thead th {
+      background: var(--ink);
+      color: #fff;
+      padding: .4rem .6rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: .75rem;
+    }
+    thead th:not(:first-child) { text-align: right; }
+    tbody td { padding: .35rem .6rem; border-bottom: 1px solid var(--line); }
+    tbody td:not(:first-child) { text-align: right; }
+    .row--surplus { background: var(--surplus); }
+    .row--deficit { background: var(--deficit); }
+    .tag { font-size: .68rem; font-weight: 700; padding: .15rem .4rem; border-radius: 3px; }
+    .tag--surplus { background: rgba(7,128,128,.15); color: var(--leaf); }
+    .tag--deficit { background: rgba(244,93,72,.12); color: var(--coral); }
+    tfoot td {
+      padding: .5rem .6rem;
+      border-top: 2px solid var(--ink);
+      font-weight: 700;
+    }
+    tfoot td:not(:first-child) { text-align: right; }
+
+    /* ── Totales ─── */
+    .totales {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .total-card {
+      flex: 1;
+      border: 1.5px solid var(--line);
+      border-radius: 6px;
+      padding: .7rem 1rem;
+      text-align: center;
+    }
+    .total-card--surplus { border-color: var(--leaf); background: var(--surplus); }
+    .total-card--deficit { border-color: var(--coral); background: var(--deficit); }
+    .total-card__label { font-size: .72rem; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .04em; }
+    .total-card__value { font-size: 1.3rem; font-weight: 700; margin: .2rem 0; }
+    .total-card__sub { font-size: .72rem; color: var(--ink-soft); }
+
+    /* ── Norma ─── */
+    .norma {
+      font-size: .72rem;
+      color: var(--ink-soft);
+      border-top: 1px solid var(--line);
+      padding-top: .7rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ── Firma ─── */
+    .firmas {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    .firma__line {
+      border-top: 1px solid var(--ink);
+      margin-top: 2rem;
+      padding-top: .3rem;
+      font-size: .75rem;
+      color: var(--ink-soft);
+    }
+
+    /* ── Footer ─── */
+    .doc-footer {
+      margin-top: 1rem;
+      text-align: center;
+      font-size: .68rem;
+      color: var(--ink-soft);
+      border-top: 1px solid var(--line);
+      padding-top: .5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Controls (screen only) -->
+  <div class="screen-bar">
+    <span class="screen-bar__title">Liquidación Energética · SymbioEnergia IA</span>
+    <button class="screen-bar__btn screen-bar__btn--print" onclick="window.print()">Imprimir / Guardar PDF</button>
+    <button class="screen-bar__btn screen-bar__btn--close" onclick="window.close()">Cerrar</button>
+  </div>
+
+  <div class="doc-body">
+
+    <!-- Header -->
+    <div class="factura-header">
+      <div class="factura-header__brand">
+        <div class="factura-header__logo">SymbioEnergia IA</div>
+        <div class="factura-header__tagline">Plataforma de Comunidades Energéticas Industriales · Apache 2.0</div>
+      </div>
+      <div class="factura-header__meta">
+        <strong>Liquidación de Saldos Energéticos</strong>
+        <div class="factura-num">Período: {{ today_iso[:7] }} · Emitida: {{ today }}</div>
+        <div class="factura-num">Coordenadas: {{ "%.5f"|format(lat) }}, {{ "%.5f"|format(lon) }}</div>
+      </div>
+    </div>
+
+    <!-- Partes -->
+    <div class="partes">
+      <div class="partes__block">
+        <div class="partes__label">Empresa generadora</div>
+        <div class="partes__name">{{ company_name }}</div>
+        <div class="partes__detail">Instalación: {{ "%.0f"|format(kwp) }} kWp · Autoconsumo colectivo</div>
+        <div class="partes__detail">Coordenadas: {{ "%.5f"|format(lat) }}, {{ "%.5f"|format(lon) }}</div>
+      </div>
+      <div class="partes__block">
+        <div class="partes__label">Red vecina ({{ neighbors|length }} empresa{{ 's' if neighbors|length != 1 else '' }})</div>
+        {% if neighbors %}
+          {% for n in neighbors[:3] %}
+          <div class="partes__name" style="font-size:.85rem">{{ n.name }}</div>
+          {% endfor %}
+          {% if neighbors|length > 3 %}
+          <div class="partes__detail">+ {{ neighbors|length - 3 }} empresas más</div>
+          {% endif %}
+        {% else %}
+          <div class="partes__name">Red Energética del Polígono</div>
+        {% endif %}
+        <div class="partes__detail">Marco: RD-ley 7/2026 · Radio 5 km</div>
+      </div>
+    </div>
+
+    <!-- Concepto -->
+    <div class="concepto">
+      <div class="concepto__title">Concepto: Liquidación de Autoconsumo Compartido</div>
+      <div class="concepto__desc">
+        Balance neto de energía intercambiada entre la instalación fotovoltaica de {{ company_name }} y la red de empresas vecinas,
+        conforme al acuerdo de reparto de coeficientes dinámicos del RD-ley 7/2026.
+        La energía en excedente se transfiere a la red vecina; el déficit se compra a la red general.
+        Precio de referencia: {{ monthly_balance.price_eur_per_kwh or 0.15 }} €/kWh (OMIE media anual).
+      </div>
+    </div>
+
+    {% if monthly_balance and monthly_balance.rows %}
+    <!-- Balance anual -->
+    <div class="balance-section">
+      <div class="balance-section__title">Detalle mensual del ejercicio {{ today_iso[:4] }}</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Mes</th>
+            <th>Producción (kWh)</th>
+            <th>Consumo red (kWh)</th>
+            <th>Neto (kWh)</th>
+            <th>Importe (€)</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in monthly_balance.rows %}
+          <tr class="{{ 'row--surplus' if r.surplus else 'row--deficit' }}">
+            <td><strong>{{ r.month }}</strong></td>
+            <td>{{ "{:,.0f}".format(r.production_kwh).replace(",", ".") }}</td>
+            <td>{{ "{:,.0f}".format(r.consumption_kwh).replace(",", ".") }}</td>
+            <td><strong>{{ "{:,.0f}".format(r.net_kwh|abs).replace(",", ".") }}</strong></td>
+            <td><strong>{{ "%.2f"|format(r.monetary_eur|abs) }} €</strong></td>
+            <td>
+              <span class="tag {{ 'tag--surplus' if r.surplus else 'tag--deficit' }}">
+                {{ 'Excedente' if r.surplus else 'Compra' }}
+              </span>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3"><strong>TOTAL ANUAL ESTIMADO</strong></td>
+            <td>
+              {% set net = monthly_balance.annual_net_kwh or 0 %}
+              <strong>{{ "{:,.0f}".format(net|abs).replace(",", ".") }} kWh</strong>
+            </td>
+            <td colspan="2">
+              {% set eur = monthly_balance.annual_monetary_eur or 0 %}
+              <strong>{{ "%.2f"|format(eur|abs) }} €</strong>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- Totales -->
+    {% set annual_net = monthly_balance.annual_net_kwh or 0 %}
+    {% set annual_eur = monthly_balance.annual_monetary_eur or 0 %}
+    <div class="totales">
+      <div class="total-card {{ 'total-card--surplus' if annual_net >= 0 else 'total-card--deficit' }}">
+        <div class="total-card__label">Balance neto anual</div>
+        <div class="total-card__value">{{ "{:,.0f}".format(annual_net|abs).replace(",", ".") }} kWh</div>
+        <div class="total-card__sub">{{ 'Excedente neto a transferir' if annual_net >= 0 else 'Déficit a adquirir de red' }}</div>
+      </div>
+      <div class="total-card {{ 'total-card--surplus' if annual_eur >= 0 else 'total-card--deficit' }}">
+        <div class="total-card__label">Saldo monetario anual</div>
+        <div class="total-card__value">{{ "%.2f"|format(annual_eur|abs) }} €</div>
+        <div class="total-card__sub">{{ 'A favor de ' + company_name if annual_eur >= 0 else 'A pagar por ' + company_name }}</div>
+      </div>
+      <div class="total-card">
+        <div class="total-card__label">Instalación origen</div>
+        <div class="total-card__value">{{ "{:,.0f}".format(kwp).replace(",", ".") }} kWp</div>
+        <div class="total-card__sub">Datos radiación: PVGIS EU-JRC</div>
+      </div>
+    </div>
+    {% else %}
+    <p style="color:#888;font-style:italic;padding:1rem 0">
+      No hay datos de balance mensual disponibles. Accede desde /simbiosis con parámetros lat, lon y kwp.
+    </p>
+    {% endif %}
+
+    <!-- Nota normativa -->
+    <div class="norma">
+      <strong>Base normativa:</strong> Real Decreto-ley 7/2026 sobre autoconsumo colectivo de energía renovable · Radio máximo de reparto: 5 km ·
+      Mecanismo: compensación simplificada de excedentes (modalidad con excedentes, acogida a tarifa regulada) ·
+      Esta liquidación tiene carácter estimativo basado en datos PVGIS (JRC · Comisión Europea) y factores estacionales industriales de referencia.
+      El valor definitivo deberá ser confirmado por la distribuidora de referencia.
+    </div>
+
+    <!-- Firmas -->
+    <div class="firmas">
+      <div>
+        <div class="firma__line">
+          {{ company_name }}<br>
+          Representante legal<br>
+          Fecha: {{ today }}
+        </div>
+      </div>
+      <div>
+        <div class="firma__line">
+          Gestor de la Comunidad Energética<br>
+          En representación de {{ neighbors|length }} empresa{{ 's' if neighbors|length != 1 else '' }} participante{{ 's' if neighbors|length != 1 else '' }}<br>
+          Fecha: {{ today }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="doc-footer">
+      Documento generado automáticamente por SymbioEnergia IA · Licencia Apache 2.0 · github.com/Oscarr36/SymbioEnergia-IA ·
+      Este documento es un borrador informativo. No constituye factura fiscal.
+    </div>
+
+  </div>
+</body>
+</html>

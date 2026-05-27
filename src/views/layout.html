@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}SymbioEnergia IA{% endblock %}</title>
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon-logo.png') }}">
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&f[]=general-sans@600,500,400&f[]=jetbrains-mono@500,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base/reset.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base/variables.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base/typography.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base/animations.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/components/navbar.css') }}">
+  {% block styles %}{% endblock %}
+</head>
+<body>
+  <div class="aurora-bg" aria-hidden="true"></div>
+  <div class="grain-overlay" aria-hidden="true"></div>
+  {% include 'components/navbar.html' %}
+  <main class="main" style="position:relative;z-index:1;">
+    {% block content %}{% endblock %}
+  </main>
+  {% include 'components/footer.html' %}
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 600, easing: 'ease-out-quart', once: true, offset: 40 });
+    // Marcar link activo en navbar
+    document.querySelectorAll('.navbar__links a').forEach(a => {
+      if (a.getAttribute('href') === window.location.pathname) a.classList.add('active');
+    });
+  </script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

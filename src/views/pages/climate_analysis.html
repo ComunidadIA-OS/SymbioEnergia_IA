@@ -1,0 +1,172 @@
+{% extends 'layout.html' %}
+{% block title %}Agente Clima · SymbioEnergia IA{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/components/agent-page.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/climate.css') }}">
+{% endblock %}
+{% block content %}
+<div class="agent-page">
+
+  <header class="agent-header" data-aos="fade-up">
+    <span class="agent-header__badge">Agente Clima · IA</span>
+    <h1 class="agent-header__title">Potencial Solar<br><em class="clima-title-accent">y Microclima Local</em></h1>
+    <p class="agent-header__subtitle">Irradiación real vía PVGIS (Comisión Europea) y caracterización climática de la ubicación. Condiciona el cálculo del Agente Financiero.</p>
+    <span class="agent-header__coords" id="coords-display"></span>
+  </header>
+
+  <!-- Loading sol animado -->
+  <div id="loading" class="agent-loading">
+    <div class="clima-loading-sun">
+      <div class="clima-loading-sun__ring"></div>
+      <div class="clima-loading-sun__ring clima-loading-sun__ring--2"></div>
+      <svg class="clima-loading-sun__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </div>
+    <p class="clima-loading-text">Consultando PVGIS<span class="clima-loading-dots"><span>.</span><span>.</span><span>.</span></span></p>
+  </div>
+
+  <div id="error" class="agent-error hidden"></div>
+
+  <!-- Weather cards row (se rellena cuando /api/weather responde) -->
+  <div id="weather-widget" class="clima-weather-row hidden">
+
+    <!-- Card 1: Condiciones actuales -->
+    <div class="agent-card clima-weather-card">
+      <div class="clima-weather-hero__left">
+        <span class="clima-weather-hero__overline">Condiciones actuales</span>
+        <div class="clima-weather-hero__temp-row">
+          <span class="clima-weather-hero__temp" id="w-temp">--</span>
+          <span class="clima-weather-hero__unit">°C</span>
+          <div class="clima-weather-hero__icon" id="w-sky-icon"></div>
+        </div>
+        <span class="clima-weather-hero__desc" id="w-description">--</span>
+      </div>
+      <div class="clima-weather-hero__pills">
+        <div class="clima-pill">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+          <span id="w-humidity">--</span>%
+          <span class="clima-pill__label">Humedad</span>
+        </div>
+        <div class="clima-pill">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+          <span id="w-cloud">--</span>%
+          <span class="clima-pill__label">Nubosidad</span>
+        </div>
+        <div class="clima-pill clima-pill--amber">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+          <span id="w-radiation">--</span> W/m²
+          <span class="clima-pill__label">Radiación</span>
+        </div>
+        <div class="clima-pill">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>
+          <span id="w-wind">--</span> m/s
+          <span class="clima-pill__label">Viento</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Generación estimada -->
+    <div class="agent-card clima-gen-card">
+      <span class="clima-weather-hero__overline">Generación estimada ahora</span>
+      <div class="clima-gen-power-row">
+        <span class="clima-gen-power__value" id="w-gen-kw">--</span>
+        <span class="clima-gen-power__unit">kW</span>
+      </div>
+      <div class="clima-gen-bar-wrap">
+        <div class="clima-gen-bar__track">
+          <div class="clima-gen-bar__fill" id="w-gen-bar" style="width:0%"></div>
+        </div>
+        <div class="clima-gen-bar__labels">
+          <span>0</span>
+          <span id="w-gen-peak-label">-- kWp pico</span>
+        </div>
+      </div>
+      <span class="clima-gen-sub" id="w-gen-sub">-- kWh estimados hoy</span>
+    </div>
+
+  </div>
+
+  <section id="results" class="agent-section hidden">
+
+    <!-- Hero KPI row -->
+    <div class="clima-hero-row">
+
+      <!-- Solar anual hero -->
+      <div class="agent-card clima-solar-card">
+        <div class="agent-card__title">
+          Producción Anual
+          <span class="clima-source-badge">PVGIS · JRC</span>
+        </div>
+        <div class="clima-kpi-hero">
+          <span class="clima-kpi-hero__value clima-kpi-hero__value--amber" id="solar-annual">--</span>
+          <span class="clima-kpi-hero__unit">kWh/kWp</span>
+        </div>
+        <span class="clima-classification-badge" id="solar-classification">--</span>
+        <div class="clima-solar-meter">
+          <div class="clima-solar-meter__track">
+            <div class="clima-solar-meter__fill" id="solar-meter-fill" style="width:0%"></div>
+          </div>
+          <div class="clima-solar-meter__labels">
+            <span>800</span><span>España</span><span>1.800</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Horas de sol -->
+      <div class="agent-card clima-hours-card">
+        <div class="agent-card__title">Horas de Sol / Año</div>
+        <div class="clima-kpi-hero">
+          <span class="clima-kpi-hero__value clima-kpi-hero__value--leaf" id="hours-sun">--</span>
+          <span class="clima-kpi-hero__unit">h/año</span>
+        </div>
+        <div class="clima-hours-visual" id="clima-hours-visual">
+          <!-- barras de 12 círculos representando meses, se rellenan en JS -->
+        </div>
+      </div>
+
+      <!-- Condiciones climáticas -->
+      <div class="agent-card clima-conditions-card">
+        <div class="agent-card__title">Condiciones Climáticas</div>
+        <div class="clima-conditions-list">
+          <div class="clima-cond-row">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
+            <span class="clima-cond-label">Temperatura media</span>
+            <span class="clima-cond-value" id="avg-temp">-- °C</span>
+          </div>
+          <div class="clima-cond-row">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="3" x2="8" y2="5"/><line x1="16" y1="3" x2="16" y2="5"/><line x1="12" y1="3" x2="12" y2="5"/><path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"/><line x1="8" y1="19" x2="8" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="16" y1="19" x2="16" y2="21"/></svg>
+            <span class="clima-cond-label">Días de lluvia</span>
+            <span class="clima-cond-value" id="rain-days">-- días</span>
+          </div>
+          <div class="clima-cond-row">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>
+            <span class="clima-cond-label">Viento medio</span>
+            <span class="clima-cond-value" id="wind-speed">-- m/s</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Gráfico mensual full-width -->
+    <div class="agent-card clima-chart-card">
+      <div class="agent-card__title">
+        Producción Solar Mensual
+        <span class="clima-source-badge">kWh/kWp</span>
+      </div>
+      <div class="clima-chart-seasons">
+        <span>Invierno</span><span>Primavera</span><span>Verano</span><span>Otoño</span>
+      </div>
+      <div class="clima-chart-wrap">
+        <canvas id="solar-chart"></canvas>
+      </div>
+    </div>
+
+    <footer class="agent-footer" id="data-footer"></footer>
+
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script src="{{ url_for('static', filename='js/pages/climate.js') }}"></script>
+{% endblock %}

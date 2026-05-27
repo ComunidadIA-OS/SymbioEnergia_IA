@@ -1,0 +1,187 @@
+{% extends 'layout.html' %}
+{% block title %}Agente Financiero · SymbioEnergia IA{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/components/agent-page.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/financial.css') }}">
+{% endblock %}
+{% block content %}
+<div class="agent-page">
+
+  <header class="agent-header">
+    <span class="agent-header__badge">Agente Financiero · IA</span>
+    <h1 class="agent-header__title">Viabilidad<br><em class="fin-title-accent">Financiera</em></h1>
+    <p class="agent-header__subtitle">ROI, payback, VAN a 15 años y TIR. Calcula el tamaño óptimo de instalación y el impacto de las subvenciones STEP Aragón. Precios pool basados en OMIE.</p>
+    <span class="agent-header__coords" id="coords-display"></span>
+  </header>
+
+  <!-- Loading €-rings -->
+  <div id="loading" class="agent-loading">
+    <div class="fin-loading-rings">
+      <div class="fin-loading-rings__ring"></div>
+      <div class="fin-loading-rings__ring fin-loading-rings__ring--2"></div>
+      <svg class="fin-loading-rings__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    </div>
+    <p class="fin-loading-text">Calculando viabilidad<span class="fin-loading-dots"><span>.</span><span>.</span><span>.</span></span></p>
+  </div>
+
+  <div id="error" class="agent-error hidden"></div>
+
+  <section id="results" class="agent-section hidden">
+
+    <!-- Payback hero (full-width) -->
+    <div class="agent-card fin-payback-card">
+      <div class="fin-payback-card__body">
+        <div class="fin-payback-card__left">
+          <div class="agent-card__title">
+            Retorno de Inversión · Con Subvención STEP
+          </div>
+          <div class="fin-payback-hero-row">
+            <span class="fin-payback-value" id="payback-net">--</span>
+            <span class="fin-payback-unit">años</span>
+            <span class="fin-payback-badge" id="payback-badge"></span>
+          </div>
+          <div class="fin-payback-sub">
+            Sin subvención: <strong id="payback-gross">--</strong> años
+          </div>
+        </div>
+        <div class="fin-payback-card__right">
+          <div class="fin-timeline-label">Horizonte de rentabilidad · 20 años</div>
+          <div class="fin-timeline-track" id="fin-timeline-track">
+            <div class="fin-timeline-recovery" id="fin-timeline-recovery"></div>
+            <div class="fin-timeline-profit" id="fin-timeline-profit"></div>
+            <div class="fin-timeline-gross-mark" id="fin-timeline-gross-mark"></div>
+            <div class="fin-timeline-net-mark" id="fin-timeline-net-mark"></div>
+          </div>
+          <div class="fin-timeline-ticks">
+            <span>0</span><span>5a</span><span>10a</span><span>15a</span><span>20a</span>
+          </div>
+          <div class="fin-timeline-legend">
+            <span class="fin-tl-leg fin-tl-leg--recovery">Recuperación</span>
+            <span class="fin-tl-leg fin-tl-leg--profit">Beneficio neto</span>
+            <span class="fin-tl-leg fin-tl-leg--gross">Sin subvención</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero KPI row: VAN · TIR · Ahorro -->
+    <div class="fin-hero-row">
+
+      <div class="agent-card fin-van-card">
+        <div class="agent-card__title">
+          VAN 15 años
+          <span class="fin-source-badge">OMIE</span>
+        </div>
+        <div class="fin-kpi-hero">
+          <span class="fin-kpi-value fin-kpi-value--green" id="npv">--</span>
+        </div>
+        <div class="fin-kpi-sub">
+          Valor actual neto descontado<br>sobre vida útil de 15 años
+        </div>
+      </div>
+
+      <div class="agent-card fin-tir-card">
+        <div class="agent-card__title">TIR 15 años</div>
+        <div class="fin-kpi-hero">
+          <span class="fin-kpi-value fin-kpi-value--amber" id="irr">--</span>
+          <span class="fin-kpi-unit">%</span>
+        </div>
+        <span class="fin-tir-badge" id="tir-badge"></span>
+      </div>
+
+      <div class="agent-card fin-savings-card">
+        <div class="agent-card__title">Ahorro neto / año</div>
+        <div class="fin-kpi-hero">
+          <span class="fin-kpi-value fin-kpi-value--leaf" id="savings">--</span>
+        </div>
+        <div class="fin-kpi-sub">
+          Ahorro en factura<br>vs. precio red (OMIE)
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Detail row: Instalación + Financiación -->
+    <div class="fin-detail-row">
+
+      <!-- Instalación -->
+      <div class="agent-card fin-install-card">
+        <div class="agent-card__title">Instalación Recomendada</div>
+
+        <div class="fin-install-top">
+          <div class="fin-install-kpi">
+            <span class="fin-install-kpi__label">Capacidad óptima</span>
+            <div class="fin-install-kpi__val-row">
+              <span class="fin-install-kpi__value fin-install-kpi__value--amber" id="capacity">--</span>
+              <span class="fin-install-kpi__unit">kWp</span>
+            </div>
+          </div>
+          <div class="fin-install-kpi">
+            <span class="fin-install-kpi__label">Producción anual</span>
+            <div class="fin-install-kpi__val-row">
+              <span class="fin-install-kpi__value" id="generation">--</span>
+              <span class="fin-install-kpi__unit">kWh</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="fin-investment-breakdown">
+          <div class="fin-inv-row">
+            <span class="fin-inv-label">Inversión total</span>
+            <span class="fin-inv-value" id="investment">--</span>
+          </div>
+          <div class="fin-inv-bar-wrap">
+            <div class="fin-inv-bar">
+              <div class="fin-inv-bar__subsidy" id="inv-bar-subsidy"></div>
+            </div>
+            <div class="fin-inv-bar-labels">
+              <span class="fin-inv-bar-label--green">Subvención STEP <span id="subsidy">--</span></span>
+              <span class="fin-inv-bar-label--blue">Inversión neta <span id="net-investment">--</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Financiación bancaria -->
+      <div class="agent-card fin-bank-card">
+        <div class="agent-card__title">Escenario Financiación Bancaria</div>
+
+        <div class="fin-bank-split">
+          <div class="fin-bank-split__block fin-bank-split__block--loan">
+            <span class="fin-bank-split__pct">70%</span>
+            <span class="fin-bank-split__label">Préstamo</span>
+            <span class="fin-bank-split__value" id="loan-amount">--</span>
+          </div>
+          <div class="fin-bank-split__block fin-bank-split__block--own">
+            <span class="fin-bank-split__pct">30%</span>
+            <span class="fin-bank-split__label">Capital propio</span>
+            <span class="fin-bank-split__value" id="own-capital">--</span>
+          </div>
+        </div>
+
+        <div class="fin-bank-metrics">
+          <div class="fin-bank-metric">
+            <span class="fin-bank-metric__label">Cuota anual préstamo</span>
+            <span class="fin-bank-metric__value" id="loan-payment">--</span>
+          </div>
+          <div class="fin-bank-metric">
+            <span class="fin-bank-metric__label">Plazo</span>
+            <span class="fin-bank-metric__value" id="loan-period">--</span>
+          </div>
+          <div class="fin-bank-metric">
+            <span class="fin-bank-metric__label">Tipo de interés</span>
+            <span class="fin-bank-metric__value" id="loan-rate">--</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="agent-footer" id="data-footer"></footer>
+
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/pages/financial.js') }}"></script>
+{% endblock %}

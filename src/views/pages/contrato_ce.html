@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contrato Comunidad Energética · SymbioEnergia IA</title>
+  <style>
+    :root {
+      --ink: #232323;
+      --ink-soft: #555;
+      --leaf: #078080;
+      --line: #d8d4cc;
+      --bg: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      font-size: 10.5pt;
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--bg);
+      padding: 2cm 2.5cm;
+      max-width: 21cm;
+      margin: 0 auto;
+    }
+
+    /* ── Screen-only controls ─── */
+    .screen-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.25rem;
+      background: #f5f3ee;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      font-family: 'Arial', sans-serif;
+      font-size: 13px;
+      color: var(--ink-soft);
+      gap: 1rem;
+    }
+
+    .screen-bar strong { color: var(--ink); }
+
+    .btn-print {
+      background: var(--leaf);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 0.45rem 1.1rem;
+      font-size: 13px;
+      font-family: 'Arial', sans-serif;
+      cursor: pointer;
+      font-weight: 600;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .btn-print:hover { background: #056868; }
+
+    /* ── Document header ─── */
+    .doc-header {
+      text-align: center;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .doc-header__logo {
+      font-family: 'Arial', sans-serif;
+      font-size: 9pt;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--leaf);
+      margin-bottom: 0.35rem;
+    }
+
+    .doc-header__title {
+      font-size: 16pt;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+
+    .doc-header__subtitle {
+      font-size: 10pt;
+      color: var(--ink-soft);
+      margin-bottom: 0.5rem;
+    }
+
+    .doc-header__meta {
+      font-family: 'Arial', sans-serif;
+      font-size: 8.5pt;
+      color: var(--ink-soft);
+    }
+
+    /* ── Sections ─── */
+    .chapter {
+      margin-bottom: 1.4rem;
+      page-break-inside: avoid;
+    }
+
+    .chapter__title {
+      font-size: 10.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 0.25rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .chapter__body {
+      font-size: 10pt;
+      line-height: 1.65;
+      color: var(--ink);
+    }
+
+    .chapter__body p + p { margin-top: 0.5rem; }
+
+    /* ── Parties table ─── */
+    .parties-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9.5pt;
+      margin-top: 0.5rem;
+    }
+
+    .parties-table th {
+      background: #f5f3ee;
+      text-align: left;
+      padding: 0.35rem 0.6rem;
+      font-family: 'Arial', sans-serif;
+      font-weight: 700;
+      font-size: 8.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .parties-table td {
+      padding: 0.35rem 0.6rem;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    .parties-table tr:last-child td { border-bottom: none; }
+
+    .parties-table .coef {
+      font-family: 'Courier New', monospace;
+      font-weight: 700;
+      color: var(--leaf);
+    }
+
+    /* ── Legal callout ─── */
+    .legal-callout {
+      border-left: 3px solid var(--leaf);
+      padding: 0.5rem 0.75rem;
+      background: #f0f9f9;
+      font-size: 9.5pt;
+      color: var(--ink-soft);
+      margin: 0.6rem 0;
+      font-style: italic;
+    }
+
+    /* ── Signature block ─── */
+    .signature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem 2rem;
+      margin-top: 0.75rem;
+    }
+
+    .signature-box {
+      border-top: 1px solid var(--ink);
+      padding-top: 0.5rem;
+      min-height: 4.5cm;
+    }
+
+    .signature-box__label {
+      font-family: 'Arial', sans-serif;
+      font-size: 8.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-soft);
+      margin-bottom: 0.2rem;
+    }
+
+    .signature-box__name {
+      font-size: 9.5pt;
+      color: var(--ink);
+    }
+
+    /* ── Footer ─── */
+    .doc-footer {
+      margin-top: 2rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--line);
+      font-family: 'Arial', sans-serif;
+      font-size: 7.5pt;
+      color: var(--ink-soft);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    /* ── Print rules ─── */
+    @media print {
+      .screen-bar { display: none; }
+      body { padding: 1cm 1.5cm; }
+      .signature-grid { grid-template-columns: 1fr 1fr; }
+      a { text-decoration: none; color: inherit; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Screen controls -->
+  <div class="screen-bar">
+    <div>
+      <strong>Borrador generado por SymbioEnergia IA</strong> — Revísalo con asesor legal antes de firmar.
+      Los coeficientes son estimaciones basadas en consumo declarado.
+    </div>
+    <button class="btn-print" onclick="window.print()">Imprimir / Guardar PDF</button>
+  </div>
+
+  <!-- Document -->
+  <div class="doc-header">
+    <div class="doc-header__logo">SymbioEnergia IA · Generado automáticamente</div>
+    <div class="doc-header__title">Estatutos de Comunidad Energética<br>de Autoconsumo Colectivo</div>
+    <div class="doc-header__subtitle">Al amparo del Real Decreto-ley 7/2026, de autoconsumo colectivo renovable</div>
+    <div class="doc-header__meta">
+      Fecha de generación: {{ today }} &nbsp;·&nbsp;
+      Coordenadas: {{ "%.5f"|format(lat) }}, {{ "%.5f"|format(lon) }} &nbsp;·&nbsp;
+      Fuente de datos: PVGIS · JRC Comisión Europea
+    </div>
+  </div>
+
+  <!-- CAPÍTULO I -->
+  <div class="chapter">
+    <div class="chapter__title">Capítulo I — Denominación, domicilio y régimen legal</div>
+    <div class="chapter__body">
+      <p>La presente comunidad energética se constituye al amparo del <strong>Real Decreto-ley 7/2026</strong>,
+      de autoconsumo colectivo y comunidades de energía renovable, y de la Directiva (UE) 2018/2001
+      (Energías Renovables II) transpuesta al ordenamiento jurídico español.</p>
+      <p>La comunidad adopta la denominación provisional de
+      <strong>"Comunidad Energética {{ company_name }}"</strong> y opera en el polígono industrial
+      correspondiente a las coordenadas {{ "%.4f"|format(lat) }} N, {{ "%.4f"|format(lon|abs) }} O
+      (sistema de referencia WGS84).</p>
+      <div class="legal-callout">
+        El RD-ley 7/2026 amplía el radio de autoconsumo colectivo a 5 km, permitiendo que instalaciones
+        fotovoltaicas industriales compartan excedentes con empresas vecinas sin necesidad de red de
+        transporte privada.
+      </div>
+    </div>
+  </div>
+
+  <!-- CAPÍTULO II -->
+  <div class="chapter">
+    <div class="chapter__title">Capítulo II — Objeto y finalidad</div>
+    <div class="chapter__body">
+      <p>La comunidad tiene por objeto la producción, distribución, almacenamiento y autoconsumo
+      colectivo de energía eléctrica procedente de fuentes renovables (fotovoltaica) entre los
+      miembros que a continuación se relacionan, en el radio legal de <strong>5 km</strong>.</p>
+      <p>La finalidad es reducir la factura eléctrica de las empresas participantes, contribuir a la
+      descarbonización del tejido industrial de Aragón y optimizar el uso de la generación renovable
+      local conforme a los objetivos del <strong>Plan STEP Aragón 2026</strong>.</p>
+    </div>
+  </div>
+
+  <!-- CAPÍTULO III -->
+  <div class="chapter">
+    <div class="chapter__title">Capítulo III — Instalaciones y potencia total</div>
+    <div class="chapter__body">
+      <p>La instalación generadora de la empresa promotora tiene una potencia pico estimada de
+      <strong>{{ kwp|int }} kWp</strong>, calculada a partir del análisis de cubierta mediante datos
+      LiDAR del PNOA y el recurso solar certificado por <strong>PVGIS · Joint Research Centre de la
+      Comisión Europea</strong>.</p>
+      {% if network_design %}
+      <p>Potencia total de la red: <strong>{{ network_design.get('total_capacity_kwp', '--') }} kWp</strong>.
+      Marco de distribución: {{ network_design.get('subscription_model', 'coeficientes de reparto dinámicos') }}.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- CAPÍTULO IV — PARTES -->
+  <div class="chapter">
+    <div class="chapter__title">Capítulo IV — Miembros y partes</div>
+    <div class="chapter__body">
+      <p>Son miembros de la comunidad energética las siguientes entidades, con sus coeficientes de
+      reparto de excedentes calculados de forma proporcional al consumo anual declarado:</p>
+
+      <table class="parties-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Empresa</th>
+            <th>Sector</th>
+            <th>Consumo anual (kWh)</th>
+            <th>Distancia</th>
+            <th>Coeficiente reparto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0</td>
+            <td><strong>{{ company_name }}</strong><br><small>Empresa promotora / generadora</small></td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td class="coef">Generador</td>
+          </tr>
+          {% for n in neighbors %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td>
+              {{ n.name }}
+              {% if n.registered %}<br><small style="color: #078080;">✓ Registrada en SymbioEnergia</small>{% endif %}
+            </td>
+            <td>{{ n.sector }}</td>
+            <td>{{ "{:,.0f}".format(n.annual_kwh).replace(",", ".") }}</td>
+            <td>{{ n.distance_km }} km</td>
+            <td class="coef">{{ n.coeficiente }}%</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <p style="margin-top:0.6rem; font-size:9pt; color:#666;">
+        Los coeficientes de reparto son dinámicos y se recalculan anualmente conforme al art. 9 del
+        RD-ley 7/2026 y la resolución de la empresa distribuidora. La suma de coeficientes debe ser
+        igual al 100% de la energía excedentaria generada en cada periodo.
+      </p>
+    </div>
+  </div>
+
+  <!-- CAPÍTULO V -->
+  <div class="chapter">
+    <div class="chapter__title">Capítulo V — Liquidación de saldos mensuales ("Bizum energético")</div>
+    <div class="chapter__body">
+      <p>La comunidad establece un mecanismo de liquidación mensual para los saldos de energía
+      generados y consumidos entre sus miembros:</p>
+      <ol style="margin: 0.5rem 0 0.5rem 1.2rem; line-height: 1.7;">
+        <li>Al cierre de cada mes natural, la plataforma SymbioEnergia IA calcula el balance neto
+            de energía de cada miembro en kWh.</li>
+        <li>Los miembros con saldo acreedor (han consumido más de lo que les corresponde) abonan
+            al fondo común el equivalente en euros al precio medio del mercado eléctrico mayorista
+            (OMIE) del mes correspondiente.</li>
+        <li>Los miembros con saldo deudor (han cedido más energía de la que han consumido) reciben
+            el importe calculado en el punto anterior, descontados gastos de gestión.</li>
+        <li>La plataforma emite factura interna automática conforme al art. 14 del RD-ley 7/2026
+            dentro de los cinco (5) días hábiles siguientes al cierre mensual.</li>
+      </ol>
+      <div class="legal-callout">
+        Precio de referencia para la liquidación: precio spot OMIE del mes en curso.
+        Si no hay acuerdo previo, se aplica el precio medio anual publicado por REE.
+      </div>
+    </div>
+  </div>
+
+  <!-- CAPÍTULO VI -->
+  <div class="chapter">
+    <div class="chapter__title">Capítulo VI — Gobernanza y gestión</div>
+    <div class="chapter__body">
+      <p>La comunidad se rige por los principios de transparencia, participación y no discriminación
+      establecidos en la Directiva (UE) 2019/944 y en el RD-ley 7/2026. Todos los miembros tienen
+      acceso en tiempo real a los datos de generación y consumo de la instalación común a través de
+      la plataforma SymbioEnergia IA (código abierto, licencia Apache 2.0).</p>
+      <p>Los miembros designarán un representante (gestor de la comunidad) responsable de la
+      interlocución con la empresa distribuidora y el operador del sistema.</p>
+    </div>
+  </div>
+
+  <!-- CAPÍTULO VII -->
+  <div class="chapter">
+    <div class="chapter__title">Capítulo VII — Subvenciones y ayudas públicas</div>
+    <div class="chapter__body">
+      <p>Los miembros podrán acogerse conjuntamente a las siguientes convocatorias de ayuda,
+      siendo la comunidad energética la entidad solicitante principal:</p>
+      <ul style="margin: 0.4rem 0 0 1.2rem; line-height: 1.7;">
+        <li><strong>Plan STEP Aragón 2026</strong> — hasta 500.000 € por proyecto de descarbonización industrial.</li>
+        <li><strong>MOVES III</strong> — para instalaciones fotovoltaicas ligadas a recarga de vehículos eléctricos.</li>
+        <li><strong>Línea ICO Sostenibilidad</strong> — financiación preferencial hasta el 70% de la inversión.</li>
+        <li><strong>REPowerEU / FEDER Aragón</strong> — cofinanciación europea para comunidades de energía renovable.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CAPÍTULO VIII -->
+  <div class="chapter">
+    <div class="chapter__title">Capítulo VIII — Duración, modificación y resolución</div>
+    <div class="chapter__body">
+      <p>El presente contrato tiene una vigencia inicial de <strong>25 años</strong> a contar desde
+      la fecha de su firma, coincidiendo con la vida útil estimada de la instalación fotovoltaica.
+      Se prorrogará tácitamente por períodos anuales salvo denuncia expresa con tres (3) meses de
+      antelación.</p>
+      <p>La modificación de los coeficientes de reparto o la incorporación de nuevos miembros requerirá
+      acuerdo por mayoría simple de los miembros y comunicación a la empresa distribuidora.</p>
+    </div>
+  </div>
+
+  <!-- FIRMAS -->
+  <div class="chapter">
+    <div class="chapter__title">Capítulo IX — Fecha y firmas</div>
+    <div class="chapter__body">
+      <p>Las partes firmantes manifiestan su conformidad con el contenido de estos estatutos y
+      acuerdan su inscripción en el registro de comunidades energéticas del Gobierno de Aragón,
+      conforme al procedimiento establecido por el IDAE.</p>
+      <p style="margin-top:0.5rem;">En ________________, a {{ today }}.</p>
+
+      <div class="signature-grid">
+        <div class="signature-box">
+          <div class="signature-box__label">Empresa promotora (generadora)</div>
+          <div class="signature-box__name">{{ company_name }}</div>
+        </div>
+        {% for n in neighbors[:3] %}
+        <div class="signature-box">
+          <div class="signature-box__label">Empresa miembro {{ loop.index }}</div>
+          <div class="signature-box__name">{{ n.name }}</div>
+        </div>
+        {% endfor %}
+        {% if neighbors|length > 3 %}
+        <div class="signature-box">
+          <div class="signature-box__label">Resto de miembros</div>
+          <div class="signature-box__name">Ver anexo de partes ({{ neighbors|length - 3 }} empresas adicionales)</div>
+        </div>
+        {% endif %}
+        <div class="signature-box">
+          <div class="signature-box__label">Notario / Fedatario público</div>
+          <div class="signature-box__name">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <div>
+      Generado automáticamente por <strong>SymbioEnergia IA</strong> · Apache 2.0 · github.com/Oscarr36/SymbioEnergia-IA<br>
+      Datos de radiación: PVGIS · Joint Research Centre · Comisión Europea · re.jrc.ec.europa.eu<br>
+      <strong>Este documento es un borrador orientativo. No sustituye el asesoramiento jurídico.</strong>
+    </div>
+    <div style="text-align:right; white-space:nowrap;">
+      Fecha: {{ today_iso }}<br>
+      Coord: {{ "%.4f"|format(lat) }}, {{ "%.4f"|format(lon) }}
+    </div>
+  </div>
+
+</body>
+</html>

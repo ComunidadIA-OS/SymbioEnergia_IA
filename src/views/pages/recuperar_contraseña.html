@@ -1,0 +1,93 @@
+{% extends 'layout.html' %}
+{% block title %}Recuperar contraseña · SymbioEnergia IA{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/login.css') }}">
+{% endblock %}
+{% block content %}
+<div class="auth-page">
+  <div class="auth-card glassmorphic">
+
+    {% if state == 'form' %}
+      <div class="auth-card__logo">Symbio<span>Energía</span> IA</div>
+      <h1 class="auth-card__title">¿Has perdido tu contraseña?</h1>
+      <p class="auth-card__sub">Te enviamos un enlace para restablecerla a tu email corporativo</p>
+
+      {% if message %}
+      <div class="auth-error">{{ message }}</div>
+      {% endif %}
+
+      <form class="auth-form" method="POST" autocomplete="on">
+        <div class="auth-field">
+          <label class="auth-label" for="email">Email corporativo</label>
+          <input class="auth-input" type="email" id="email" name="email"
+                 placeholder="empresa@dominio.com" required autocomplete="email">
+        </div>
+        <button class="auth-submit" type="submit">Enviar enlace</button>
+      </form>
+      <p class="auth-switch"><a href="/login">Volver a iniciar sesión</a></p>
+
+    {% elif state == 'enviado' %}
+      <div class="auth-card__logo">Symbio<span>Energía</span> IA</div>
+      <h1 class="auth-card__title">Revisa tu email</h1>
+      <p class="auth-card__sub">
+        Si existe una cuenta con <strong>{{ email }}</strong>,
+        recibirás un enlace para restablecer tu contraseña en unos minutos.
+      </p>
+      <p style="text-align:center;font-size:0.82rem;color:var(--ink-soft);margin:1.5rem 0 0;">
+        ¿No te llega? Revisa la carpeta de spam.<br>
+        <a href="/recuperar-contraseña" style="color:var(--leaf);">Intentar de nuevo</a>
+      </p>
+      <p class="auth-switch" style="margin-top:1rem;"><a href="/login">Volver a iniciar sesión</a></p>
+
+    {% elif state == 'reset' %}
+      <div class="auth-card__logo">Symbio<span>Energía</span> IA</div>
+      <h1 class="auth-card__title">Nueva contraseña</h1>
+      <p class="auth-card__sub">Elige una contraseña segura de al menos 6 caracteres</p>
+
+      {% if message %}
+      <div class="auth-error">{{ message }}</div>
+      {% endif %}
+
+      <form class="auth-form" method="POST" action="/restablecer-contraseña" autocomplete="on">
+        <input type="hidden" name="token" value="{{ token }}">
+        <div class="auth-field">
+          <label class="auth-label" for="password">Nueva contraseña</label>
+          <input class="auth-input" type="password" id="password" name="password"
+                 placeholder="Mínimo 6 caracteres" required autocomplete="new-password" minlength="6">
+        </div>
+        <button class="auth-submit" type="submit">Restablecer contraseña</button>
+      </form>
+
+    {% elif state == 'exito' %}
+      <div class="auth-card__logo">Symbio<span>Energía</span> IA</div>
+      <h1 class="auth-card__title">Contraseña actualizada</h1>
+      <p class="auth-card__sub">Tu contraseña se ha restablecido correctamente. Ya puedes iniciar sesión.</p>
+      <div style="text-align:center;margin-top:1.5rem;">
+        <a href="/login" class="auth-submit" style="display:inline-block;text-decoration:none;">Iniciar sesión</a>
+      </div>
+
+    {% elif state == 'invalido' %}
+      <div class="auth-card__logo">Symbio<span>Energía</span> IA</div>
+      <h1 class="auth-card__title">Enlace inválido</h1>
+      <p class="auth-card__sub">Este enlace de restablecimiento no es válido o ya ha sido utilizado.</p>
+      <p class="auth-switch"><a href="/recuperar-contraseña">Solicitar uno nuevo</a></p>
+
+    {% elif state == 'expirado' %}
+      <div class="auth-card__logo">Symbio<span>Energía</span> IA</div>
+      <h1 class="auth-card__title">Enlace caducado</h1>
+      <p class="auth-card__sub">El enlace de restablecimiento ha caducado (24 horas). Solicita uno nuevo.</p>
+      <p class="auth-switch"><a href="/recuperar-contraseña">Solicitar uno nuevo</a></p>
+
+    {% elif state == 'error' %}
+      <div class="auth-card__logo">Symbio<span>Energía</span> IA</div>
+      <h1 class="auth-card__title">Error</h1>
+      <p class="auth-card__sub">{{ message }}</p>
+      <p class="auth-switch"><a href="/recuperar-contraseña">Intentar de nuevo</a></p>
+    {% endif %}
+
+    <div class="auth-trust">
+      <span>🔒 Datos almacenados localmente · Anonimización IA por Presidio</span>
+    </div>
+  </div>
+</div>
+{% endblock %}
