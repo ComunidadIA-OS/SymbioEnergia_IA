@@ -621,21 +621,7 @@ Hackathon IA Responsable y Abierta en Industria · SEDIA · AESIA · EDIH Aragó
   | 🔒 | Endpoints con rate limiting | 5 |
   | 📡 | Fuentes de datos abiertas | 10 |
 
-● <table>
-  <tr>
-  <td width="50%">
 
-  [![Óscar – actividad](https://github-readme-activity-graph.vercel.app/graph?username=Oscarr36&repo=SymbioEnergia-IA&theme=tokyo-night&hide_border=true&area=true&title=Óscar)](https://github.com/Oscarr36)
-
-  </td>
-  <td width="50%">
-
-  [![Lucía – actividad](https://github-readme-activity-graph.vercel.app/graph?username=930089Luu&repo=SymbioEnergia-IA&theme=tokyo-night&hide_border=true&area=true&title=Lucía)](https://github.com/930089Luu)
-
-  </td>
-  </tr>
-  </table>
-  ---
 
 ## Licencia
 
