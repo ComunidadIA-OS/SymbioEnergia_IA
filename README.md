@@ -596,6 +596,36 @@ Declaración conforme a la sección 11 de los Términos y Condiciones del hackat
 Hackathon IA Responsable y Abierta en Industria · SEDIA · AESIA · EDIH Aragón · ITA · Universidad de Zaragoza · Mayo 2026
 
 ---
+  ## Stats del proyecto
+
+  <p align="center">
+    <img src="https://img.shields.io/badge/commits-102-informational?style=flat-square&logo=git" alt="Commits">
+    <img src="https://img.shields.io/badge/l%C3%ADneas%20de%20c%C3%B3digo-23.086-blueviolet?style=flat-square" alt="Líneas de código">
+    <img src="https://img.shields.io/badge/archivos-105-blue?style=flat-square" alt="Archivos">
+    <img src="https://img.shields.io/badge/tests%20unitarios-56%20passing-brightgreen?style=flat-square&logo=pytest" alt="Tests">
+    <img src="https://img.shields.io/badge/agentes%20IA-6%20en%20paralelo-orange?style=flat-square" alt="Agentes">
+    <img src="https://img.shields.io/github/repo-size/Oscarr36/SymbioEnergia-IA?style=flat-square&label=tama%C3%B1o" alt="Repo size">
+  </p>
+
+  | | Stat | Valor |
+  |---|---|---|
+  | 🔢 | Commits totales | **102** |
+  | 👤 | Óscar Blasco | 70 commits |
+  | 👤 | Lucía Claver | 32 commits |
+  | 📄 | Líneas de código | **23.086** |
+  | 🐍 | Python | 5.929 líneas · 56 archivos |
+  | 🎨 | CSS | 9.055 líneas · 20 archivos |
+  | ⚡ | JavaScript | 4.610 líneas · 11 archivos |
+  | 🌐 | HTML | 3.492 líneas · 18 archivos |
+  | ✅ | Tests unitarios | **56 passing** |
+  | ⚡ | Agentes IA | 6 en paralelo |
+  | 🗄️ | Tablas MySQL | 10 con FK y cascades |
+  | 🔒 | Endpoints con rate limiting | 5 |
+  | 📡 | Fuentes de datos abiertas | 10 |
+
+  [![Activity graph](https://github-readme-activity-graph.vercel.app/graph?username=Oscarr36&repo=SymbioEnergia-IA&theme=tokyo-night&hide_border=true&area=true)](https://github.com/Oscarr36/SymbioEnergia-IA)
+
+  ---
 
 ## Licencia
 
