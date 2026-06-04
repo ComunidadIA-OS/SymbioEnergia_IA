@@ -610,8 +610,6 @@ Hackathon IA Responsable y Abierta en Industria · SEDIA · AESIA · EDIH Aragó
   | | Stat | Valor |
   |---|---|---|
   | 🔢 | Commits totales | **102** |
-  | 👤 | Óscar Blasco | 70 commits |
-  | 👤 | Lucía Claver | 32 commits |
   | 📄 | Líneas de código | **23.086** |
   | 🐍 | Python | 5.929 líneas · 56 archivos |
   | 🎨 | CSS | 9.055 líneas · 20 archivos |
@@ -623,8 +621,20 @@ Hackathon IA Responsable y Abierta en Industria · SEDIA · AESIA · EDIH Aragó
   | 🔒 | Endpoints con rate limiting | 5 |
   | 📡 | Fuentes de datos abiertas | 10 |
 
-  [![Activity graph](https://github-readme-activity-graph.vercel.app/graph?username=Oscarr36&repo=SymbioEnergia-IA&theme=tokyo-night&hide_border=true&area=true)](https://github.com/Oscarr36/SymbioEnergia-IA)
+● <table>
+  <tr>
+  <td width="50%">
 
+  [![Óscar – actividad](https://github-readme-activity-graph.vercel.app/graph?username=Oscarr36&repo=SymbioEnergia-IA&theme=tokyo-night&hide_border=true&area=true&title=Óscar)](https://github.com/Oscarr36)
+
+  </td>
+  <td width="50%">
+
+  [![Lucía – actividad](https://github-readme-activity-graph.vercel.app/graph?username=930089Luu&repo=SymbioEnergia-IA&theme=tokyo-night&hide_border=true&area=true&title=Lucía)](https://github.com/930089Luu)
+
+  </td>
+  </tr>
+  </table>
   ---
 
 ## Licencia
